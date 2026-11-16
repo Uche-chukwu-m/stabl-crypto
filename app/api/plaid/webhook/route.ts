@@ -10,7 +10,7 @@ import { refreshRecurringBills } from "@/lib/plaid/recurring";
 import { syncItem } from "@/lib/plaid/sync";
 import { verifyPlaidWebhook } from "@/lib/plaid/webhook-verify";
 
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 type PlaidWebhook = { webhook_type: string; webhook_code: string; item_id: string; error?: { error_code?: string } | null };
 

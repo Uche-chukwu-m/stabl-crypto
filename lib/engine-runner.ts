@@ -17,26 +17,44 @@ import { announceBuffer, releaseNow } from "@/lib/moves";
 export type RunOptions = { forceFast?: boolean; forceFeast?: boolean; learnOnly?: boolean };
 
 // One engine run per user at a time, even when the cron and a webhook overlap.
+//
+// The lock is held by an open transaction, not by the session, so it can never
+// outlive its holder: if a serverless function is frozen or killed while holding
+// it, Postgres ends that idle transaction after two minutes and the lock goes
+// with it. Waiting for the lock gives up after a minute instead of hanging.
 export async function withUserLock<T>(userId: string, fn: () => Promise<T>): Promise<T> {
   const client = await pool.connect();
+  let broken = false;
   try {
-    await client.query("select pg_advisory_lock(hashtext($1))", [userId]);
-    return await fn();
+    await client.query("set idle_in_transaction_session_timeout = '120s'");
+    await client.query("begin");
+    await client.query("set local lock_timeout = '60s'");
+    await client.query("select pg_advisory_xact_lock(hashtext($1))", [userId]);
+    try {
+      return await fn();
+    } finally {
+      await client.query("commit").catch(() => (broken = true));
+    }
+  } catch (error) {
+    broken = true;
+    await client.query("rollback").catch(() => {});
+    throw error;
   } finally {
-    await client.query("select pg_advisory_unlock(hashtext($1))", [userId]).catch(() => {});
-    client.release();
+    client.release(broken);
   }
 }
 
 // Load, decide, save what was learned, then carry out every planned move and
 // prompt. The engine itself stays pure; all side effects happen here.
 export async function runEngine(userId: string, opts: RunOptions = {}): Promise<Decision> {
+  // On Arc, a move may still be on its way. Let it land first, outside the lock,
+  // so nothing waits on the network while holding it.
+  const inFlight = opts.learnOnly ? 0 : await settlePending(userId, { waitMs: 15_000 });
   return withUserLock(userId, async () => {
     let ctx = await loadContext(userId);
     let learnOnly = opts.learnOnly || !ctx.homeBase || !ctx.vault;
-    // On Arc, a move may still be on its way. Let it land before deciding, and
-    // if it has not, only learn this time: never decide on a balance in motion.
-    if (!learnOnly && (await settlePending(userId)) > 0) learnOnly = true;
+    // If it has not landed, only learn this time: never decide on a balance in motion.
+    if (!learnOnly && inFlight > 0) learnOnly = true;
     if (!learnOnly && ctx.homeBase && opts.forceFeast) {
       await refreshLiveBalance(ctx.homeBase.id);
       ctx = await loadContext(userId);
