@@ -1,0 +1,1853 @@
+{
+  "seed": "stabl-ada-ada-main",
+  "roll_dates_forward": false,
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 2800,
+      "currency": "USD",
+      "meta": {
+        "name": "Checking",
+        "official_name": "Personal Checking",
+        "mask": "5512"
+      },
+      "identity": {
+        "names": [
+          "Ada Okafor"
+        ],
+        "emails": [
+          {
+            "data": "ada.okafor@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": 23.94,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-25",
+          "date_posted": "2026-04-25",
+          "amount": 72,
+          "description": "ALDI #3548",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": 57,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-29",
+          "date_posted": "2026-04-29",
+          "amount": 49.4,
+          "description": "SHELL OIL 9074",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 22.95,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-02",
+          "date_posted": "2026-05-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-03",
+          "date_posted": "2026-05-03",
+          "amount": 75.13,
+          "description": "KROGER #8980",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 45.6,
+          "description": "SHELL OIL 1927",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-06",
+          "date_posted": "2026-05-06",
+          "amount": 29.54,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 59.23,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-10",
+          "date_posted": "2026-05-10",
+          "amount": 51.36,
+          "description": "KROGER #8598",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-13",
+          "date_posted": "2026-05-13",
+          "amount": 33.48,
+          "description": "CHEVRON 6313",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-13",
+          "date_posted": "2026-05-13",
+          "amount": 14.33,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-16",
+          "date_posted": "2026-05-16",
+          "amount": 71.96,
+          "description": "KROGER #1785",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": 9.86,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 132.6,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 30.06,
+          "description": "SHELL OIL 5659",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 28.13,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 62.14,
+          "description": "ALDI #7426",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": 40.57,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": 18.34,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": 41.74,
+          "description": "SHELL OIL 237",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-31",
+          "date_posted": "2026-05-31",
+          "amount": 72.09,
+          "description": "ALDI #8846",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": 22.03,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-02",
+          "date_posted": "2026-06-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 46.16,
+          "description": "SHELL OIL 4658",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-07",
+          "date_posted": "2026-06-07",
+          "amount": 53,
+          "description": "ALDI #9495",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-07",
+          "date_posted": "2026-06-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 73.48,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 45.56,
+          "description": "SHELL OIL 5286",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-11",
+          "date_posted": "2026-06-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-11",
+          "date_posted": "2026-06-11",
+          "amount": 11.22,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-14",
+          "date_posted": "2026-06-14",
+          "amount": 52.99,
+          "description": "ALDI #6576",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 41.6,
+          "description": "CHEVRON 3544",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 18.55,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-17",
+          "date_posted": "2026-06-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 17.19,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": 138.18,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-20",
+          "date_posted": "2026-06-20",
+          "amount": 78.5,
+          "description": "ALDI #9392",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 9.13,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": 47.14,
+          "description": "SHELL OIL 9313",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-27",
+          "date_posted": "2026-06-27",
+          "amount": 50.92,
+          "description": "ALDI #734",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-28",
+          "date_posted": "2026-06-28",
+          "amount": 72.69,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-29",
+          "date_posted": "2026-06-29",
+          "amount": 27.49,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 49.4,
+          "description": "CHEVRON 6208",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-02",
+          "date_posted": "2026-07-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-05",
+          "date_posted": "2026-07-05",
+          "amount": 75.49,
+          "description": "KROGER #446",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-07",
+          "date_posted": "2026-07-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-07",
+          "date_posted": "2026-07-07",
+          "amount": 43.83,
+          "description": "SHELL OIL 8527",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 24.7,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 29.01,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 79.53,
+          "description": "ALDI #8953",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 77.63,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 25.03,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 32.43,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 35.08,
+          "description": "SHELL OIL 3578",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 64.13,
+          "description": "ALDI #5755",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-19",
+          "date_posted": "2026-07-19",
+          "amount": 123.93,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-22",
+          "date_posted": "2026-07-22",
+          "amount": 40.24,
+          "description": "CHEVRON 3816",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-22",
+          "date_posted": "2026-07-22",
+          "amount": 12.81,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 77.33,
+          "description": "ALDI #5360",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 29.92,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-29",
+          "date_posted": "2026-07-29",
+          "amount": 67.06,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-30",
+          "date_posted": "2026-07-30",
+          "amount": 32.07,
+          "description": "CHEVRON 2491",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-31",
+          "date_posted": "2026-07-31",
+          "amount": 33.28,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 59.46,
+          "description": "KROGER #4664",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 37.89,
+          "description": "CHEVRON 4277",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 26.59,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-07",
+          "date_posted": "2026-08-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-09",
+          "date_posted": "2026-08-09",
+          "amount": 66,
+          "description": "ALDI #5854",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-11",
+          "date_posted": "2026-08-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": 31.9,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": 45.07,
+          "description": "SHELL OIL 7058",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": 73.03,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-16",
+          "date_posted": "2026-08-16",
+          "amount": 66.19,
+          "description": "ALDI #1121",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": 37.63,
+          "description": "SHELL OIL 9744",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-19",
+          "date_posted": "2026-08-19",
+          "amount": 18.03,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-19",
+          "date_posted": "2026-08-19",
+          "amount": 153.41,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 52.83,
+          "description": "ALDI #4838",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 32.6,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-24",
+          "date_posted": "2026-08-24",
+          "amount": -250,
+          "description": "ZELLE FROM T OKAFOR",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-25",
+          "date_posted": "2026-08-25",
+          "amount": 46.84,
+          "description": "SHELL OIL 2236",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-25",
+          "date_posted": "2026-08-25",
+          "amount": 51.32,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-26",
+          "date_posted": "2026-08-26",
+          "amount": 28.57,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-28",
+          "date_posted": "2026-08-28",
+          "amount": 49.11,
+          "description": "KROGER #9198",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-31",
+          "date_posted": "2026-08-31",
+          "amount": 28.35,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-02",
+          "date_posted": "2026-09-02",
+          "amount": 47.75,
+          "description": "CHEVRON 6820",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-02",
+          "date_posted": "2026-09-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-05",
+          "date_posted": "2026-09-05",
+          "amount": 54.07,
+          "description": "ALDI #9426",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-06",
+          "date_posted": "2026-09-06",
+          "amount": 28.51,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-07",
+          "date_posted": "2026-09-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 23.98,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-09",
+          "date_posted": "2026-09-09",
+          "amount": 19.15,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 41.18,
+          "description": "SHELL OIL 2645",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-13",
+          "date_posted": "2026-09-13",
+          "amount": 68.05,
+          "description": "ALDI #8428",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-13",
+          "date_posted": "2026-09-13",
+          "amount": 31.97,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 29.43,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 49.92,
+          "description": "SHELL OIL 6223",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-19",
+          "date_posted": "2026-09-19",
+          "amount": 113.23,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 77.65,
+          "description": "KROGER #7979",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-23",
+          "date_posted": "2026-09-23",
+          "amount": 33.66,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-23",
+          "date_posted": "2026-09-23",
+          "amount": 28.52,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": 45.89,
+          "description": "CHEVRON 3047",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-25",
+          "date_posted": "2026-09-25",
+          "amount": 61.83,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-27",
+          "date_posted": "2026-09-27",
+          "amount": 78.48,
+          "description": "KROGER #3273",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-29",
+          "date_posted": "2026-09-29",
+          "amount": 32.61,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-29",
+          "date_posted": "2026-09-29",
+          "amount": 33.01,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-30",
+          "date_posted": "2026-09-30",
+          "amount": 30.26,
+          "description": "CHEVRON 7427",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 1050,
+          "description": "MAGNOLIA PLACE RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": 55.65,
+          "description": "ALDI #7205",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": -1600,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-06",
+          "date_posted": "2026-10-06",
+          "amount": 34.93,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-07",
+          "date_posted": "2026-10-07",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 28.69,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 48.94,
+          "description": "SHELL OIL 8624",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-11",
+          "date_posted": "2026-10-11",
+          "amount": 46.38,
+          "description": "ALDI #9229",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-11",
+          "date_posted": "2026-10-11",
+          "amount": 78,
+          "description": "AT&T WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-11",
+          "date_posted": "2026-10-11",
+          "amount": 31.23,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": -180,
+          "description": "VENMO CASHOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": 35.21,
+          "description": "JOLLOF HUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": 37.82,
+          "description": "SHELL OIL 6824",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": -1400,
+          "description": "ONLINE TRANSFER FROM CHK 6630",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-18",
+          "date_posted": "2026-10-18",
+          "amount": 51.31,
+          "description": "KROGER #6319",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-19",
+          "date_posted": "2026-10-19",
+          "amount": 112.69,
+          "description": "GEORGIA POWER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-20",
+          "date_posted": "2026-10-20",
+          "amount": 45.93,
+          "description": "CHEVRON 8907",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 306,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 562,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 108,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-26",
+          "date_posted": "2026-08-26",
+          "amount": 1784,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-16",
+          "date_posted": "2026-09-16",
+          "amount": 54,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-07",
+          "date_posted": "2026-10-07",
+          "amount": 2500,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 4129.3,
+      "currency": "USD",
+      "meta": {
+        "name": "Business Checking",
+        "official_name": "Okafor Catering LLC",
+        "mask": "6630"
+      },
+      "identity": {
+        "names": [
+          "Ada Okafor"
+        ],
+        "emails": [
+          {
+            "data": "ada.okafor@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": 116.92,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-27",
+          "date_posted": "2026-04-27",
+          "amount": -671.51,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-28",
+          "date_posted": "2026-04-28",
+          "amount": 211.19,
+          "description": "RESTAURANT DEPOT 3178",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-02",
+          "date_posted": "2026-05-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-04",
+          "date_posted": "2026-05-04",
+          "amount": -653.87,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 192.39,
+          "description": "RESTAURANT DEPOT 1692",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-06",
+          "date_posted": "2026-05-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": -736.84,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-14",
+          "date_posted": "2026-05-14",
+          "amount": 150.94,
+          "description": "RESTAURANT DEPOT 3826",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-15",
+          "date_posted": "2026-05-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": -1009.47,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 224.63,
+          "description": "RESTAURANT DEPOT 2526",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": -2233.75,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-26",
+          "date_posted": "2026-05-26",
+          "amount": 235.75,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-26",
+          "date_posted": "2026-05-26",
+          "amount": 152.56,
+          "description": "RESTAURANT DEPOT 438",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": -681.28,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-02",
+          "date_posted": "2026-06-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 164.97,
+          "description": "RESTAURANT DEPOT 8018",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-06",
+          "date_posted": "2026-06-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-08",
+          "date_posted": "2026-06-08",
+          "amount": -1193.05,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 234.87,
+          "description": "RESTAURANT DEPOT 6918",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-15",
+          "date_posted": "2026-06-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-15",
+          "date_posted": "2026-06-15",
+          "amount": -683.86,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 126.35,
+          "description": "RESTAURANT DEPOT 1607",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-17",
+          "date_posted": "2026-06-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-22",
+          "date_posted": "2026-06-22",
+          "amount": -1016.75,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 240.14,
+          "description": "RESTAURANT DEPOT 8813",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-26",
+          "date_posted": "2026-06-26",
+          "amount": 281.06,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-29",
+          "date_posted": "2026-06-29",
+          "amount": -983.66,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 147.06,
+          "description": "RESTAURANT DEPOT 6213",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-02",
+          "date_posted": "2026-07-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-06",
+          "date_posted": "2026-07-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-06",
+          "date_posted": "2026-07-06",
+          "amount": -1116.89,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 113.92,
+          "description": "RESTAURANT DEPOT 4722",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-13",
+          "date_posted": "2026-07-13",
+          "amount": -1094.46,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-14",
+          "date_posted": "2026-07-14",
+          "amount": 145.69,
+          "description": "RESTAURANT DEPOT 1128",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-20",
+          "date_posted": "2026-07-20",
+          "amount": -930.18,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-23",
+          "date_posted": "2026-07-23",
+          "amount": 231.74,
+          "description": "RESTAURANT DEPOT 8947",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 235.23,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-27",
+          "date_posted": "2026-07-27",
+          "amount": -997.42,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-30",
+          "date_posted": "2026-07-30",
+          "amount": 182.17,
+          "description": "RESTAURANT DEPOT 3930",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": -803.73,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": 180.59,
+          "description": "RESTAURANT DEPOT 7942",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": -953.54,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": 180.11,
+          "description": "RESTAURANT DEPOT 7230",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-15",
+          "date_posted": "2026-08-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": -2512.82,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-20",
+          "date_posted": "2026-08-20",
+          "amount": 123.35,
+          "description": "RESTAURANT DEPOT 4626",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-24",
+          "date_posted": "2026-08-24",
+          "amount": -949.13,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-26",
+          "date_posted": "2026-08-26",
+          "amount": 292.2,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": 140.74,
+          "description": "RESTAURANT DEPOT 2410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-31",
+          "date_posted": "2026-08-31",
+          "amount": -789.78,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-02",
+          "date_posted": "2026-09-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-02",
+          "date_posted": "2026-09-02",
+          "amount": 227.53,
+          "description": "RESTAURANT DEPOT 766",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-06",
+          "date_posted": "2026-09-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-07",
+          "date_posted": "2026-09-07",
+          "amount": -982.52,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 163.19,
+          "description": "RESTAURANT DEPOT 4787",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": -914.61,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-15",
+          "date_posted": "2026-09-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 259.32,
+          "description": "RESTAURANT DEPOT 1212",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": -640,
+          "description": "MOBILE DEPOSIT CHECK 1042",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-21",
+          "date_posted": "2026-09-21",
+          "amount": -954.69,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": 119.95,
+          "description": "RESTAURANT DEPOT 7829",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-26",
+          "date_posted": "2026-09-26",
+          "amount": 279.42,
+          "description": "CHASE CARD EPAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-28",
+          "date_posted": "2026-09-28",
+          "amount": -3536.01,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-29",
+          "date_posted": "2026-09-29",
+          "amount": 251.56,
+          "description": "RESTAURANT DEPOT 8507",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": 1600,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-05",
+          "date_posted": "2026-10-05",
+          "amount": -814.81,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-06",
+          "date_posted": "2026-10-06",
+          "amount": 450,
+          "description": "COMMISSARY KITCHEN LEASE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-07",
+          "date_posted": "2026-10-07",
+          "amount": 103.3,
+          "description": "RESTAURANT DEPOT 4911",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": -1002.66,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": 129,
+          "description": "NEXT INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": 232.96,
+          "description": "RESTAURANT DEPOT 3284",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 1400,
+          "description": "ONLINE TRANSFER TO CHK 5512",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-19",
+          "date_posted": "2026-10-19",
+          "amount": -887.81,
+          "description": "SQUARE INC DEP",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "type": "credit",
+      "subtype": "credit card",
+      "starting_balance": 28.44,
+      "currency": "USD",
+      "meta": {
+        "name": "Business Card",
+        "official_name": "Platypus Business Visa",
+        "mask": "1187"
+      },
+      "identity": {
+        "names": [
+          "Ada Okafor"
+        ],
+        "emails": [
+          {
+            "data": "ada.okafor@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": 116.92,
+          "description": "WEBSTAURANTSTORE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-27",
+          "date_posted": "2026-04-27",
+          "amount": -116.92,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-06",
+          "date_posted": "2026-05-06",
+          "amount": 94.64,
+          "description": "COSTCO WHSE 1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-23",
+          "date_posted": "2026-05-23",
+          "amount": 141.11,
+          "description": "WEBSTAURANTSTORE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-27",
+          "date_posted": "2026-05-27",
+          "amount": -235.75,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-09",
+          "date_posted": "2026-06-09",
+          "amount": 110.38,
+          "description": "COSTCO WHSE 1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": 170.68,
+          "description": "SYSCO ATLANTA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-27",
+          "date_posted": "2026-06-27",
+          "amount": -281.06,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-10",
+          "date_posted": "2026-07-10",
+          "amount": 64.55,
+          "description": "WEBSTAURANTSTORE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 124.25,
+          "description": "SYSCO ATLANTA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-27",
+          "date_posted": "2026-07-27",
+          "amount": -235.23,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-14",
+          "date_posted": "2026-08-14",
+          "amount": 167.95,
+          "description": "COSTCO WHSE 1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": -292.2,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-29",
+          "date_posted": "2026-08-29",
+          "amount": 117.26,
+          "description": "COSTCO WHSE 1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": 162.16,
+          "description": "SYSCO ATLANTA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-27",
+          "date_posted": "2026-09-27",
+          "amount": -279.42,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 40.78,
+          "description": "SYSCO ATLANTA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-20",
+          "date_posted": "2026-10-20",
+          "amount": 158.34,
+          "description": "COSTCO WHSE 1123",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}

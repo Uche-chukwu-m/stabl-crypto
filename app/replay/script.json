@@ -1,0 +1,61 @@
+{
+  "persona": "Jemaya Brooks",
+  "steps": [
+    {
+      "at": 0,
+      "title": "Home",
+      "status": "steady",
+      "vaultCents": 128000,
+      "note": "Jemaya is Steady. Income swings, spending stays inside the band.",
+      "message": null
+    },
+    {
+      "at": 6,
+      "title": "Big client pays",
+      "status": "feast",
+      "vaultCents": 128000,
+      "note": "A big client payment lands. The feast check runs.",
+      "message": "Stabl: Good stretch. Tomorrow we will move $650.00 from Checking 4321 to your vault. Your bills stay covered. Reply STOP to skip it."
+    },
+    {
+      "at": 14,
+      "title": "One day later",
+      "status": "feast",
+      "vaultCents": 193000,
+      "note": "The buffer settles. The receipt shows both balances.",
+      "message": "Stabl: Moved $650.00 to your vault. Vault $1,930.00. Checking $2,105.33."
+    },
+    {
+      "at": 22,
+      "title": "Slow week",
+      "status": "fast",
+      "vaultCents": 152000,
+      "note": "No income and a $620.00 car repair. The fast check sends money back right away. No question asked.",
+      "message": "Stabl: Slow week, so we sent $410.00 from your vault to Checking 4321. It is there now. Vault $1,520.00."
+    },
+    {
+      "at": 30,
+      "title": "Emergency",
+      "status": "fast",
+      "vaultCents": 152000,
+      "note": "EMERGENCY typed in Telegram. The code shows in the app, never back in Telegram.",
+      "message": "Stabl: Emergency unlock requested. Your code is 482913 and it expires in 10 minutes. You have 1 emergency unlock left this quarter."
+    },
+    {
+      "at": 37,
+      "title": "Unlocked the same day",
+      "status": "fast",
+      "vaultCents": 137000,
+      "note": "Code and $150.00 entered. The money is in checking now.",
+      "message": "Stabl: Emergency unlock done. We sent $150.00 from your vault to Checking 4321. It is there now. Vault $1,370.00."
+    },
+    {
+      "at": 45,
+      "title": "The thread",
+      "status": "fast",
+      "vaultCents": 137000,
+      "note": "The messages tell the whole story with no screen explained.",
+      "message": null
+    }
+  ]
+}

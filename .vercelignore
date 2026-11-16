@@ -1,0 +1,10 @@
+# Never upload local secrets, the local database, or build output.
+.env*
+!.env.example
+.pgdata
+.next
+node_modules
+tsconfig.tsbuildinfo
+.agents
+.claude
+skills-lock.json

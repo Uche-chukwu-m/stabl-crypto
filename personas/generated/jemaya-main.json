@@ -1,0 +1,1429 @@
+{
+  "seed": "stabl-jemaya-jemaya-main",
+  "roll_dates_forward": false,
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 593.24,
+      "currency": "USD",
+      "meta": {
+        "name": "Checking",
+        "official_name": "Everyday Checking",
+        "mask": "4321"
+      },
+      "identity": {
+        "names": [
+          "Jemaya Brooks"
+        ],
+        "emails": [
+          {
+            "data": "jemaya.brooks@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": 12.09,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-27",
+          "date_posted": "2026-04-27",
+          "amount": -1012,
+          "description": "STRIPE TRANSFER ST 26537",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-28",
+          "date_posted": "2026-04-28",
+          "amount": 26.47,
+          "description": "QT 6570",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 21.8,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-02",
+          "date_posted": "2026-05-02",
+          "amount": 63.89,
+          "description": "KROGER #6925",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-03",
+          "date_posted": "2026-05-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-04",
+          "date_posted": "2026-05-04",
+          "amount": -1201,
+          "description": "STRIPE TRANSFER ST 36302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 9.16,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 30.86,
+          "description": "QT 137",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 34.79,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-08",
+          "date_posted": "2026-05-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-10",
+          "date_posted": "2026-05-10",
+          "amount": 72.47,
+          "description": "KROGER #2642",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": -1181,
+          "description": "STRIPE TRANSFER ST 30430",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-12",
+          "date_posted": "2026-05-12",
+          "amount": 36.25,
+          "description": "SHELL OIL 5310",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-12",
+          "date_posted": "2026-05-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-13",
+          "date_posted": "2026-05-13",
+          "amount": 12.77,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-14",
+          "date_posted": "2026-05-14",
+          "amount": 18.45,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-14",
+          "date_posted": "2026-05-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-15",
+          "date_posted": "2026-05-15",
+          "amount": 86.07,
+          "description": "KROGER #5329",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": 25.01,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": 123.94,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": -852,
+          "description": "ONLINE TRANSFER FROM SAV 7781",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 35.51,
+          "description": "SHELL OIL 6187",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 14.74,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-20",
+          "date_posted": "2026-05-20",
+          "amount": 41.02,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-22",
+          "date_posted": "2026-05-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 80.25,
+          "description": "KROGER #3211",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": -1167,
+          "description": "ONLINE TRANSFER FROM SAV 7781",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 9.91,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-27",
+          "date_posted": "2026-05-27",
+          "amount": 25.16,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": 26.49,
+          "description": "SHELL OIL 2201",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-29",
+          "date_posted": "2026-05-29",
+          "amount": 66.04,
+          "description": "KROGER #1249",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-29",
+          "date_posted": "2026-05-29",
+          "amount": 20.35,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-30",
+          "date_posted": "2026-05-30",
+          "amount": -416,
+          "description": "STRIPE TRANSFER ST 51077",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-02",
+          "date_posted": "2026-06-02",
+          "amount": 33.43,
+          "description": "QT 9670",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 13.56,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 48.79,
+          "description": "MICHAELS STORES 4410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 24.42,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-05",
+          "date_posted": "2026-06-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-07",
+          "date_posted": "2026-06-07",
+          "amount": 68.35,
+          "description": "PUBLIX #3528",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-07",
+          "date_posted": "2026-06-07",
+          "amount": -696,
+          "description": "STRIPE TRANSFER ST 83971",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-08",
+          "date_posted": "2026-06-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-09",
+          "date_posted": "2026-06-09",
+          "amount": 10.52,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-09",
+          "date_posted": "2026-06-09",
+          "amount": 21.73,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 37.55,
+          "description": "SHELL OIL 3278",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-12",
+          "date_posted": "2026-06-12",
+          "amount": 286.4,
+          "description": "GOODYEAR AUTO 118",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-12",
+          "date_posted": "2026-06-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-13",
+          "date_posted": "2026-06-13",
+          "amount": -975,
+          "description": "STRIPE TRANSFER ST 18396",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-14",
+          "date_posted": "2026-06-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-14",
+          "date_posted": "2026-06-14",
+          "amount": 52.09,
+          "description": "PUBLIX #8362",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 19.76,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 48.38,
+          "description": "MICHAELS STORES 4410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 130.73,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 34.61,
+          "description": "SHELL OIL 8093",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": 8.65,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": 22.29,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": 86,
+          "description": "KROGER #8186",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": -982,
+          "description": "STRIPE TRANSFER ST 53176",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-22",
+          "date_posted": "2026-06-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-22",
+          "date_posted": "2026-06-22",
+          "amount": 14.24,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 15.27,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": 32.1,
+          "description": "SHELL OIL 7102",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-27",
+          "date_posted": "2026-06-27",
+          "amount": 66.58,
+          "description": "KROGER #6605",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-30",
+          "date_posted": "2026-06-30",
+          "amount": 45.04,
+          "description": "MICHAELS STORES 4410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-30",
+          "date_posted": "2026-06-30",
+          "amount": 32.35,
+          "description": "SHELL OIL 8578",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-30",
+          "date_posted": "2026-06-30",
+          "amount": 9.78,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 20.27,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-02",
+          "date_posted": "2026-07-02",
+          "amount": 24.87,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-03",
+          "date_posted": "2026-07-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-04",
+          "date_posted": "2026-07-04",
+          "amount": 75.73,
+          "description": "KROGER #6987",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-05",
+          "date_posted": "2026-07-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 15.76,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-08",
+          "date_posted": "2026-07-08",
+          "amount": 27.56,
+          "description": "SHELL OIL 9658",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-10",
+          "date_posted": "2026-07-10",
+          "amount": 22.71,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 35.64,
+          "description": "MICHAELS STORES 4410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 15.28,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 82.54,
+          "description": "PUBLIX #8491",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 20.15,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-13",
+          "date_posted": "2026-07-13",
+          "amount": 29.14,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-14",
+          "date_posted": "2026-07-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-14",
+          "date_posted": "2026-07-14",
+          "amount": 34.3,
+          "description": "SHELL OIL 809",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": -800,
+          "description": "STRIPE TRANSFER ST 40417",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-18",
+          "date_posted": "2026-07-18",
+          "amount": 122.65,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-18",
+          "date_posted": "2026-07-18",
+          "amount": 75.88,
+          "description": "KROGER #1502",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-20",
+          "date_posted": "2026-07-20",
+          "amount": 24.05,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-22",
+          "date_posted": "2026-07-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-22",
+          "date_posted": "2026-07-22",
+          "amount": 31.82,
+          "description": "QT 7743",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-23",
+          "date_posted": "2026-07-23",
+          "amount": 10.81,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-25",
+          "date_posted": "2026-07-25",
+          "amount": 24.75,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 85.19,
+          "description": "KROGER #7222",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-27",
+          "date_posted": "2026-07-27",
+          "amount": 42.71,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-27",
+          "date_posted": "2026-07-27",
+          "amount": 11.98,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-28",
+          "date_posted": "2026-07-28",
+          "amount": 21.58,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-30",
+          "date_posted": "2026-07-30",
+          "amount": 34.65,
+          "description": "QT 5971",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-31",
+          "date_posted": "2026-07-31",
+          "amount": 68,
+          "description": "KROGER #3263",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": -1045,
+          "description": "STRIPE TRANSFER ST 25631",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 36.87,
+          "description": "QT 2311",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 22.37,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": -993,
+          "description": "STRIPE TRANSFER ST 43610",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-07",
+          "date_posted": "2026-08-07",
+          "amount": 61.78,
+          "description": "KROGER #6661",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-08",
+          "date_posted": "2026-08-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-08",
+          "date_posted": "2026-08-08",
+          "amount": 26.32,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-08",
+          "date_posted": "2026-08-08",
+          "amount": 86.25,
+          "description": "OLIVE GARDEN 1407",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": 9.88,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": -508,
+          "description": "STRIPE TRANSFER ST 32363",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": 25.44,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": 56.26,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": 39.3,
+          "description": "QT 4428",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-14",
+          "date_posted": "2026-08-14",
+          "amount": 83.26,
+          "description": "KROGER #6864",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-14",
+          "date_posted": "2026-08-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": 127.05,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": -1143,
+          "description": "ONLINE TRANSFER FROM SAV 7781",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": 35.29,
+          "description": "QT 9924",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 77.24,
+          "description": "PUBLIX #6801",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 8.28,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-22",
+          "date_posted": "2026-08-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-22",
+          "date_posted": "2026-08-22",
+          "amount": -555,
+          "description": "STRIPE TRANSFER ST 39209",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 12.21,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 24.27,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": 27.74,
+          "description": "SHELL OIL 4625",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-28",
+          "date_posted": "2026-08-28",
+          "amount": 25.06,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-28",
+          "date_posted": "2026-08-28",
+          "amount": -912,
+          "description": "STRIPE TRANSFER ST 86796",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-29",
+          "date_posted": "2026-08-29",
+          "amount": 59.77,
+          "description": "KROGER #8280",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-31",
+          "date_posted": "2026-08-31",
+          "amount": 45.46,
+          "description": "TARGET T 1442",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 32.38,
+          "description": "SHELL OIL 2279",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": 19.39,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": -1029,
+          "description": "STRIPE TRANSFER ST 30526",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-04",
+          "date_posted": "2026-09-04",
+          "amount": 76.54,
+          "description": "PUBLIX #9948",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-05",
+          "date_posted": "2026-09-05",
+          "amount": 129,
+          "description": "DELTA AIR 0062",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-05",
+          "date_posted": "2026-09-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-07",
+          "date_posted": "2026-09-07",
+          "amount": 25.65,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 14.59,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 36.94,
+          "description": "QT 3181",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 19.78,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": -1193,
+          "description": "ONLINE TRANSFER FROM SAV 7781",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": 66.83,
+          "description": "PUBLIX #9424",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-12",
+          "date_posted": "2026-09-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": 21.09,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-15",
+          "date_posted": "2026-09-15",
+          "amount": 13.67,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 30.75,
+          "description": "QT 8869",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": -868,
+          "description": "STRIPE TRANSFER ST 68714",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": 116.42,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": 28.35,
+          "description": "MICHAELS STORES 4410",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 22.43,
+          "description": "CAVA GRILL 220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 77.29,
+          "description": "KROGER #5623",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 19.6,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-21",
+          "date_posted": "2026-09-21",
+          "amount": 24.16,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": 39.78,
+          "description": "SHELL OIL 8029",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": -595,
+          "description": "STRIPE TRANSFER ST 16607",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-26",
+          "date_posted": "2026-09-26",
+          "amount": 63.36,
+          "description": "KROGER #7498",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-28",
+          "date_posted": "2026-09-28",
+          "amount": 13.93,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 1150,
+          "description": "PARKSIDE APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 35.89,
+          "description": "QT 3598",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": 15.72,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-03",
+          "date_posted": "2026-10-03",
+          "amount": 48.49,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-03",
+          "date_posted": "2026-10-03",
+          "amount": 365,
+          "description": "TOYOTA FINANCIAL",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": -479,
+          "description": "ONLINE TRANSFER FROM SAV 7781",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 52.23,
+          "description": "PUBLIX #9089",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-05",
+          "date_posted": "2026-10-05",
+          "amount": 22.61,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-05",
+          "date_posted": "2026-10-05",
+          "amount": 11.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 70,
+          "description": "COMCAST XFINITY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 35.23,
+          "description": "QT 1525",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-09",
+          "date_posted": "2026-10-09",
+          "amount": 70.61,
+          "description": "PUBLIX #6434",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-11",
+          "date_posted": "2026-10-11",
+          "amount": 22.8,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": 85,
+          "description": "T MOBILE AUTOPAY",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": 64.3,
+          "description": "ULTA BEAUTY 551",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-14",
+          "date_posted": "2026-10-14",
+          "amount": 28.82,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-14",
+          "date_posted": "2026-10-14",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-14",
+          "date_posted": "2026-10-14",
+          "amount": 34.88,
+          "description": "QT 6091",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-16",
+          "date_posted": "2026-10-16",
+          "amount": 16.1,
+          "description": "CHICK FIL A #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 12.96,
+          "description": "MARTA BREEZE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 83.17,
+          "description": "PUBLIX #5812",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-18",
+          "date_posted": "2026-10-18",
+          "amount": 115.68,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-21",
+          "date_posted": "2026-10-21",
+          "amount": 33.82,
+          "description": "SHELL OIL 5319",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-22",
+          "date_posted": "2026-10-22",
+          "amount": 59.99,
+          "description": "ADOBE CREATIVE CLD",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-22",
+          "date_posted": "2026-10-22",
+          "amount": 22.4,
+          "description": "WAFFLE HOUSE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-24",
+          "date_posted": "2026-10-24",
+          "amount": 52.07,
+          "description": "KROGER #9599",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-27",
+          "date_posted": "2026-06-27",
+          "amount": 551,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": -551,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-29",
+          "date_posted": "2026-08-29",
+          "amount": 1051,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-19",
+          "date_posted": "2026-09-19",
+          "amount": 1049,
+          "description": "STABL VAULT TRANSFER",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}

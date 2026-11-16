@@ -1,0 +1,1305 @@
+{
+  "seed": "stabl-jordan-jordan-main",
+  "roll_dates_forward": false,
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 3400,
+      "currency": "USD",
+      "meta": {
+        "name": "Checking",
+        "official_name": "Premier Checking",
+        "mask": "2208"
+      },
+      "identity": {
+        "names": [
+          "Jordan Ellis"
+        ],
+        "emails": [
+          {
+            "data": "jordan.ellis@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-25",
+          "date_posted": "2026-04-25",
+          "amount": 36.83,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-03",
+          "date_posted": "2026-05-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-08",
+          "date_posted": "2026-05-08",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-09",
+          "date_posted": "2026-05-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-15",
+          "date_posted": "2026-05-15",
+          "amount": -3150,
+          "description": "PAYROLL ELLIS MOTORS COMM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-16",
+          "date_posted": "2026-05-16",
+          "amount": 125.8,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-20",
+          "date_posted": "2026-05-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-22",
+          "date_posted": "2026-05-22",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": 737.64,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-05",
+          "date_posted": "2026-06-05",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-09",
+          "date_posted": "2026-06-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-16",
+          "date_posted": "2026-06-16",
+          "amount": 129,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-20",
+          "date_posted": "2026-06-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": 752.23,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-03",
+          "date_posted": "2026-07-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-03",
+          "date_posted": "2026-07-03",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-09",
+          "date_posted": "2026-07-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": -1850,
+          "description": "PAYROLL ELLIS MOTORS COMM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-16",
+          "date_posted": "2026-07-16",
+          "amount": 88.58,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-20",
+          "date_posted": "2026-07-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-25",
+          "date_posted": "2026-07-25",
+          "amount": 927.76,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-31",
+          "date_posted": "2026-07-31",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-09",
+          "date_posted": "2026-08-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-14",
+          "date_posted": "2026-08-14",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-15",
+          "date_posted": "2026-08-15",
+          "amount": -4000,
+          "description": "PAYROLL ELLIS MOTORS COMM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-16",
+          "date_posted": "2026-08-16",
+          "amount": 93.79,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-20",
+          "date_posted": "2026-08-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-25",
+          "date_posted": "2026-08-25",
+          "amount": 834.36,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-28",
+          "date_posted": "2026-08-28",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-09",
+          "date_posted": "2026-09-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-15",
+          "date_posted": "2026-09-15",
+          "amount": -620,
+          "description": "PAYROLL ELLIS MOTORS COMM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-16",
+          "date_posted": "2026-09-16",
+          "amount": 112.94,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-25",
+          "date_posted": "2026-09-25",
+          "amount": 979.35,
+          "description": "CAPITAL ONE MOBILE PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-25",
+          "date_posted": "2026-09-25",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 1400,
+          "description": "WESTWOOD LOFTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-03",
+          "date_posted": "2026-10-03",
+          "amount": 412,
+          "description": "ALLY AUTO PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-09",
+          "date_posted": "2026-10-09",
+          "amount": -1200,
+          "description": "PAYROLL ELLIS MOTORS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-09",
+          "date_posted": "2026-10-09",
+          "amount": 168,
+          "description": "STATE FARM INSURANCE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": -2400,
+          "description": "PAYROLL ELLIS MOTORS COMM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-16",
+          "date_posted": "2026-10-16",
+          "amount": 125.9,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-20",
+          "date_posted": "2026-10-20",
+          "amount": 95,
+          "description": "VERIZON WIRELESS",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "type": "credit",
+      "subtype": "credit card",
+      "starting_balance": 678.12,
+      "currency": "USD",
+      "meta": {
+        "name": "Rewards Card",
+        "official_name": "Platypus Rewards Visa",
+        "mask": "9031"
+      },
+      "identity": {
+        "names": [
+          "Jordan Ellis"
+        ],
+        "emails": [
+          {
+            "data": "jordan.ellis@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": 25.84,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-25",
+          "date_posted": "2026-04-25",
+          "amount": 71.2,
+          "description": "WALMART SUPERCENTER #5942",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": 14.16,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": -36.83,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-28",
+          "date_posted": "2026-04-28",
+          "amount": 48.04,
+          "description": "EXXONMOBIL 9954",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-03",
+          "date_posted": "2026-05-03",
+          "amount": 39.72,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-03",
+          "date_posted": "2026-05-03",
+          "amount": 71.52,
+          "description": "KROGER #5352",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 37.7,
+          "description": "SHELL OIL 6504",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-09",
+          "date_posted": "2026-05-09",
+          "amount": 63.8,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-09",
+          "date_posted": "2026-05-09",
+          "amount": 68.01,
+          "description": "KROGER #8450",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-10",
+          "date_posted": "2026-05-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-13",
+          "date_posted": "2026-05-13",
+          "amount": 12.96,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-14",
+          "date_posted": "2026-05-14",
+          "amount": 41.87,
+          "description": "EXXONMOBIL 3827",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-16",
+          "date_posted": "2026-05-16",
+          "amount": 76.81,
+          "description": "WALMART SUPERCENTER #1692",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-21",
+          "date_posted": "2026-05-21",
+          "amount": 48.08,
+          "description": "SHELL OIL 2937",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-22",
+          "date_posted": "2026-05-22",
+          "amount": 61.04,
+          "description": "KROGER #3831",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-22",
+          "date_posted": "2026-05-22",
+          "amount": 38.11,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 18.14,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": 29.09,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-26",
+          "date_posted": "2026-05-26",
+          "amount": -737.64,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-27",
+          "date_posted": "2026-05-27",
+          "amount": 44.85,
+          "description": "EXXONMOBIL 2329",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": 38.03,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-30",
+          "date_posted": "2026-05-30",
+          "amount": 55.1,
+          "description": "WALMART SUPERCENTER #5807",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 14.2,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 41.3,
+          "description": "SHELL OIL 5583",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-06",
+          "date_posted": "2026-06-06",
+          "amount": 83.77,
+          "description": "WALMART SUPERCENTER #7711",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-07",
+          "date_posted": "2026-06-07",
+          "amount": 27.37,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 38.62,
+          "description": "EXXONMOBIL 9357",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-12",
+          "date_posted": "2026-06-12",
+          "amount": 74.93,
+          "description": "KROGER #656",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-17",
+          "date_posted": "2026-06-17",
+          "amount": 30.87,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-17",
+          "date_posted": "2026-06-17",
+          "amount": 27.08,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 25.11,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 35.1,
+          "description": "SHELL OIL 8518",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-21",
+          "date_posted": "2026-06-21",
+          "amount": 89.11,
+          "description": "KROGER #1550",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 49.01,
+          "description": "EXXONMOBIL 107",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 22.21,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-26",
+          "date_posted": "2026-06-26",
+          "amount": -752.23,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-28",
+          "date_posted": "2026-06-28",
+          "amount": 63.89,
+          "description": "WALMART SUPERCENTER #5809",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-30",
+          "date_posted": "2026-06-30",
+          "amount": 10.62,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 44.82,
+          "description": "SHELL OIL 8092",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-03",
+          "date_posted": "2026-07-03",
+          "amount": 78.56,
+          "description": "BEST BUY 00412",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-05",
+          "date_posted": "2026-07-05",
+          "amount": 55.73,
+          "description": "WALMART SUPERCENTER #8220",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-06",
+          "date_posted": "2026-07-06",
+          "amount": 28.03,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-07",
+          "date_posted": "2026-07-07",
+          "amount": 36.69,
+          "description": "EXXONMOBIL 6166",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-10",
+          "date_posted": "2026-07-10",
+          "amount": 16.39,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-10",
+          "date_posted": "2026-07-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 51.01,
+          "description": "KROGER #8428",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 32.73,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-16",
+          "date_posted": "2026-07-16",
+          "amount": 51.7,
+          "description": "EXXONMOBIL 9825",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-16",
+          "date_posted": "2026-07-16",
+          "amount": 31.32,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 214,
+          "description": "FIRESTONE 0381",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-18",
+          "date_posted": "2026-07-18",
+          "amount": 71.04,
+          "description": "KROGER #5069",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-19",
+          "date_posted": "2026-07-19",
+          "amount": 45.92,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-21",
+          "date_posted": "2026-07-21",
+          "amount": 38.37,
+          "description": "EXXONMOBIL 4009",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-21",
+          "date_posted": "2026-07-21",
+          "amount": 30.46,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-24",
+          "date_posted": "2026-07-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 14.01,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": -927.76,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 53.55,
+          "description": "WALMART SUPERCENTER #546",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-29",
+          "date_posted": "2026-07-29",
+          "amount": 45.66,
+          "description": "SHELL OIL 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-29",
+          "date_posted": "2026-07-29",
+          "amount": 31.35,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 75.39,
+          "description": "WALMART SUPERCENTER #4339",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": 23.31,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-05",
+          "date_posted": "2026-08-05",
+          "amount": 40.41,
+          "description": "SHELL OIL 7288",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": 76.23,
+          "description": "NIKE COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": 31.45,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-08",
+          "date_posted": "2026-08-08",
+          "amount": 64.12,
+          "description": "KROGER #7360",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": 13.67,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": 41.76,
+          "description": "EXXONMOBIL 3788",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-15",
+          "date_posted": "2026-08-15",
+          "amount": 80.38,
+          "description": "KROGER #5592",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-19",
+          "date_posted": "2026-08-19",
+          "amount": 38.48,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-20",
+          "date_posted": "2026-08-20",
+          "amount": 40.94,
+          "description": "SHELL OIL 2527",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 12.85,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-22",
+          "date_posted": "2026-08-22",
+          "amount": 23.07,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-22",
+          "date_posted": "2026-08-22",
+          "amount": 83.7,
+          "description": "KROGER #1273",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 17.55,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-24",
+          "date_posted": "2026-08-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-26",
+          "date_posted": "2026-08-26",
+          "amount": -834.36,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": 41.34,
+          "description": "EXXONMOBIL 6470",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-29",
+          "date_posted": "2026-08-29",
+          "amount": 74.95,
+          "description": "KROGER #3754",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 37.61,
+          "description": "SHELL OIL 8237",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": 31.48,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-05",
+          "date_posted": "2026-09-05",
+          "amount": 87.5,
+          "description": "WALMART SUPERCENTER #6335",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-06",
+          "date_posted": "2026-09-06",
+          "amount": 26.57,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 21.78,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-08",
+          "date_posted": "2026-09-08",
+          "amount": 51.34,
+          "description": "SHELL OIL 6357",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 55.08,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 175,
+          "description": "BIRTHDAY DINNER RUTHS CHRIS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-12",
+          "date_posted": "2026-09-12",
+          "amount": 86.76,
+          "description": "WALMART SUPERCENTER #4405",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": 25.86,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 49.78,
+          "description": "EXXONMOBIL 1088",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": 26.38,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": 70.58,
+          "description": "KROGER #8819",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 21.98,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": 49.88,
+          "description": "SHELL OIL 1217",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": 10.99,
+          "description": "SPOTIFY USA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": 19,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-25",
+          "date_posted": "2026-09-25",
+          "amount": 66.32,
+          "description": "KROGER #889",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-26",
+          "date_posted": "2026-09-26",
+          "amount": -979.35,
+          "description": "PAYMENT THANK YOU",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-30",
+          "date_posted": "2026-09-30",
+          "amount": 36.94,
+          "description": "EXXONMOBIL 6426",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-30",
+          "date_posted": "2026-09-30",
+          "amount": 16.01,
+          "description": "WINGSTOP 702",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": 21.73,
+          "description": "OUTBACK 3301",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-03",
+          "date_posted": "2026-10-03",
+          "amount": 83.83,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 20.31,
+          "description": "CHIPOTLE 2291",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 71.78,
+          "description": "WALMART SUPERCENTER #1123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 46.56,
+          "description": "EXXONMOBIL 7095",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-10",
+          "date_posted": "2026-10-10",
+          "amount": 15.49,
+          "description": "NETFLIX COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-10",
+          "date_posted": "2026-10-10",
+          "amount": 74.88,
+          "description": "WALMART SUPERCENTER #9617",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": 31.25,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-14",
+          "date_posted": "2026-10-14",
+          "amount": 50.28,
+          "description": "SHELL OIL 2123",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-16",
+          "date_posted": "2026-10-16",
+          "amount": 21.08,
+          "description": "STARBUCKS STORE 0921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 74.15,
+          "description": "WALMART SUPERCENTER #4921",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-20",
+          "date_posted": "2026-10-20",
+          "amount": 47.51,
+          "description": "SHELL OIL 5680",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}

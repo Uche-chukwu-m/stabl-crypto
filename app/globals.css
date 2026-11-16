@@ -1,0 +1,373 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens, as on the landing page and the deck. Clearing the default
+ * palette means a stray bg-blue-500 compiles to nothing.
+ *
+ * Screens use the semantic names (page, card, text, muted, rule, accent, fast,
+ * band). They switch for dark mode: ink background, paper text, the same green
+ * lightened for contrast. Every text pair passes WCAG AA. Tan is for rules and
+ * fills only; on cream it is too light for words, so quiet labels use brown.
+ */
+@theme {
+  --color-*: initial;
+  --color-green: #1f5138;
+  --color-ink: #16241d;
+  --color-cream: #f1eee3;
+  --color-paper: #fbf9f4;
+  --color-brown: #8a5a3b;
+  --color-tan: #c9a97e;
+  --color-sage: #7fa68c;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.45;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.45;
+  --text-title: 1.875rem;
+  --text-title--line-height: 1.15;
+  --text-stat: 2.75rem;
+  --text-stat--line-height: 1.05;
+  --text-hero: 3.25rem;
+  --text-hero--line-height: 1;
+
+  --radius-card: 1.25rem;
+  --radius-tile: 0.875rem;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-sunk: var(--sunk);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-fast: var(--fast);
+  --color-band: var(--band);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+  --font-italic: var(--font-lora-italic);
+}
+
+:root {
+  --page: #f1eee3;
+  --card: #fbf9f4;
+  --sunk: #e8e3d5;
+  --text: #16241d;
+  --muted: #8a5a3b;
+  --rule: #c9a97e;
+  --accent: #1f5138;
+  --on-accent: #f1eee3;
+  --fast: #8a5a3b;
+  --band: #7fa68c;
+  --shadow: 0 1px 2px rgb(22 36 29 / 0.05), 0 8px 24px rgb(22 36 29 / 0.07);
+  --shadow-lift: 0 2px 4px rgb(22 36 29 / 0.06), 0 16px 40px rgb(22 36 29 / 0.14);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #16241d;
+    --card: #1e3027;
+    --sunk: #12201a;
+    --text: #fbf9f4;
+    --muted: #bfb39c;
+    --rule: #3a4c41;
+    --accent: #7cc49a;
+    --on-accent: #16241d;
+    --fast: #d19a72;
+    --band: #4f7a5f;
+    --shadow: 0 0 0 1px rgb(255 255 255 / 0.04);
+    --shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.06), 0 16px 40px rgb(0 0 0 / 0.4);
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--page);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--page);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    min-height: 100dvh;
+  }
+
+  /* Bold Inter for titles; Lora is kept for money. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* Money, set in Lora with even figures so columns line up. */
+  .figure {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.015em;
+  }
+
+  .label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--text-caption);
+    line-height: var(--text-caption--line-height);
+    color: var(--muted);
+    letter-spacing: 0.01em;
+  }
+
+  /* Soft raised surface: rounded, a faint shadow, no outline. */
+  .card {
+    background-color: var(--card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow);
+  }
+
+  /* Anything tappable gives a little under the finger. */
+  .press {
+    transition: transform 120ms ease, background-color 150ms, color 150ms, box-shadow 150ms;
+  }
+
+  .press:active {
+    transform: scale(0.97);
+  }
+
+  .btn {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-inline: 1.375rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: transform 120ms ease, background-color 150ms, color 150ms, border-color 150ms;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn-quiet {
+    background-color: var(--sunk);
+    color: var(--text);
+  }
+
+  .btn-quiet:hover {
+    filter: brightness(0.97);
+  }
+
+  .btn-fast {
+    background-color: color-mix(in srgb, var(--fast) 14%, transparent);
+    color: var(--fast);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .field {
+    width: 100%;
+    min-height: 52px;
+    border-radius: var(--radius-tile);
+    border: 1.5px solid transparent;
+    background-color: var(--sunk);
+    padding: 0.75rem 1rem;
+    transition: border-color 150ms, background-color 150ms;
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: var(--card);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+  }
+
+  /* Placeholder while a screen loads. */
+  .skeleton {
+    border-radius: var(--radius-tile);
+    background: linear-gradient(90deg, var(--sunk) 0%, var(--card) 50%, var(--sunk) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes sheet-down {
+  from {
+    transform: translateY(-120%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fill-cell {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* Screens rise in gently, a beat apart, in the order they read. */
+.rise {
+  animation: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.rise-2 {
+  animation-delay: 60ms;
+}
+
+.rise-3 {
+  animation-delay: 120ms;
+}
+
+.rise-4 {
+  animation-delay: 180ms;
+}
+
+.cell-fill {
+  transform-origin: left;
+  animation: fill-cell 380ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.draw-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 900ms cubic-bezier(0.33, 1, 0.68, 1) 120ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .draw-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}

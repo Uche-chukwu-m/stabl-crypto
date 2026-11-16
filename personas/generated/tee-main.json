@@ -1,0 +1,1443 @@
+{
+  "seed": "stabl-tee-tee-main",
+  "roll_dates_forward": false,
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 240,
+      "currency": "USD",
+      "meta": {
+        "name": "Checking",
+        "official_name": "Basic Checking",
+        "mask": "3074"
+      },
+      "identity": {
+        "names": [
+          "Tee Daniels"
+        ],
+        "emails": [
+          {
+            "data": "tee.daniels@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-24",
+          "date_posted": "2026-04-24",
+          "amount": 13.52,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-26",
+          "date_posted": "2026-04-26",
+          "amount": 75.54,
+          "description": "DOLLAR GENERAL #3868",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-27",
+          "date_posted": "2026-04-27",
+          "amount": -254.21,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-29",
+          "date_posted": "2026-04-29",
+          "amount": 38.09,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-30",
+          "date_posted": "2026-04-30",
+          "amount": -99.74,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-30",
+          "date_posted": "2026-04-30",
+          "amount": 15.18,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-30",
+          "date_posted": "2026-04-30",
+          "amount": 43.95,
+          "description": "RACETRAC 8299",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-04-30",
+          "date_posted": "2026-04-30",
+          "amount": 16.91,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-01",
+          "date_posted": "2026-05-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-02",
+          "date_posted": "2026-05-02",
+          "amount": 80.27,
+          "description": "DOLLAR GENERAL #4665",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-02",
+          "date_posted": "2026-05-02",
+          "amount": -183.65,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-04",
+          "date_posted": "2026-05-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-04",
+          "date_posted": "2026-05-04",
+          "amount": -253.27,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-05",
+          "date_posted": "2026-05-05",
+          "amount": 9.65,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 49.17,
+          "description": "SHELL OIL 9712",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-07",
+          "date_posted": "2026-05-07",
+          "amount": 8.86,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-10",
+          "date_posted": "2026-05-10",
+          "amount": 58.79,
+          "description": "DOLLAR GENERAL #5757",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-10",
+          "date_posted": "2026-05-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": -242.05,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": 13.75,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-11",
+          "date_posted": "2026-05-11",
+          "amount": 16.62,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-14",
+          "date_posted": "2026-05-14",
+          "amount": 50.33,
+          "description": "SHELL OIL 6218",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-15",
+          "date_posted": "2026-05-15",
+          "amount": 22.21,
+          "description": "WALMART COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-16",
+          "date_posted": "2026-05-16",
+          "amount": 81.48,
+          "description": "DOLLAR GENERAL #9962",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-16",
+          "date_posted": "2026-05-16",
+          "amount": -183.23,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": 98.76,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": -201.27,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": 9.46,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 52.98,
+          "description": "RACETRAC 3355",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-19",
+          "date_posted": "2026-05-19",
+          "amount": 16.65,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-21",
+          "date_posted": "2026-05-21",
+          "amount": -95.19,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-21",
+          "date_posted": "2026-05-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 84.03,
+          "description": "WALMART SUPERCENTER #4121",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-25",
+          "date_posted": "2026-05-25",
+          "amount": -188.39,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-26",
+          "date_posted": "2026-05-26",
+          "amount": 50.08,
+          "description": "SHELL OIL 7515",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-27",
+          "date_posted": "2026-05-27",
+          "amount": 14.3,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": -80.5,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": 16.48,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-31",
+          "date_posted": "2026-05-31",
+          "amount": 56.33,
+          "description": "WALMART SUPERCENTER #6012",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": -320.99,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-01",
+          "date_posted": "2026-06-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-02",
+          "date_posted": "2026-06-02",
+          "amount": 50.79,
+          "description": "SHELL OIL 4958",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-02",
+          "date_posted": "2026-06-02",
+          "amount": 8.38,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-03",
+          "date_posted": "2026-06-03",
+          "amount": 8.28,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 21.88,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-04",
+          "date_posted": "2026-06-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-05",
+          "date_posted": "2026-06-05",
+          "amount": -136.65,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-05",
+          "date_posted": "2026-06-05",
+          "amount": 82.99,
+          "description": "WALMART SUPERCENTER #6250",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-08",
+          "date_posted": "2026-06-08",
+          "amount": -199.93,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-08",
+          "date_posted": "2026-06-08",
+          "amount": 9.74,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-10",
+          "date_posted": "2026-06-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-11",
+          "date_posted": "2026-06-11",
+          "amount": -103.65,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-11",
+          "date_posted": "2026-06-11",
+          "amount": 41.57,
+          "description": "RACETRAC 3618",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-12",
+          "date_posted": "2026-06-12",
+          "amount": 10.42,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-13",
+          "date_posted": "2026-06-13",
+          "amount": 55.47,
+          "description": "WALMART SUPERCENTER #9508",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-15",
+          "date_posted": "2026-06-15",
+          "amount": -186.45,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-15",
+          "date_posted": "2026-06-15",
+          "amount": 10.78,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-17",
+          "date_posted": "2026-06-17",
+          "amount": 111.5,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": -80.81,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 12.27,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-18",
+          "date_posted": "2026-06-18",
+          "amount": 41.97,
+          "description": "RACETRAC 412",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-19",
+          "date_posted": "2026-06-19",
+          "amount": 82.06,
+          "description": "DOLLAR GENERAL #6162",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-21",
+          "date_posted": "2026-06-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-22",
+          "date_posted": "2026-06-22",
+          "amount": -306.33,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": 38.64,
+          "description": "SHELL OIL 6352",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-24",
+          "date_posted": "2026-06-24",
+          "amount": -117.24,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": -97.3,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-25",
+          "date_posted": "2026-06-25",
+          "amount": 7.28,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-26",
+          "date_posted": "2026-06-26",
+          "amount": 17.76,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-26",
+          "date_posted": "2026-06-26",
+          "amount": 82.87,
+          "description": "WALMART SUPERCENTER #8114",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-28",
+          "date_posted": "2026-06-28",
+          "amount": 23.59,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-29",
+          "date_posted": "2026-06-29",
+          "amount": -242.07,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-29",
+          "date_posted": "2026-06-29",
+          "amount": 13.22,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-01",
+          "date_posted": "2026-07-01",
+          "amount": 46.55,
+          "description": "RACETRAC 995",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-02",
+          "date_posted": "2026-07-02",
+          "amount": 17.81,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-03",
+          "date_posted": "2026-07-03",
+          "amount": 66.05,
+          "description": "WALMART SUPERCENTER #7767",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-04",
+          "date_posted": "2026-07-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-04",
+          "date_posted": "2026-07-04",
+          "amount": -157.87,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-05",
+          "date_posted": "2026-07-05",
+          "amount": 16.89,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-06",
+          "date_posted": "2026-07-06",
+          "amount": -254.89,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-09",
+          "date_posted": "2026-07-09",
+          "amount": -117.36,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-09",
+          "date_posted": "2026-07-09",
+          "amount": 41.66,
+          "description": "RACETRAC 9796",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-09",
+          "date_posted": "2026-07-09",
+          "amount": 9.4,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-10",
+          "date_posted": "2026-07-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-11",
+          "date_posted": "2026-07-11",
+          "amount": 62,
+          "description": "WALMART SUPERCENTER #5377",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-12",
+          "date_posted": "2026-07-12",
+          "amount": 11.13,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-13",
+          "date_posted": "2026-07-13",
+          "amount": -270.87,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 48.61,
+          "description": "SHELL OIL 5111",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-15",
+          "date_posted": "2026-07-15",
+          "amount": 42.26,
+          "description": "WALMART COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-16",
+          "date_posted": "2026-07-16",
+          "amount": -118.62,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-16",
+          "date_posted": "2026-07-16",
+          "amount": -208.12,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 70.91,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 17.48,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-17",
+          "date_posted": "2026-07-17",
+          "amount": 83.92,
+          "description": "WALMART SUPERCENTER #2157",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-19",
+          "date_posted": "2026-07-19",
+          "amount": 17.94,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-20",
+          "date_posted": "2026-07-20",
+          "amount": -306.39,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-21",
+          "date_posted": "2026-07-21",
+          "amount": 17.49,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-21",
+          "date_posted": "2026-07-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-21",
+          "date_posted": "2026-07-21",
+          "amount": 53.7,
+          "description": "SHELL OIL 9461",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-23",
+          "date_posted": "2026-07-23",
+          "amount": -148.48,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-25",
+          "date_posted": "2026-07-25",
+          "amount": 340,
+          "description": "AUTOZONE 1876",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 76.47,
+          "description": "DOLLAR GENERAL #199",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-26",
+          "date_posted": "2026-07-26",
+          "amount": 10.91,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-27",
+          "date_posted": "2026-07-27",
+          "amount": -241.85,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-29",
+          "date_posted": "2026-07-29",
+          "amount": 11.5,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-30",
+          "date_posted": "2026-07-30",
+          "amount": -62.86,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-30",
+          "date_posted": "2026-07-30",
+          "amount": 46.07,
+          "description": "RACETRAC 8413",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 75.28,
+          "description": "DOLLAR GENERAL #1014",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-01",
+          "date_posted": "2026-08-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": 21.38,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-02",
+          "date_posted": "2026-08-02",
+          "amount": 13.87,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": -282.84,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": 8.81,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-03",
+          "date_posted": "2026-08-03",
+          "amount": -192.31,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-04",
+          "date_posted": "2026-08-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": -60.02,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-06",
+          "date_posted": "2026-08-06",
+          "amount": 50.17,
+          "description": "SHELL OIL 5302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-07",
+          "date_posted": "2026-08-07",
+          "amount": 81.17,
+          "description": "DOLLAR GENERAL #5713",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-09",
+          "date_posted": "2026-08-09",
+          "amount": 9.56,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": -187.59,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-10",
+          "date_posted": "2026-08-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-11",
+          "date_posted": "2026-08-11",
+          "amount": 44.28,
+          "description": "RACETRAC 8578",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-12",
+          "date_posted": "2026-08-12",
+          "amount": 12.36,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-13",
+          "date_posted": "2026-08-13",
+          "amount": -149.07,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-16",
+          "date_posted": "2026-08-16",
+          "amount": 9.38,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-16",
+          "date_posted": "2026-08-16",
+          "amount": -191.93,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-16",
+          "date_posted": "2026-08-16",
+          "amount": 74.39,
+          "description": "WALMART SUPERCENTER #8812",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": -212.67,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": 109.23,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": 42.95,
+          "description": "RACETRAC 1107",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 60.92,
+          "description": "DOLLAR GENERAL #560",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-21",
+          "date_posted": "2026-08-21",
+          "amount": 15.13,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 26.19,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-23",
+          "date_posted": "2026-08-23",
+          "amount": 7.76,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-24",
+          "date_posted": "2026-08-24",
+          "amount": -326.77,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": -132.35,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": 54.07,
+          "description": "RACETRAC 7663",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-27",
+          "date_posted": "2026-08-27",
+          "amount": 15.09,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-29",
+          "date_posted": "2026-08-29",
+          "amount": 76.96,
+          "description": "WALMART SUPERCENTER #1843",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-31",
+          "date_posted": "2026-08-31",
+          "amount": -200.91,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": 13.17,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-01",
+          "date_posted": "2026-09-01",
+          "amount": -175.46,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-03",
+          "date_posted": "2026-09-03",
+          "amount": 38.87,
+          "description": "SHELL OIL 8837",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-04",
+          "date_posted": "2026-09-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-04",
+          "date_posted": "2026-09-04",
+          "amount": 80.47,
+          "description": "DOLLAR GENERAL #3272",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-04",
+          "date_posted": "2026-09-04",
+          "amount": 15.57,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-06",
+          "date_posted": "2026-09-06",
+          "amount": 12.42,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-07",
+          "date_posted": "2026-09-07",
+          "amount": -191.37,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": -86.07,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 38.95,
+          "description": "SHELL OIL 381",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-10",
+          "date_posted": "2026-09-10",
+          "amount": 12,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": -91.11,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": 44.76,
+          "description": "WALMART COM",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-12",
+          "date_posted": "2026-09-12",
+          "amount": 62.95,
+          "description": "DOLLAR GENERAL #4157",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-13",
+          "date_posted": "2026-09-13",
+          "amount": 12.31,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-14",
+          "date_posted": "2026-09-14",
+          "amount": -235.31,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 101.77,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-17",
+          "date_posted": "2026-09-17",
+          "amount": 38.98,
+          "description": "SHELL OIL 9652",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-18",
+          "date_posted": "2026-09-18",
+          "amount": 15.9,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-20",
+          "date_posted": "2026-09-20",
+          "amount": 68.75,
+          "description": "WALMART SUPERCENTER #7416",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-21",
+          "date_posted": "2026-09-21",
+          "amount": -326.8,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-21",
+          "date_posted": "2026-09-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": 16.52,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": 50.72,
+          "description": "RACETRAC 5511",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-22",
+          "date_posted": "2026-09-22",
+          "amount": -128.94,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-23",
+          "date_posted": "2026-09-23",
+          "amount": 15.01,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-24",
+          "date_posted": "2026-09-24",
+          "amount": -76.31,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-27",
+          "date_posted": "2026-09-27",
+          "amount": 14.01,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-27",
+          "date_posted": "2026-09-27",
+          "amount": 17.19,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-27",
+          "date_posted": "2026-09-27",
+          "amount": 61.02,
+          "description": "WALMART SUPERCENTER #3498",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-28",
+          "date_posted": "2026-09-28",
+          "amount": -212.08,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-30",
+          "date_posted": "2026-09-30",
+          "amount": 47.49,
+          "description": "SHELL OIL 7568",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 28.53,
+          "description": "AMAZON MKTP US",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": -64.13,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-01",
+          "date_posted": "2026-10-01",
+          "amount": 925,
+          "description": "OAK HOLLOW APTS RENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-03",
+          "date_posted": "2026-10-03",
+          "amount": 67.81,
+          "description": "DOLLAR GENERAL #5970",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 289,
+          "description": "CARVANA AUTO PMT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 11.27,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-05",
+          "date_posted": "2026-10-05",
+          "amount": -265.34,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-06",
+          "date_posted": "2026-10-06",
+          "amount": -158.71,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 7.78,
+          "description": "MCDONALDS F1203",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-08",
+          "date_posted": "2026-10-08",
+          "amount": 46.55,
+          "description": "SHELL OIL 9956",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-10",
+          "date_posted": "2026-10-10",
+          "amount": 56.4,
+          "description": "DOLLAR GENERAL #1779",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-10",
+          "date_posted": "2026-10-10",
+          "amount": 65,
+          "description": "METRO BY T MOBILE",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-12",
+          "date_posted": "2026-10-12",
+          "amount": -292.07,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-13",
+          "date_posted": "2026-10-13",
+          "amount": 12.22,
+          "description": "POPEYES 3302",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-13",
+          "date_posted": "2026-10-13",
+          "amount": 11.15,
+          "description": "SONIC DRIVE IN 41",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-14",
+          "date_posted": "2026-10-14",
+          "amount": 49.88,
+          "description": "SHELL OIL 2549",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-15",
+          "date_posted": "2026-10-15",
+          "amount": -129.75,
+          "description": "INSTACART SHOPPER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 79.8,
+          "description": "DOLLAR GENERAL #3958",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-17",
+          "date_posted": "2026-10-17",
+          "amount": 95.71,
+          "description": "ENTERGY LA",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-19",
+          "date_posted": "2026-10-19",
+          "amount": -189.68,
+          "description": "DOORDASH DASHER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-21",
+          "date_posted": "2026-10-21",
+          "amount": 142,
+          "description": "PROGRESSIVE INS",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-21",
+          "date_posted": "2026-10-21",
+          "amount": 42.76,
+          "description": "RACETRAC 977",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-21",
+          "date_posted": "2026-10-21",
+          "amount": -207.08,
+          "description": "UBER DRIVER PAYOUT",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}

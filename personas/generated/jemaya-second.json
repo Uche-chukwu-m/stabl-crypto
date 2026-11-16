@@ -1,0 +1,162 @@
+{
+  "seed": "stabl-jemaya-jemaya-second",
+  "roll_dates_forward": false,
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "savings",
+      "starting_balance": 422.7,
+      "currency": "USD",
+      "meta": {
+        "name": "Savings",
+        "official_name": "Online Savings",
+        "mask": "7781"
+      },
+      "identity": {
+        "names": [
+          "Jemaya Brooks"
+        ],
+        "emails": [
+          {
+            "data": "jemaya.brooks@demo.stabl.app",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "phone_numbers": [
+          {
+            "data": "3185550142",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "addresses": [
+          {
+            "primary": true,
+            "data": {
+              "street": "403 Main Street",
+              "city": "Grambling",
+              "region": "LA",
+              "postal_code": "71245",
+              "country": "US"
+            }
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2026-04-28",
+          "date_posted": "2026-04-28",
+          "amount": -0.35,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-17",
+          "date_posted": "2026-05-17",
+          "amount": -852,
+          "description": "PAYPAL TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-18",
+          "date_posted": "2026-05-18",
+          "amount": 852,
+          "description": "ONLINE TRANSFER TO CHK 4321",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": 1167,
+          "description": "ONLINE TRANSFER TO CHK 4321",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-24",
+          "date_posted": "2026-05-24",
+          "amount": -1167,
+          "description": "PAYPAL TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-05-28",
+          "date_posted": "2026-05-28",
+          "amount": -0.49,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-06-28",
+          "date_posted": "2026-06-28",
+          "amount": -0.45,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-07-28",
+          "date_posted": "2026-07-28",
+          "amount": -0.46,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-17",
+          "date_posted": "2026-08-17",
+          "amount": -1143,
+          "description": "PAYPAL TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-18",
+          "date_posted": "2026-08-18",
+          "amount": 1143,
+          "description": "ONLINE TRANSFER TO CHK 4321",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-08-28",
+          "date_posted": "2026-08-28",
+          "amount": -0.45,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": 1193,
+          "description": "ONLINE TRANSFER TO CHK 4321",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-11",
+          "date_posted": "2026-09-11",
+          "amount": -1193,
+          "description": "PAYPAL TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-09-28",
+          "date_posted": "2026-09-28",
+          "amount": -0.5,
+          "description": "INTEREST PAYMENT",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-02",
+          "date_posted": "2026-10-02",
+          "amount": -479,
+          "description": "PAYPAL TRANSFER",
+          "currency": "USD"
+        },
+        {
+          "date_transacted": "2026-10-04",
+          "date_posted": "2026-10-04",
+          "amount": 479,
+          "description": "ONLINE TRANSFER TO CHK 4321",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}
