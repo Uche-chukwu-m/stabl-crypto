@@ -80,7 +80,7 @@ export default async function VaultPage({ searchParams }: { searchParams: Promis
       <p className="px-1 text-caption text-muted">
         {v.onArc ? (
           <>
-            In {v.legalName}&apos;s name, ending {v.mask}. Only you can receive this money.
+            In {v.legalName}&apos;s name, ending {v.mask}. The contract only pays it back to you.
           </>
         ) : (
           <>

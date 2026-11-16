@@ -236,6 +236,7 @@ export async function sendToBankSide(move: { id: string; userId: string; amountC
     await db.update(chainOps).set({ chainTxId: id }).where(eq(chainOps.id, op.id));
   } catch (error) {
     await db.update(chainOps).set({ state: "failed" }).where(eq(chainOps.id, op.id));
-    console.error("offramp failed", (error as Error).message);
+    // Thrown, so the move keeps this step open and it is tried again later.
+    throw error;
   }
 }

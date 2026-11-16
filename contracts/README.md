@@ -12,7 +12,7 @@ Stabl sets money aside in good weeks and gives it back in slow ones. The contrac
 1. **Closed loop.** Every way out of a vault pays that vault's owner. No function sends an owner's money to any other address.
 2. **A limited operator.** Stabl's operator can add money to a vault and send it back to its owner. It cannot redirect, borrow or sweep anything.
 3. **Freeze.** An owner can freeze their vault. While frozen, nothing moves in or out. Only the owner can unfreeze. The operator may freeze on an owner's behalf, because stopping is always safe, but can never unfreeze.
-4. **Emergency unlock.** An owner can take their own money out without the operator.
+4. **Emergency unlock.** An owner's wallet can take its own money out without the operator. In the app those wallets are Circle developer-controlled, so this is not yet an exit that works without Stabl.
 5. **Once only.** Every move carries the app's move id as a reference. A reference settles once, so a retried request never moves money twice.
 
 There is no admin, no pause switch, no fee and no upgrade path. The operator and the token are fixed at deployment.

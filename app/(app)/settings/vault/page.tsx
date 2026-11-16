@@ -38,8 +38,9 @@ function Out({ href, children }: { href: string; children: React.ReactNode }) {
 
 const PROMISES = [
   "Your vault is held by a contract on Arc, a network built for dollars. The contract is public, and anyone can read it.",
-  "The contract can only ever pay you. Stabl can set money aside and send it back, and cannot send it anywhere else.",
-  "You can freeze your vault, or take your money out, without Stabl.",
+  "The contract can only ever pay your vault's own key. Stabl can set money aside and send it back to you, and the contract refuses to send it anywhere else.",
+  "Freezing stops every move at once. While it is frozen, the contract moves nothing in or out.",
+  "In this early version Stabl looks after your vault key for you, so you never handle one. Next, the key moves to your phone, so only you can freeze or unlock.",
 ];
 
 // The only page that says this build runs on a test network. Everything else in

@@ -267,6 +267,12 @@ export const moves = pgTable(
     confirmedBy: text("confirmed_by", { enum: ["stream", "reconcile"] }),
     // Details the receipt needs once the move settles.
     metaJson: jsonb("meta_json").$type<{ shortByCents?: number }>(),
+    // What follows a settled move, one step at a time, so a step that fails is
+    // retried later instead of lost: the bank side, the receipt, and on Arc the
+    // USDC going back to the bank side after a release.
+    followUpsJson: jsonb("follow_ups_json").$type<{ mirror?: boolean; receipt?: boolean; offramp?: boolean }>(),
+    followUpsClaimedAt: stamp("follow_ups_claimed_at"),
+    followUpsDoneAt: stamp("follow_ups_done_at"),
     createdAt: createdAt(),
   },
   (t) => [

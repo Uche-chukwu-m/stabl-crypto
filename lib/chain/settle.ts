@@ -5,7 +5,7 @@ import { execute, txStatus, waitForTx } from "@/lib/chain/circle";
 import { ARC, centsToUnits, chain, moveRef, refToMoveId, type Address } from "@/lib/chain/config";
 import { db } from "@/lib/db";
 import { chainEvents, chainOps, chainWallets, ledgerEntries, moves, vaultAccounts, vaultBalances } from "@/lib/db/schema";
-import { afterMoveSettled } from "@/lib/move-receipts";
+import { afterMoveSettled, unfinishedFollowUps } from "@/lib/move-receipts";
 import { notify } from "@/lib/notify";
 import { sendToBankSide, submitMove, walletFor } from "@/lib/vault/arc";
 
@@ -50,7 +50,7 @@ export async function applyVaultEvent(ev: VaultEvent, source: EventSource): Prom
       })
       .onConflictDoNothing()
       .returning({ id: chainEvents.id });
-    if (!row) return { kind: "duplicate" as const };
+    if (!row) return { kind: "duplicate" as const, moveId: move?.id ?? null };
 
     if (ev.name === "Frozen" || ev.name === "Unfrozen") return { kind: "freeze" as const };
 
@@ -81,7 +81,12 @@ export async function applyVaultEvent(ev: VaultEvent, source: EventSource): Prom
     return { kind: "settled" as const, move };
   });
 
-  if (outcome.kind === "duplicate") return "duplicate";
+  if (outcome.kind === "duplicate") {
+    // Seen before. If what followed the first delivery did not finish (say the
+    // receipt failed to send), this delivery is the chance to finish it.
+    if (outcome.moveId) await followUp(outcome.moveId);
+    return "duplicate";
+  }
 
   if (outcome.kind === "freeze") {
     // The contract is the record. Read its state now, so events that arrive out
@@ -100,11 +105,29 @@ export async function applyVaultEvent(ev: VaultEvent, source: EventSource): Prom
   }
 
   if (outcome.kind === "settled") {
-    await afterMoveSettled(outcome.move.id);
-    if (outcome.move.direction !== "buffer") await sendToBankSide(outcome.move);
+    await followUp(outcome.move.id);
     return "settled";
   }
   return "recorded";
+}
+
+function followUp(moveId: string) {
+  return afterMoveSettled(moveId, { offramp: sendToBankSide });
+}
+
+// Finish follow-ups left undone by an earlier failure. Each one is retried on
+// its own, so one stuck move cannot hold up the rest.
+export async function finishFollowUps(userId?: string): Promise<number> {
+  let failed = 0;
+  for (const { id } of await unfinishedFollowUps(userId)) {
+    try {
+      await followUp(id);
+    } catch (error) {
+      failed++;
+      console.error("follow-up failed", id, (error as Error).message);
+    }
+  }
+  return failed;
 }
 
 // Raw logs in, vault events applied in chain order. Used by the Stream webhook.
@@ -172,6 +195,7 @@ function streamGraceMs(): number {
 // change. Returns how many moves are still unsettled.
 export async function settlePending(userId: string, opts: { waitMs?: number } = {}): Promise<number> {
   if (!chain.enabled) return 0;
+  await finishFollowUps(userId);
   const unsettled = () => db.select().from(moves).where(and(eq(moves.userId, userId), eq(moves.state, "settling")));
   let pending = await unsettled();
   // Where the QuickNode Stream is running, give it the first chance: its
@@ -201,6 +225,7 @@ export async function settlePending(userId: string, opts: { waitMs?: number } = 
 // seconds ago with no event yet gets one look from the fallback, without waiting.
 export async function nudgePending(userId: string, olderThanMs = 12_000): Promise<void> {
   if (!chain.enabled) return;
+  await finishFollowUps(userId);
   const before = new Date(Date.now() - olderThanMs);
   const stale = await db
     .select()

@@ -22,6 +22,13 @@
       "when": 1794806427739,
       "tag": "0002_arc_vault",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794830337786,
+      "tag": "0003_move_follow_ups",
+      "breakpoints": true
     }
   ]
 }

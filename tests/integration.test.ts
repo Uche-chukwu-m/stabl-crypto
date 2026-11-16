@@ -246,6 +246,122 @@ suite("server side against Postgres", () => {
     expect(buffers).toEqual([]);
   }, 120_000);
 
+  // The Arc path, without Arc: the contract's event is handed to the same code the
+  // QuickNode Stream's webhook calls.
+  it("a vault event settles a move once, and a repeated delivery changes nothing", async () => {
+    const { applyVaultEvent } = await import("@/lib/chain/settle");
+    const { moveRef, centsToUnits } = await import("@/lib/chain/config");
+    const { db, schema, drizzle } = m;
+    const ctx = await m.loadContext(jemaya);
+    const owner = "0x00000000000000000000000000000000000a11ce";
+    await db.insert(schema.chainWallets).values({ userId: jemaya, circleWalletId: "test-wallet", address: owner, blockchain: "ARC-TESTNET" }).onConflictDoNothing();
+
+    const [move] = await db
+      .insert(schema.moves)
+      .values({
+        userId: jemaya,
+        vaultId: ctx.vault!.id,
+        homeBaseAccountId: ctx.homeBase!.id,
+        direction: "buffer",
+        amountCents: 123_00,
+        state: "settling",
+        reason: "test",
+        plannedFor: ctx.today,
+        settleOn: ctx.today,
+        chainTxId: "circle-test-tx",
+        submittedAt: new Date(),
+      })
+      .returning();
+    const before = await ledgerSum(ctx.vault!.id);
+    const event = {
+      name: "Deposited" as const,
+      owner: owner as `0x${string}`,
+      units: centsToUnits(123_00),
+      ref: moveRef(move.id),
+      balanceUnits: 0n,
+      txHash: `0x${"ab".repeat(32)}` as `0x${string}`,
+      logIndex: 3,
+      blockNumber: 1000n,
+    };
+
+    expect(await applyVaultEvent(event, "stream")).toBe("settled");
+    const receipts = async () => (await thread(jemaya)).filter((x) => x.moveId === move.id && x.template === "buffer_settled");
+    const [settled] = await db.select().from(schema.moves).where(drizzle.eq(schema.moves.id, move.id));
+    expect(settled).toMatchObject({ state: "settled", confirmedBy: "stream", txHash: event.txHash });
+    expect(settled.followUpsDoneAt).not.toBeNull();
+    expect(await ledgerSum(ctx.vault!.id)).toBe(before + 123_00);
+    expect(await receipts()).toHaveLength(1);
+
+    // QuickNode retries, or the fallback reads the same event from Arc.
+    expect(await applyVaultEvent(event, "stream")).toBe("duplicate");
+    expect(await applyVaultEvent(event, "reconcile")).toBe("duplicate");
+    expect(await ledgerSum(ctx.vault!.id)).toBe(before + 123_00);
+    expect(await receipts()).toHaveLength(1);
+    const events = await db.select().from(schema.chainEvents).where(drizzle.eq(schema.chainEvents.txHash, event.txHash));
+    expect(events).toHaveLength(1);
+
+    // An event for an amount the move did not ask for never settles it.
+    const [other] = await db
+      .insert(schema.moves)
+      .values({ ...move, id: undefined, state: "settling", amountCents: 50_00, createdAt: undefined, settledAt: null, txHash: null, confirmedBy: null, followUpsDoneAt: null, followUpsJson: null })
+      .returning();
+    const wrong = { ...event, ref: moveRef(other.id), units: centsToUnits(49_00), txHash: `0x${"cd".repeat(32)}` as `0x${string}` };
+    expect(await applyVaultEvent(wrong, "stream")).toBe("mismatch");
+    const [still] = await db.select().from(schema.moves).where(drizzle.eq(schema.moves.id, other.id));
+    expect(still.state).toBe("settling");
+    await db.update(schema.moves).set({ state: "cancelled" }).where(drizzle.eq(schema.moves.id, other.id));
+  }, 60_000);
+
+  it("a receipt that failed to send is finished by the next delivery", async () => {
+    const { applyVaultEvent } = await import("@/lib/chain/settle");
+    const { moveRef, centsToUnits } = await import("@/lib/chain/config");
+    const { db, schema, drizzle } = m;
+    const ctx = await m.loadContext(jemaya);
+    const owner = "0x00000000000000000000000000000000000a11ce";
+    const [move] = await db
+      .insert(schema.moves)
+      .values({
+        userId: jemaya,
+        vaultId: ctx.vault!.id,
+        homeBaseAccountId: ctx.homeBase!.id,
+        direction: "buffer",
+        amountCents: 77_00,
+        state: "settling",
+        reason: "test",
+        plannedFor: ctx.today,
+        settleOn: ctx.today,
+        chainTxId: "circle-test-tx-2",
+        submittedAt: new Date(),
+      })
+      .returning();
+    const event = {
+      name: "Deposited" as const,
+      owner: owner as `0x${string}`,
+      units: centsToUnits(77_00),
+      ref: moveRef(move.id),
+      balanceUnits: 0n,
+      txHash: `0x${"ef".repeat(32)}` as `0x${string}`,
+      logIndex: 0,
+      blockNumber: 1001n,
+    };
+    expect(await applyVaultEvent(event, "stream")).toBe("settled");
+
+    // As if the first delivery crashed after the bank side but before the receipt.
+    await db.delete(schema.messages).where(drizzle.eq(schema.messages.moveId, move.id));
+    await db.update(schema.moves).set({ followUpsJson: { mirror: true }, followUpsDoneAt: null }).where(drizzle.eq(schema.moves.id, move.id));
+
+    expect(await applyVaultEvent(event, "stream")).toBe("duplicate");
+    const receipts = (await thread(jemaya)).filter((x) => x.moveId === move.id && x.template === "buffer_settled");
+    expect(receipts).toHaveLength(1);
+    const mirrors = await db
+      .select()
+      .from(schema.transactions)
+      .where(drizzle.and(drizzle.eq(schema.transactions.userId, jemaya), drizzle.eq(schema.transactions.amountCents, -77_00), drizzle.eq(schema.transactions.origin, "vault_mirror")));
+    expect(mirrors).toHaveLength(1); // the bank side was not posted twice
+    const [done] = await db.select().from(schema.moves).where(drizzle.eq(schema.moves.id, move.id));
+    expect(done.followUpsDoneAt).not.toBeNull();
+  }, 60_000);
+
   it("deleting a user removes everything, ledger included", async () => {
     const ada = (await m.seedPersona("ada")).userId;
     await m.deleteUserData(ada);

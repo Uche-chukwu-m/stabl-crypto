@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { messages, plaidItems, prompts, transactions, vaultAccounts } from "@/lib/db/schema";
 import { runEngine } from "@/lib/engine-runner";
 import { notify } from "@/lib/notify";
+import { finishFollowUps } from "@/lib/chain/settle";
 import { settleDueBuffers } from "@/lib/moves";
 import { syncItem } from "@/lib/plaid/sync";
 import { activatePendingHomeBase } from "@/lib/security";
@@ -15,6 +16,7 @@ import { accrueInterest, vault } from "@/lib/vault";
 // clock" runs this once per day it skips, so a week passes the same way it would
 // in real life.
 export async function runDailyForUser(userId: string) {
+  await finishFollowUps(userId);
   await activatePendingHomeBase(userId);
   await settleDueBuffers(userId);
   await runEngine(userId);

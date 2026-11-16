@@ -8,7 +8,9 @@
 
 ## The problem
 
-Freelancers, people on commission, gig workers and small business owners have income that changes from week to week. Their bills do not change. A good month gets spent, and a slow month means overdrafts and payday loans.
+Stabl starts with freelancers who earn enough over a year but get paid at unpredictable times. Their bills arrive on fixed dates; their income does not. A good month gets spent, and a slow month means overdrafts and payday loans.
+
+Stabl spreads money a person already earns across time. It cannot help someone whose income stays below their spending, and it tells them so instead of moving anything.
 
 Stabl connects to a person's bank, learns their income pattern and their bills, and then does two things:
 
@@ -21,17 +23,19 @@ Every move gets a plain message. There is nothing to configure and nothing to re
 
 A product that moves your money on its own has one question to answer: what stops it from moving your money somewhere else?
 
-For most apps the answer is "trust us." Here the answer is a contract anyone can read. The vault holds each person's money as USDC, and the contract enforces the rules whatever Stabl's servers do:
+For most apps the answer is "trust us." Here much of the answer is a contract anyone can read. The vault holds each person's money as USDC, and the contract enforces these rules whatever Stabl's servers ask for:
 
 1. **Closed loop.** Every way out of a vault pays that vault's owner. No function sends an owner's money to any other address.
 2. **A limited operator.** Stabl can add money to a vault and send it back to its owner. It cannot redirect, borrow or sweep anything.
 3. **Freeze.** An owner can freeze their vault. Nothing moves in or out until they unfreeze it. Stabl can freeze on someone's behalf, because stopping is always safe, but can never unfreeze.
-4. **Emergency unlock.** An owner can take their money out without Stabl.
+4. **Emergency unlock.** The owner's own wallet can take money out without the operator. The only place it can go is that wallet.
 5. **Once only.** Every move carries the app's move id. A move settles once, so a retried request never moves money twice.
 
 There is no admin key, no pause switch, no fee and no upgrade path. The contract is about 150 lines: [contracts/src/StablVault.sol](contracts/src/StablVault.sol).
 
 The person using Stabl sees none of this. They see dollars, their bank, and a small **Proof** link on each receipt.
+
+**What the contract does not do yet.** In this prototype each person's wallet is a Circle developer-controlled wallet, so Stabl signs for it on their behalf. The contract limits where money can go, but it does not yet give a person an exit that works if Stabl disappears. That needs the person to hold their own key: Circle user-controlled wallets with a passkey, or a recovery address only they control. It is the next thing on the list. See [Custody](#what-is-real-and-what-is-simulated).
 
 ## How it works
 
@@ -119,7 +123,9 @@ Test USDC has no value. The app says so on one page, Settings then "Where your v
 
 **Plaid Sandbox.** In Sandbox every bank returns the same stock test user, in someone else's name and with no income pattern Stabl could learn from. So after Plaid's window closes, Stabl asks the Sandbox for a custom test user instead: your own name, under the bank you picked, with six months of history for the way you said you earn ([lib/plaid/test-history.ts](lib/plaid/test-history.ts)). With real accounts the connection is used exactly as Plaid returns it.
 
-**Custody.** The hidden wallets are developer-controlled, which is what lets a person use Stabl without ever seeing a wallet. It also means Stabl can ask Circle to sign for them. The contract still guarantees money only reaches the owner's own address. The next step is user-controlled wallets, so that only the person can sign a freeze or an emergency unlock.
+**Custody.** This is a custodial prototype with contract-enforced vault rules. The hidden wallets are developer-controlled, which is what lets a person use Stabl without ever seeing a wallet, and it means Stabl asks Circle to sign for them. The contract guarantees that money leaving a vault only reaches that vault's owner wallet. After a release, the app sends the USDC from the owner wallet back to the operator, standing in for paying dollars into checking. The next step is user-controlled wallets, so that only the person can sign a freeze or an emergency unlock.
+
+**Bank timing.** Arc finalizes a vault move in under a second. That says nothing about how fast a real bank transfer would be; the bank side here is simulated.
 
 ## Run it locally
 

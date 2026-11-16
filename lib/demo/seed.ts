@@ -242,6 +242,8 @@ async function seedVaultHistory(userId: string, vaultId: string, home: typeof ac
       plannedFor: m.date,
       settleOn,
       settledAt: m.settledOn ? at(m.settledOn, 14) : null,
+      // History: its receipts are written below, so nothing is left to follow up.
+      followUpsDoneAt: at(m.settledOn ?? m.date, 15),
       createdAt: at(m.date, 14),
     });
 
