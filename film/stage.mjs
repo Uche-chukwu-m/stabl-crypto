@@ -49,7 +49,7 @@ export async function renderStage(outDir) {
   for (const [name, body] of Object.entries(pages)) {
     const isMask = name === "screen-mask";
     const page = await browser.newPage({ viewport: isMask ? { width: S.w, height: S.h } : { width: W, height: H }, deviceScaleFactor: 1 });
-    await page.setContent(`<!doctype html><html><head>${FONTS}</head>${body}</html>`, { waitUntil: "networkidle" });
+    await page.setContent(`<!doctype html><html><head>${FONTS}</head>${body}</html>`, { waitUntil: "load", timeout: 90_000 });
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({ path: `${outDir}/${name}.png`, omitBackground: name === "stage-fg" });
     await page.close();

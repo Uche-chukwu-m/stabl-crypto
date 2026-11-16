@@ -140,7 +140,7 @@ export function caption({ title, note, facts = [] }) {
 export async function renderHtml(html, out, { transparent = false } = {}) {
   const browser = await chromium.launch({ executablePath: CHROME, headless: true });
   const p = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
-  await p.setContent(html, { waitUntil: "networkidle" });
+  await p.setContent(html, { waitUntil: "load", timeout: 90_000 });
   await p.evaluate(() => document.fonts.ready);
   await p.screenshot({ path: out, omitBackground: transparent });
   await browser.close();
