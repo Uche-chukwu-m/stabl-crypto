@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Terms" };
 // Plain words. To be reviewed by a lawyer before any real user money is involved.
 export default function TermsPage() {
   const rules = [
-    "This is a demo build. No real money moves. Stabl is not a bank, and the vault is simulated.",
+    "This is an early build that runs on a test network. No real money moves, and Stabl is not a bank.",
     "Stabl moves money only between your home base checking account and your own vault, both in your name.",
     "Stabl never takes money if it would leave less in checking than your upcoming bills plus a small floor.",
     "Buffers are announced the day before and you can stop them. Releases happen right away.",
@@ -18,7 +18,7 @@ export default function TermsPage() {
   return (
     <Plain wide>
       <h1 className="text-title">Terms</h1>
-      <p className="label mt-2">Draft for the demo build. A lawyer reviews this before any real money is involved.</p>
+      <p className="label mt-2">Draft. A lawyer reviews this before any real money is involved.</p>
       <ol className="mt-8 space-y-4">
         {rules.map((r, i) => (
           <li key={r} className="flex gap-4 border-t border-rule pt-4">

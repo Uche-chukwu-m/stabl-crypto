@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { PulseMark } from "@/components/Logo";
-import { Monogram } from "@/components/Monogram";
 import { auth, signIn } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { rateLimit } from "@/lib/rate-limit";
@@ -21,31 +20,23 @@ async function sendLink(formData: FormData) {
   redirect("/signin/check");
 }
 
-// Demo builds without email: straight in, no link.
+// Until an email service is set up: straight in with an email address.
 async function instant(formData: FormData) {
   "use server";
-  const persona = String(formData.get("persona") ?? "");
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  if (!persona && !z.email().safeParse(email).success) redirect("/signin?error=email");
+  if (!z.email().safeParse(email).success) redirect("/signin?error=email");
   const h = await headers();
   const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  // Generous: judges at a venue share one network address.
+  // Generous: people at one venue share a network address.
   if (!(await rateLimit(`instant:${ip}`, 100, 900))) redirect("/signin?error=slow");
-  await signIn("instant", persona ? { persona, redirectTo: "/home" } : { email, redirectTo: "/home" });
+  await signIn("instant", { email, redirectTo: "/home" });
 }
-
-const DEMO_PEOPLE = [
-  { key: "jemaya", name: "Jemaya Brooks", detail: "Freelancer, the pitch" },
-  { key: "jordan", name: "Jordan Ellis", detail: "Commission sales" },
-  { key: "ada", name: "Ada Okafor", detail: "Catering business" },
-  { key: "tee", name: "Tee Daniels", detail: "Gig work, no margin" },
-];
 
 const ERRORS: Record<string, string> = {
   email: "That does not look like an email address.",
   slow: "Too many links asked for. Wait a few minutes and try again.",
   Verification: "That link has expired or was already used. Ask for a new one.",
-  CredentialsSignin: "That did not work. If it was a demo link, it may have been used already.",
+  CredentialsSignin: "That did not work. Check the address and try again.",
 };
 
 export default async function SignInPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
@@ -80,33 +71,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
           <button type="submit" className="btn btn-primary w-full">
             {quick ? "Continue" : "Email me a link"}
           </button>
-          {quick && <p className="text-center text-caption text-muted">Demo build. Email addresses are not checked.</p>}
         </form>
-
-        {quick && (
-          <section className="mt-6">
-            <h2 className="label mb-2 px-1">Or try a demo person</h2>
-            <ul className="card divide-y divide-rule/50 overflow-hidden">
-              {DEMO_PEOPLE.map((p) => (
-                <li key={p.key}>
-                  <form action={instant}>
-                    <input type="hidden" name="persona" value={p.key} />
-                    <button type="submit" className="press flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-sunk">
-                      <Monogram name={p.name} />
-                      <span className="min-w-0 flex-1">
-                        <span className="block font-semibold">{p.name}</span>
-                        <span className="block truncate text-caption text-muted">{p.detail}</span>
-                      </span>
-                      <span aria-hidden="true" className="text-muted">
-                        ›
-                      </span>
-                    </button>
-                  </form>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
       </main>
       <p className="px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] text-center text-[0.75rem] text-muted">Stabl is not a bank.</p>
     </div>

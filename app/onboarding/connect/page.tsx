@@ -40,7 +40,7 @@ export default async function ConnectPage({ searchParams }: { searchParams: Prom
         </ul>
       )}
 
-      <ConnectBank mode={env.plaidMode} label={items.length ? "Add another place you get paid" : "Connect a bank"} openDemo={env.plaidMode === "local" && items.length === 0} />
+      <ConnectBank mode={env.plaidMode} label={items.length ? "Add another place you get paid" : "Connect a bank"} />
 
       {error === "checking" && (
         <p role="alert" className="mt-6 text-fast">

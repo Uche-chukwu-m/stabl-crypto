@@ -12,7 +12,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     .where(and(eq(plaidItems.userId, user.id), eq(plaidItems.env, "production")))
     .limit(1);
   // Real Trial plan accounts never move money; every screen says so.
-  const badge = real ? "Simulated moves" : user.isDemo ? "Demo" : null;
+  const badge = real ? "Simulated moves" : null;
   return (
     <AppShell badge={badge}>
       {children}

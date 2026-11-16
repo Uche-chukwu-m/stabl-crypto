@@ -9,12 +9,13 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { advanceClock, injectEvent, resetDemoUser, runNow } from "@/lib/demo/admin";
 import { demoLoginUrl } from "@/lib/demo/login";
+import { seedPersona } from "@/lib/demo/seed";
 import { env } from "@/lib/env";
 import { freeze } from "@/lib/security";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { HttpError } from "@/lib/session";
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 const Target = z.object({ userId: z.uuid() });
 const Bodies = {
@@ -26,7 +27,7 @@ const Bodies = {
   freeze: Target,
 };
 
-// Founders only: needs ADMIN_KEY, DEMO_MODE, and a sandbox or local bank setup.
+// Presenter only: needs ADMIN_KEY, DEMO_MODE, and a sandbox or local bank setup.
 // Every call is written to the audit log.
 export const POST = route(async (request, { params }: { params: Promise<{ action: string }> }) => {
   if (!env.adminEnabled) throw new HttpError(404, "Not found");
@@ -41,12 +42,17 @@ export const POST = route(async (request, { params }: { params: Promise<{ action
     await audit(null, "admin", "admin_login");
     return { ok: true };
   }
-  if (!(await isAdmin(request))) throw new HttpError(401, "Admin key needed.");
+  if (!(await isAdmin(request))) throw new HttpError(401, "Presenter key needed.");
+  // The one presenter account. Creating it again replaces it with a fresh copy.
+  if (action === "seed") {
+    const { userId } = await seedPersona("jemaya");
+    return { userId };
+  }
   if (!(action in Bodies)) throw new HttpError(404, "Not found");
 
   const body = Bodies[action as keyof typeof Bodies].parse(await request.json());
   const [user] = await db.select().from(users).where(eq(users.id, body.userId));
-  if (!user?.isDemo) throw new HttpError(403, "Admin tools only work on demo users.");
+  if (!user?.isDemo) throw new HttpError(403, "These tools only work on the presenter account.");
 
   switch (action) {
     case "inject": {

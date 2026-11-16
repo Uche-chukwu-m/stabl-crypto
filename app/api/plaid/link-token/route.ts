@@ -10,7 +10,7 @@ const Body = z.object({ itemId: z.uuid().optional() });
 // A Link token for a new connection, or update mode for one that needs a login.
 export const POST = route(async (request) => {
   const user = await apiUser();
-  if (env.plaidMode === "local") throw new HttpError(409, "Plaid is not set up here. Use a demo bank instead.");
+  if (env.plaidMode === "local") throw new HttpError(409, "Bank connections are not set up here.");
   if (!(await rateLimit(`link:${user.id}`, 20, 3600))) throw new HttpError(429, "Too many tries. Wait a little.");
   const { itemId } = Body.parse(await request.json().catch(() => ({})));
   try {

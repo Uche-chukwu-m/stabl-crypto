@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { eq } from "drizzle-orm";
-import { DemoControls } from "@/components/DemoControls";
 import { LargeTitle } from "@/components/LargeTitle";
 import { Monogram } from "@/components/Monogram";
 import { PushToggle } from "@/components/PushToggle";
@@ -12,7 +11,6 @@ import { chain } from "@/lib/chain/config";
 import { loadContext } from "@/lib/context";
 import { db } from "@/lib/db";
 import { channels, engineProfiles } from "@/lib/db/schema";
-import { env } from "@/lib/env";
 import { formatDay } from "@/lib/format";
 import { requireOnboardedUser } from "@/lib/session";
 import { telegramLink } from "@/lib/telegram-link";
@@ -95,13 +93,6 @@ export default async function SettingsPage() {
           </Link>
         </Row>
       </Group>
-
-      {user.isDemo && env.adminEnabled && (
-        <section>
-          <h2 className="label mb-2 px-1">Demo controls</h2>
-          <DemoControls />
-        </section>
-      )}
 
       <Group title="Your data">
         <DataControls />

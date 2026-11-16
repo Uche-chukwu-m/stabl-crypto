@@ -126,14 +126,19 @@ export async function connectPersona(
   gp: GeneratedPersona,
   log: (line: string) => void = () => {},
   ownerName = gp.persona.legalName,
+  // Connect only one of the persona's banks, and show it under another name.
+  only?: { itemKey: string; label: string },
 ) {
   const ids = new Map<string, string>();
+  const items = only ? gp.persona.items.filter((i) => i.key === only.itemKey) : gp.persona.items;
   if (env.plaidMode === "sandbox") {
-    for (const item of gp.persona.items) {
-      log(`  creating Plaid Sandbox custom user for ${item.label}`);
+    for (const item of items) {
+      const label = only?.label ?? item.label;
+      log(`  creating Plaid Sandbox custom user for ${label}`);
       const publicToken = await createCustomUserPublicToken(plaidCustomUser(gp, item.key, ownerName));
-      const row = await connectItem(userId, publicToken, { label: item.label });
-      await waitForTransactions(row.id);
+      const row = await connectItem(userId, publicToken, { label });
+      const keys = new Set(item.accounts.map((a) => a.key));
+      await waitForTransactions(row.id, gp.txns.filter((t) => keys.has(t.accountId)).length);
       const rows = await db.select().from(accounts).where(eq(accounts.itemId, row.id));
       for (const a of item.accounts) {
         const match = rows.find((r) => r.mask === a.mask);
@@ -147,10 +152,10 @@ export async function connectPersona(
   }
 
   // Local mode: the same data, written straight into the database.
-  for (const item of gp.persona.items) {
+  for (const item of items) {
     const [row] = await db
       .insert(plaidItems)
-      .values({ userId, itemId: `local-${randomUUID()}`, institutionName: item.label, env: "local", lastSyncedAt: new Date() })
+      .values({ userId, itemId: `local-${randomUUID()}`, institutionName: only?.label ?? item.label, env: "local", lastSyncedAt: new Date() })
       .returning();
     for (const a of item.accounts) {
       const [acct] = await db
@@ -172,7 +177,7 @@ export async function connectPersona(
       ids.set(a.key, acct.id);
     }
   }
-  const rows = gp.txns.map((t) => ({
+  const rows = gp.txns.filter((t) => ids.has(t.accountId)).map((t) => ({
     accountId: ids.get(t.accountId)!,
     userId,
     date: t.date,
@@ -185,14 +190,25 @@ export async function connectPersona(
   return ids;
 }
 
-// Plaid builds a custom user's history in the background; wait until it lands.
-async function waitForTransactions(itemRowId: string) {
-  for (let attempt = 0; attempt < 20; attempt++) {
-    const result = await syncItem(itemRowId);
-    if (result.added > 0) return;
+// Plaid builds a custom user's history in the background and hands it over in
+// two stages: the last month first, the rest a little later. Wait for all of it,
+// because an engine that has only seen one month reads everything wrong.
+async function waitForTransactions(itemRowId: string, expected: number) {
+  const enough = Math.floor(expected * 0.95);
+  let have = 0;
+  for (let attempt = 0; attempt < 45; attempt++) {
+    await syncItem(itemRowId);
+    const [{ n }] = await db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(transactions)
+      .innerJoin(accounts, eq(transactions.accountId, accounts.id))
+      .where(eq(accounts.itemId, itemRowId));
+    have = n;
+    if (have >= enough && have > 0) return;
     await new Promise((r) => setTimeout(r, 2000));
   }
-  throw new Error("Plaid Sandbox did not return transactions in time");
+  if (have === 0) throw new Error("Plaid Sandbox did not return transactions in time");
+  console.warn(`Plaid Sandbox returned ${have} of ${expected} transactions; continuing`);
 }
 
 // The moves Stabl made during the persona's history, written as real moves,

@@ -12,15 +12,15 @@ import { auditLog, engineProfiles, ledgerEntries, users, vaultBalances, vaultAcc
 import { env } from "@/lib/env";
 import { formatCents, formatTime } from "@/lib/format";
 
-export const metadata: Metadata = { title: "Admin", robots: { index: false } };
+export const metadata: Metadata = { title: "Presenter", robots: { index: false } };
 
 export default async function AdminPage() {
   if (!env.adminEnabled) notFound();
   if (!(await isAdmin())) {
     return (
       <Plain>
-        <h1 className="text-title">Admin</h1>
-        <p className="mt-2 mb-6">Founders only.</p>
+        <h1 className="text-title">Presenter</h1>
+        <p className="mt-2 mb-6">For the person presenting Stabl.</p>
         <AdminLogin />
       </Plain>
     );
@@ -61,11 +61,10 @@ export default async function AdminPage() {
 
   return (
     <Plain wide>
-      <h1 className="text-title">Admin</h1>
+      <h1 className="text-title">Presenter</h1>
       <p className="mt-2 text-caption">
-        {env.plaidMode === "sandbox" ? "Plaid Sandbox." : "Local mode: no Plaid keys, demo data written straight to the database."} Demo mode for the
-        pitch. <Link href="/replay" className="underline underline-offset-4">Replay</Link> ·{" "}
-        <Link href="/try" className="underline underline-offset-4">Judge mode</Link>
+        Tools for the presenter account. It runs on test banks, opens only from a link made here, and looks like any other account once signed in.{" "}
+        <Link href="/replay" className="underline underline-offset-4">Replay</Link>
       </p>
       <div className="mt-8">
         <AdminConsole users={demoUsers} />

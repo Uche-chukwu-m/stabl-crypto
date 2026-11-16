@@ -6,9 +6,10 @@ import { z } from "zod";
 import { audit } from "@/lib/audit";
 import { loadContext } from "@/lib/context";
 import { db } from "@/lib/db";
-import { accounts, engineProfiles, users } from "@/lib/db/schema";
+import { accounts, engineProfiles, messages, users } from "@/lib/db/schema";
 import { RULES_VERSION } from "@/lib/demo/seed";
 import { runEngine } from "@/lib/engine-runner";
+import { notify } from "@/lib/notify";
 import { setHomeBase } from "@/lib/security";
 import { requireUser } from "@/lib/session";
 
@@ -46,18 +47,17 @@ export async function signRules(_: unknown, form: FormData) {
   redirect("/onboarding/identity");
 }
 
-// Simulated identity check. The SSN digits are checked for shape and dropped;
-// only kyc_status = verified_mock is stored. Date of birth is not stored either.
+// A light identity step: legal name and an age check. Nothing is sent to a
+// verification service in this build, and only kyc_status = verified_mock is
+// stored. The date of birth is checked and dropped.
 export async function verifyIdentity(_: unknown, form: FormData) {
   const user = await requireUser();
   const legalName = String(form.get("legalName") ?? "").trim().replace(/\s+/g, " ");
   const dob = String(form.get("dob") ?? "");
-  const ssn4 = String(form.get("ssn4") ?? "");
   if (legalName.split(" ").length < 2) return { error: "Enter your first and last name as they appear on your bank account." };
   const born = new Date(`${dob}T12:00:00Z`);
   const adult = !Number.isNaN(born.getTime()) && new Date().getTime() - born.getTime() >= 18 * 365.25 * 86_400_000;
   if (!adult) return { error: "You need to be 18 or older to use Stabl." };
-  if (!/^\d{4}$/.test(ssn4)) return { error: "Enter the last 4 digits of your Social Security number." };
   await db.update(users).set({ legalName, name: legalName, kycStatus: "verified_mock" }).where(eq(users.id, user.id));
   await audit(user.id, "user", "identity_verified_mock");
   await advance(user.id, 5);
@@ -96,13 +96,19 @@ export async function finishOnboarding() {
   const user = await requireUser();
   const ctx = await loadContext(user.id);
   if (!ctx.vault) redirect("/onboarding/ready");
-  await runEngine(user.id, { learnOnly: true });
-  // The first fast check runs next week and the first feast check in three; a
-  // low balance still triggers a fast check right away.
-  await db
-    .update(engineProfiles)
-    .set({ lastFastCheck: ctx.today, lastFeastCheck: ctx.today })
-    .where(eq(engineProfiles.userId, user.id));
+  if (user.onboardingStep < 9) {
+    // The first check runs now, so a new person sees what Stabl would do with
+    // their money today instead of waiting a week for the schedule to come round.
+    const said = () => db.$count(messages, eq(messages.userId, user.id));
+    const before = await said();
+    await runEngine(user.id, { forceFast: true, forceFeast: true });
+    await db
+      .update(engineProfiles)
+      .set({ lastFastCheck: ctx.today, lastFeastCheck: ctx.today })
+      .where(eq(engineProfiles.userId, user.id));
+    // If the check had nothing to say, say so, rather than leave an empty thread.
+    if ((await said()) === before) await notify(user.id, "first_check", {});
+  }
   await advance(user.id, 9);
   redirect("/home");
 }

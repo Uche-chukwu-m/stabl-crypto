@@ -225,6 +225,10 @@ export const templates = {
     body: `Stabl: Your vault ending in ${d.mask} is open. Every move will show up here first, and nothing happens without a message.`,
   }),
 
+  first_check: (): Rendered => ({
+    body: "Stabl: First check done. Your income and bills look steady right now, so nothing needs to move today. We check again every week.",
+  }),
+
   telegram_linked: (): Rendered => ({
     body: "Stabl: Telegram is linked. You will get every receipt here too. Reply HELP for commands.",
   }),

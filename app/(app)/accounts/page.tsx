@@ -99,7 +99,7 @@ export default async function AccountsPage() {
               Add a place you get paid
             </summary>
             <div className="px-4 pb-4">
-              <ConnectBank mode={env.plaidMode} openDemo />
+              <ConnectBank mode={env.plaidMode} />
             </div>
           </details>
         </div>

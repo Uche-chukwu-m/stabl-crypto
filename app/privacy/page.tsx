@@ -8,7 +8,7 @@ export default function PrivacyPage() {
   return (
     <Plain wide>
       <h1 className="text-title">Privacy</h1>
-      <p className="label mt-2">Draft for the demo build. A lawyer reviews this before any real money is involved.</p>
+      <p className="label mt-2">Draft. A lawyer reviews this before any real money is involved.</p>
       <div className="mt-8 space-y-6">
         <Section title="What we collect">
           Your email, your legal name, how you earn, and the bank data you choose to connect through Plaid: accounts, balances,

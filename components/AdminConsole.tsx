@@ -32,7 +32,7 @@ export function AdminLogin() {
       }}
     >
       <label className="block">
-        <span className="label">Admin key</span>
+        <span className="label">Presenter key</span>
         <input type="password" value={key} onChange={(e) => setKey(e.target.value)} autoComplete="off" className="field mt-1" />
       </label>
       {error && <p className="text-fast">{error}</p>}
@@ -68,10 +68,23 @@ export function AdminConsole({ users }: { users: DemoUser[] }) {
     }
   }
 
+  if (users.length === 0) {
+    return (
+      <div className="space-y-3">
+        <p>There is no presenter account yet.</p>
+        <button type="button" disabled={Boolean(busy)} className="btn btn-primary" onClick={() => act("Create presenter account", "seed")}>
+          Create the presenter account
+        </button>
+        {busy && <p className="label">Creating. This takes about a minute.</p>}
+        {log[0] && <p className="text-caption">{log[0]}</p>}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
       <label className="block max-w-md">
-        <span className="label">Demo user</span>
+        <span className="label">Presenter account</span>
         <select value={userId} onChange={(e) => setUserId(e.target.value)} className="field mt-1">
           {users.map((u) => (
             <option key={u.id} value={u.id}>
@@ -117,7 +130,7 @@ export function AdminConsole({ users }: { users: DemoUser[] }) {
             type="button"
             disabled={Boolean(busy)}
             className="btn btn-fast"
-            onClick={() => confirm("Reset this demo user to a fresh copy? Push and Telegram stay linked.") && act("Reset", "reset")}
+            onClick={() => confirm("Reset this account to a fresh copy? Push and Telegram stay linked.") && act("Reset", "reset")}
           >
             Reset user
           </button>

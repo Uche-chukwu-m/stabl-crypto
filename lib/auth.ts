@@ -1,5 +1,5 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Resend from "next-auth/providers/resend";
@@ -7,7 +7,6 @@ import { sendEmail } from "@/lib/channels/email";
 import { checkCode } from "@/lib/codes";
 import { db } from "@/lib/db";
 import { env } from "@/lib/env";
-import { PERSONAS } from "@/personas";
 import { z } from "zod";
 import { authAccounts, authVerificationTokens, users } from "@/lib/db/schema";
 
@@ -38,28 +37,23 @@ const config: NextAuthConfig = {
         await sendEmail(identifier, "Your Stabl sign in link", text, html);
       },
     }),
-    // Demo builds without email: sign in with just an email address, or as one of
-    // the demo people. Refused unless env.instantSignIn is on.
+    // Until an email service is set up: sign in with just an email address.
+    // Refused unless env.instantSignIn is on. The presenter account is never
+    // reachable this way; it opens only from a one time link (below).
     Credentials({
       id: "instant",
-      credentials: { email: {}, persona: {} },
+      credentials: { email: {} },
       async authorize(input) {
         if (!env.instantSignIn) return null;
-        const persona = String(input?.persona ?? "");
-        if (persona) {
-          const seeded = PERSONAS[persona as keyof typeof PERSONAS];
-          if (!seeded) return null;
-          const [user] = await db.select().from(users).where(and(eq(users.email, seeded.email), eq(users.isDemo, true)));
-          return user ? { id: user.id, email: user.email, name: user.name } : null;
-        }
         const email = z.email().safeParse(String(input?.email ?? "").trim().toLowerCase());
         if (!email.success) return null;
         const [existing] = await db.select().from(users).where(eq(users.email, email.data));
+        if (existing?.isDemo) return null;
         const [user] = existing ? [existing] : await db.insert(users).values({ email: email.data, emailVerified: null }).returning();
         return { id: user.id, email: user.email, name: user.name };
       },
     }),
-    // One time links for demo users only: the presenting phone and judge mode.
+    // One time links for the presenter account only, made on the presenter page.
     Credentials({
       id: "demo",
       credentials: { userId: {}, token: {} },
