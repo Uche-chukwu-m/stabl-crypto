@@ -1,0 +1,18 @@
+{
+  "network": "Arc Testnet",
+  "chainId": 5042002,
+  "contract": "StablVault",
+  "address": "0xD70f1e4973458D2b2E440b17600c53A4ca78d90f",
+  "operator": "0xde7b71881b9cfC887AF7bb0155b624c68c3D9b8e",
+  "usdc": "0x3600000000000000000000000000000000000000",
+  "txHash": "0x1302c8f4725d73f795a258edca6dbf6fd74c3ae4363d0cda55f165baff91cd3d",
+  "blockNumber": 72518444,
+  "deployedVia": "CREATE2 factory 0x4e59b44847b379578588920cA78FbF26c0B4956C",
+  "salt": "0x61689992802368429b54e0fb41bf8597b9e58c433e03e501d9d280ea770bfd43",
+  "compiler": {
+    "solc": "0.8.30",
+    "optimizerRuns": 200,
+    "evmVersion": "prague"
+  },
+  "explorer": "https://explorer.testnet.arc.io/address/0xD70f1e4973458D2b2E440b17600c53A4ca78d90f"
+}

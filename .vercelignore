@@ -9,3 +9,7 @@ tsconfig.tsbuildinfo
 .agents
 .claude
 skills-lock.json
+.tools
+contracts/node_modules
+contracts/artifacts
+contracts/cache
