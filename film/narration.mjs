@@ -45,10 +45,17 @@ export function speakAll(dir) {
   mkdirSync(dir, { recursive: true });
   const out = {};
   for (const [key, line] of Object.entries(LINES)) {
-    const recorded = ["m4a", "wav", "aiff"].map((ext) => process.env.FILM_VOICE_DIR && path.join(process.env.FILM_VOICE_DIR, `${key}.${ext}`)).find((f) => f && existsSync(f));
+    const recorded = ["m4a", "wav", "aiff", "mp3", "mov", "caf"].map((ext) => process.env.FILM_VOICE_DIR && path.join(process.env.FILM_VOICE_DIR, `${key}.${ext}`)).find((f) => f && existsSync(f));
     const file = path.join(dir, `${key}.m4a`);
     if (recorded) {
-      execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", recorded, "-ac", "2", "-ar", "48000", "-c:a", "aac", "-b:a", "192k", file]);
+      // Trim the silence before and after the line, and bring every clip to the
+      // same loudness, so takes recorded at different times sound like one.
+      const trim = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1";
+      execFileSync(ffmpeg, [
+        "-hide_banner", "-loglevel", "error", "-y", "-i", recorded, "-vn",
+        "-af", `${trim},areverse,${trim},areverse,highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11`,
+        "-ac", "2", "-ar", "48000", "-c:a", "aac", "-b:a", "192k", file,
+      ]);
     } else {
       const aiff = path.join(dir, `${key}.aiff`);
       execFileSync("say", ["-v", VOICE, "-r", String(RATE), "-o", aiff, line]);
