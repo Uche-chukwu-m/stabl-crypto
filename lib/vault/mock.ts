@@ -10,13 +10,15 @@ import { VaultError, type LedgerEntry, type Move, type VaultAccount, type VaultP
 // Every call takes a moveId, and ledger_entries.move_id is unique, so a retried
 // call returns the first result instead of moving money twice.
 export class MockVaultProvider implements VaultProvider {
+  protected partnerLabel = "Partner Bank (simulated)";
+
   async openAccount(userId: string, legalName: string): Promise<VaultAccount> {
     const [existing] = await db.select().from(vaultAccounts).where(eq(vaultAccounts.userId, userId));
     if (existing) return existing;
     const mask = String(1000 + Math.floor(Math.random() * 9000));
     const [created] = await db
       .insert(vaultAccounts)
-      .values({ userId, legalName, partnerLabel: "Partner Bank (simulated)", mask })
+      .values({ userId, legalName, partnerLabel: this.partnerLabel, mask })
       .onConflictDoNothing()
       .returning();
     return created ?? (await db.select().from(vaultAccounts).where(eq(vaultAccounts.userId, userId)))[0];

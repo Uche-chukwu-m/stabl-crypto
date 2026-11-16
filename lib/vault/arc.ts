@@ -17,6 +17,8 @@ import { VaultError, type Move, type VaultAccount } from "./provider";
 // Balances and the ledger are read the same way as before: the ledger is the
 // app's copy of the contract's events, and its sum is the balance.
 export class ArcVaultProvider extends MockVaultProvider {
+  protected partnerLabel = "Stabl Vault";
+
   async openAccount(userId: string, legalName: string): Promise<VaultAccount> {
     const account = await super.openAccount(userId, legalName);
     await walletFor(userId);

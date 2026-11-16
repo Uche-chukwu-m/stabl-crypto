@@ -2,6 +2,8 @@ import { and, asc, desc, eq, gte, inArray, isNull, lte, ne } from "drizzle-orm";
 import { ENGINE, SAFETY } from "@/engine/config";
 import { addDays, weekStart, type ISODate } from "@/engine/dates";
 import { checkingBalance } from "@/lib/balances";
+import { readVault } from "@/lib/chain/arc";
+import { ARC, addressUrl, chain, txUrl, unitsToCents, type Address } from "@/lib/chain/config";
 import { pendingCode } from "@/lib/codes";
 import { accountLabel, loadContext } from "@/lib/context";
 import { titleCase } from "@/lib/format";
@@ -9,6 +11,8 @@ import { db } from "@/lib/db";
 import {
   accounts,
   bills,
+  chainEvents,
+  chainWallets,
   channels,
   engineProfiles,
   ledgerEntries,
@@ -34,7 +38,11 @@ export type ThreadMessage = {
   replies: string[];
   promptId: string | null;
   moveId: string | null;
+  // On Arc: where anyone can check the move this receipt is about.
+  proofUrl: string | null;
 };
+
+const RECEIPTS = new Set(["buffer_settled", "release", "release_short", "emergency_settled"]);
 
 export async function threadFor(userId: string, limit = 200): Promise<ThreadMessage[]> {
   const rows = await db
@@ -60,6 +68,7 @@ export async function threadFor(userId: string, limit = 200): Promise<ThreadMess
       replies,
       promptId: m.promptId,
       moveId: m.moveId,
+      proofUrl: move?.txHash && RECEIPTS.has(m.template) ? txUrl(move.txHash) : null,
     };
   });
 }
@@ -112,7 +121,7 @@ export async function homeView(userId: string) {
   const [lastMove] = await db
     .select()
     .from(moves)
-    .where(and(eq(moves.userId, userId), inArray(moves.state, ["settled", "announced"])))
+    .where(and(eq(moves.userId, userId), inArray(moves.state, ["settled", "announced", "settling"])))
     .orderBy(desc(moves.createdAt))
     .limit(1);
   const weeklyHigh = Math.round((profile?.expenseHighCents ?? 0) / ENGINE.weeksPerMonth);
@@ -169,6 +178,11 @@ export async function vaultView(userId: string) {
     .from(moves)
     .where(and(eq(moves.userId, userId), eq(moves.state, "announced")))
     .orderBy(asc(moves.settleOn));
+  const onTheWay = await db
+    .select()
+    .from(moves)
+    .where(and(eq(moves.userId, userId), eq(moves.state, "settling")))
+    .orderBy(asc(moves.createdAt));
   const used = await emergenciesUsed(userId, ctx.today);
   const code = await pendingCode(userId, "emergency");
   const [ch] = await db.select().from(channels).where(eq(channels.userId, userId));
@@ -210,6 +224,9 @@ export async function vaultView(userId: string) {
     apy: Number(process.env.VAULT_APY ?? "3.50"),
     ledger,
     pending: pending.map((p) => ({ id: p.id, amountCents: p.amountCents, settleOn: p.settleOn, direction: p.direction })),
+    // Arc only: sent, and waiting for the vault contract to confirm.
+    onTheWay: onTheWay.map((p) => ({ id: p.id, amountCents: p.amountCents, direction: p.direction })),
+    onArc: chain.enabled,
     emergency: {
       left: Math.max(0, SAFETY.emergencyPerWindow - used),
       codeWaiting: Boolean(code),
@@ -309,6 +326,7 @@ export type FeedItem = {
   amountCents: number;
   tone: "in" | "out" | "vault_in" | "vault_out" | "pending";
   vault: boolean;
+  proofUrl?: string | null;
 };
 
 // One bank style list: every transaction on connected accounts and every vault
@@ -326,7 +344,7 @@ export async function activityFeed(userId: string, opts: { limit?: number; days?
   const moveRows = await db
     .select()
     .from(moves)
-    .where(and(eq(moves.userId, userId), gte(moves.plannedFor, since), inArray(moves.state, ["settled", "announced"])))
+    .where(and(eq(moves.userId, userId), gte(moves.plannedFor, since), inArray(moves.state, ["settled", "announced", "settling"])))
     .orderBy(desc(moves.plannedFor));
 
   const items: FeedItem[] = [];
@@ -336,10 +354,20 @@ export async function activityFeed(userId: string, opts: { limit?: number; days?
       id: m.id,
       date: m.state === "settled" && m.settledAt ? (m.direction === "buffer" ? m.settleOn : m.plannedFor) : m.plannedFor,
       title: isIn ? "Set aside" : m.direction === "emergency" ? "Emergency unlock" : "Sent back",
-      subtitle: m.state === "announced" ? "Moving to your vault tomorrow" : isIn ? "Into your vault" : "From your vault to checking",
+      subtitle:
+        m.state === "announced"
+          ? "Moving to your vault tomorrow"
+          : m.state === "settling"
+            ? isIn
+              ? "On its way to your vault"
+              : "On its way to checking"
+            : isIn
+              ? "Into your vault"
+              : "From your vault to checking",
       amountCents: m.amountCents,
-      tone: m.state === "announced" ? "pending" : isIn ? "vault_in" : "vault_out",
+      tone: m.state === "settled" ? (isIn ? "vault_in" : "vault_out") : "pending",
       vault: true,
+      proofUrl: m.state === "settled" && m.txHash ? txUrl(m.txHash) : null,
     });
   }
   for (const t of txns) {
@@ -357,4 +385,63 @@ export async function activityFeed(userId: string, opts: { limit?: number; days?
   }
   items.sort((a, b) => b.date.localeCompare(a.date) || Number(b.vault) - Number(a.vault));
   return items.slice(0, opts.limit ?? 200);
+}
+
+// USDC's smallest unit as a plain amount, like "6.50".
+export function formatUsdc(units: bigint): string {
+  const whole = units / 1_000_000n;
+  const frac = (units % 1_000_000n).toString().padStart(6, "0").replace(/0+$/, "").padEnd(2, "0");
+  return `${whole.toLocaleString("en-US")}.${frac}`;
+}
+
+const EVENT_LABELS = {
+  Deposited: "Set aside",
+  Released: "Sent back",
+  EmergencyUnlocked: "Emergency unlock",
+  Frozen: "Frozen",
+  Unfrozen: "Unfrozen",
+} as const;
+
+// The one Settings page that says where the vault is held, and lets a person
+// check Stabl's numbers against the contract's own.
+export async function vaultProofView(userId: string) {
+  const ctx = await loadContext(userId);
+  if (!chain.enabled || !ctx.vault || !chain.vaultAddress) return null;
+  const [wallet] = await db.select().from(chainWallets).where(eq(chainWallets.userId, userId));
+  const shownCents = await vault.getBalance(ctx.vault.id);
+
+  let onChain: { units: bigint; frozen: boolean } | null = null;
+  if (wallet) {
+    try {
+      onChain = await readVault(wallet.address as Address);
+    } catch {
+      onChain = null; // Arc could not be reached just now; the page says so.
+    }
+  }
+  const events = await db
+    .select()
+    .from(chainEvents)
+    .where(eq(chainEvents.userId, userId))
+    .orderBy(desc(chainEvents.createdAt))
+    .limit(8);
+
+  return {
+    network: ARC.name,
+    contract: { address: chain.vaultAddress, url: addressUrl(chain.vaultAddress) },
+    wallet: wallet ? { address: wallet.address, url: addressUrl(wallet.address) } : null,
+    shownCents,
+    onChain: onChain ? { usdc: formatUsdc(onChain.units), cents: unitsToCents(onChain.units), frozen: onChain.frozen } : null,
+    matches: onChain ? unitsToCents(onChain.units) === shownCents : null,
+    // One to one is 10,000 units a cent. Anything else is the test network scale.
+    usdcPerDollar: chain.unitsPerCent === 10_000n ? null : formatUsdc(chain.unitsPerCent * 100n),
+    events: events.map((e) => ({
+      id: e.id,
+      label: EVENT_LABELS[e.name],
+      usdc: e.units ? formatUsdc(BigInt(e.units)) : null,
+      cents: e.units ? unitsToCents(BigInt(e.units)) : null,
+      at: e.createdAt.toISOString(),
+      url: txUrl(e.txHash),
+      source: e.source,
+    })),
+  };
 }

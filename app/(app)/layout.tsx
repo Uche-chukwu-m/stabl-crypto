@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <AppShell badge={badge}>
       {children}
-      <p className="mt-12 pb-2 text-center text-[0.75rem] text-muted">Demo build. No real money moves. Stabl is not a bank.</p>
+      <p className="mt-12 pb-2 text-center text-[0.75rem] text-muted">Stabl is not a bank.</p>
     </AppShell>
   );
 }

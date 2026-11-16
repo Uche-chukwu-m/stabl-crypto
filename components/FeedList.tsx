@@ -48,7 +48,17 @@ function FeedRow({ item }: { item: FeedItem }) {
       <Monogram name={item.title} vault={item.vault} />
       <span className="min-w-0 flex-1">
         <span className="block truncate font-semibold">{item.title}</span>
-        <span className="block truncate text-caption text-muted">{item.subtitle}</span>
+        <span className="block truncate text-caption text-muted">
+          {item.subtitle}
+          {item.proofUrl && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={item.proofUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-rule underline-offset-2 hover:decoration-current">
+                Proof
+              </a>
+            </>
+          )}
+        </span>
       </span>
       <span className={`figure whitespace-nowrap text-[1.0625rem] ${amount.cls}`}>{amount.text}</span>
     </li>

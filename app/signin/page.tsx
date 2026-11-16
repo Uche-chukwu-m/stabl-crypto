@@ -108,7 +108,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
           </section>
         )}
       </main>
-      <p className="px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] text-center text-[0.75rem] text-muted">Demo build. No real money moves. Stabl is not a bank.</p>
+      <p className="px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] text-center text-[0.75rem] text-muted">Stabl is not a bank.</p>
     </div>
   );
 }

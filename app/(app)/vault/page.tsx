@@ -40,6 +40,16 @@ export default async function VaultPage({ searchParams }: { searchParams: Promis
         </div>
       ))}
 
+      {v.onTheWay.map((p) => (
+        <div key={p.id} className="card rise rise-2 flex items-center gap-3 p-4">
+          <Monogram name="Stabl" vault />
+          <span className="min-w-0 flex-1">
+            <span className="figure block text-[1.125rem]">{formatCents(p.amountCents)}</span>
+            <span className="block text-caption text-muted">{p.direction === "buffer" ? "On its way to your vault" : "On its way to checking"}</span>
+          </span>
+        </div>
+      ))}
+
       <div className="rise rise-2">
         <VaultSheets
           balanceCents={v.balanceCents}
@@ -68,7 +78,15 @@ export default async function VaultPage({ searchParams }: { searchParams: Promis
       </details>
 
       <p className="px-1 text-caption text-muted">
-        In {v.legalName}&apos;s name at {v.partnerLabel}, ending {v.mask}. {formatCents(v.interestCents)} interest earned at {v.apy.toFixed(2)}%.
+        {v.onArc ? (
+          <>
+            In {v.legalName}&apos;s name, ending {v.mask}. Only you can receive this money.
+          </>
+        ) : (
+          <>
+            In {v.legalName}&apos;s name at {v.partnerLabel}, ending {v.mask}. {formatCents(v.interestCents)} interest earned at {v.apy.toFixed(2)}%.
+          </>
+        )}
       </p>
     </div>
   );

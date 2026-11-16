@@ -14,7 +14,7 @@ export function Plain({ children, wide = false }: { children: React.ReactNode; w
       </header>
       <main className={`mx-auto w-full flex-1 px-5 py-6 ${wide ? "max-w-3xl" : "max-w-lg"}`}>{children}</main>
       <footer className="px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 text-center text-[0.75rem] text-muted">
-        <p>Demo build. No real money moves. Stabl is not a bank.</p>
+        <p>Stabl is not a bank.</p>
         <p className="mt-1">
           <Link href="/privacy" className="underline underline-offset-4">
             Privacy

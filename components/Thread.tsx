@@ -128,7 +128,17 @@ export function Thread({ initial, timezone }: { initial: ThreadMessage[]; timezo
                     )}
                     {amount && <p className="figure mb-1 text-[1.625rem] leading-tight">{amount}</p>}
                     <p className={`whitespace-pre-line ${kind ? "text-[0.9375rem] text-muted" : ""}`}>{m.body}</p>
-                    <p className="mt-1.5 text-[0.6875rem] text-muted">{time}</p>
+                    <p className="mt-1.5 text-[0.6875rem] text-muted">
+                      {time}
+                      {m.proofUrl && (
+                        <>
+                          <span aria-hidden="true"> · </span>
+                          <a href={m.proofUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-rule underline-offset-2 hover:decoration-current">
+                            Proof
+                          </a>
+                        </>
+                      )}
+                    </p>
                     {m.replies.length > 0 && (
                       <div className="mt-3 flex flex-wrap gap-2">
                         {m.replies.map((r, j) => (

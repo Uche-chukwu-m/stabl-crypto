@@ -4,7 +4,7 @@ import Link from "next/link";
 export function LegalFooter() {
   return (
     <footer className="border-t border-rule px-4 py-5 text-center text-caption text-muted">
-      <p>Demo build. No real money moves. Stabl is not a bank.</p>
+      <p>Stabl is not a bank.</p>
       <p className="mt-1">
         <Link href="/privacy" className="underline decoration-rule underline-offset-4 hover:decoration-current">
           Privacy

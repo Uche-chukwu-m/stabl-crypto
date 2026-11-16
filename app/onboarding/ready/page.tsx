@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { finishOnboarding } from "@/app/onboarding/actions";
 import { StepHeader, Submit } from "@/components/Onboarding";
 import { PushToggle } from "@/components/PushToggle";
+import { chain } from "@/lib/chain/config";
 import { loadContext } from "@/lib/context";
 import { db } from "@/lib/db";
 import { channels, users } from "@/lib/db/schema";
@@ -34,7 +35,7 @@ export default async function ReadyPage() {
         <p className="text-caption opacity-80">Stabl Vault ending {v.mask}</p>
         <p className="figure mt-1 text-[3rem] leading-none">{formatCents(0)}</p>
         <p className="mt-3 text-caption opacity-85">
-          In {v.legalName}&apos;s name at {v.partnerLabel}. Locked.
+          {chain.enabled ? <>In {v.legalName}&apos;s name. Locked.</> : <>In {v.legalName}&apos;s name at {v.partnerLabel}. Locked.</>}
         </p>
       </section>
 

@@ -8,6 +8,7 @@ import { PushToggle } from "@/components/PushToggle";
 import { DailyLimit, DataControls, Toggle } from "@/components/SettingsForm";
 import { ENGINE } from "@/engine/config";
 import { signOut } from "@/lib/auth";
+import { chain } from "@/lib/chain/config";
 import { loadContext } from "@/lib/context";
 import { db } from "@/lib/db";
 import { channels, engineProfiles } from "@/lib/db/schema";
@@ -105,6 +106,16 @@ export default async function SettingsPage() {
       <Group title="Your data">
         <DataControls />
       </Group>
+
+      {chain.enabled && (
+        <Group title="About">
+          <Row label="Where your vault is held">
+            <Link href="/settings/vault" className="btn btn-quiet min-h-10 px-4">
+              Open
+            </Link>
+          </Row>
+        </Group>
+      )}
 
       <p className="text-center text-caption text-muted">
         <Link href="/privacy" className="underline underline-offset-4">
