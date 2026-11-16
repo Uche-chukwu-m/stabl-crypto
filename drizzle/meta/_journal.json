@@ -15,6 +15,13 @@
       "when": 1792630409564,
       "tag": "0001_ledger_rules",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794806427739,
+      "tag": "0002_arc_vault",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  bigint,
   boolean,
   check,
   date,
@@ -248,13 +249,24 @@ export const moves = pgTable(
     homeBaseAccountId: uuid("home_base_account_id").notNull(),
     direction: text("direction", { enum: ["buffer", "release", "emergency"] }).notNull(),
     amountCents: integer("amount_cents").notNull(),
-    state: text("state", { enum: ["planned", "announced", "settled", "cancelled"] }).notNull(),
+    // "settling" is the Arc build only: the transaction is sent and the move
+    // waits for the vault contract's event before the ledger is written.
+    state: text("state", { enum: ["planned", "announced", "settling", "settled", "cancelled"] }).notNull(),
     reason: text("reason").notNull(),
     cancelReason: text("cancel_reason"),
     // Demo clock dates
     plannedFor: day("planned_for").notNull(),
     settleOn: day("settle_on").notNull(),
     settledAt: stamp("settled_at"),
+    // On Arc: Circle's id for the transaction, then where it landed and what
+    // told us (the QuickNode Stream, or the fallback that reads Arc directly).
+    chainTxId: text("chain_tx_id"),
+    submittedAt: stamp("submitted_at"),
+    txHash: text("tx_hash"),
+    chainBlock: bigint("chain_block", { mode: "number" }),
+    confirmedBy: text("confirmed_by", { enum: ["stream", "reconcile"] }),
+    // Details the receipt needs once the move settles.
+    metaJson: jsonb("meta_json").$type<{ shortByCents?: number }>(),
     createdAt: createdAt(),
   },
   (t) => [
@@ -304,6 +316,61 @@ export const vaultBalances = pgView("vault_balances", {
   vaultId: uuid("vault_id").notNull(),
   balanceCents: integer("balance_cents").notNull(),
 }).existing();
+
+// Arc build: each person's hidden wallet. A Circle smart contract account that
+// owns their vault on chain. They never see it.
+export const chainWallets = pgTable("chain_wallets", {
+  userId: uuid("user_id")
+    .primaryKey()
+    .references(() => users.id, { onDelete: "cascade" }),
+  circleWalletId: text("circle_wallet_id").notNull().unique(),
+  // Lower case, so lookups by event owner are exact.
+  address: text("address").notNull().unique(),
+  blockchain: text("blockchain").notNull(),
+  createdAt: createdAt(),
+});
+
+// Every vault contract event the app has acted on, once. The unique key is what
+// makes a repeated webhook delivery harmless.
+export const chainEvents = pgTable(
+  "chain_events",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    txHash: text("tx_hash").notNull(),
+    logIndex: integer("log_index").notNull(),
+    blockNumber: bigint("block_number", { mode: "number" }).notNull(),
+    name: text("name", { enum: ["Deposited", "Released", "EmergencyUnlocked", "Frozen", "Unfrozen"] }).notNull(),
+    owner: text("owner").notNull(),
+    // USDC's smallest unit, as text because it can exceed a JS integer.
+    units: text("units"),
+    ref: text("ref"),
+    balanceUnits: text("balance_units"),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+    moveId: uuid("move_id").references(() => moves.id, { onDelete: "set null" }),
+    source: text("source", { enum: ["stream", "reconcile"] }).notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [unique("chain_events_tx_log_unique").on(t.txHash, t.logIndex), index("chain_events_user").on(t.userId, t.createdAt)],
+);
+
+// On chain work that is not a move: carrying an opening balance onto Arc,
+// freezing, unfreezing, and sending released USDC back to the bank side.
+export const chainOps = pgTable(
+  "chain_ops",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: ["opening", "freeze", "unfreeze", "offramp", "close"] }).notNull(),
+    // For offramp: the move whose release is being sent back.
+    moveId: uuid("move_id").references(() => moves.id, { onDelete: "cascade" }),
+    units: text("units"),
+    chainTxId: text("chain_tx_id"),
+    txHash: text("tx_hash"),
+    state: text("state", { enum: ["sent", "landed", "failed"] }).notNull().default("sent"),
+    createdAt: createdAt(),
+  },
+  (t) => [index("chain_ops_user").on(t.userId, t.createdAt)],
+);
 
 export const prompts = pgTable("prompts", {
   id: uuid("id").primaryKey().defaultRandom(),

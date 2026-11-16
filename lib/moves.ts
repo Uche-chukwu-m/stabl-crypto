@@ -3,23 +3,26 @@ import { addDays } from "@/engine/dates";
 import { decide } from "@/engine/decide";
 import { settleCheck } from "@/engine/settle";
 import { audit } from "@/lib/audit";
-import { checkingBalance } from "@/lib/balances";
-import { mirrorVaultMove } from "@/lib/bank-mirror";
+import { settlePending } from "@/lib/chain/settle";
 import { accountLabel, loadContext, type UserContext } from "@/lib/context";
 import { db } from "@/lib/db";
 import { moves } from "@/lib/db/schema";
 import { loadEngineInputs } from "@/lib/engine-inputs";
+import { afterMoveSettled } from "@/lib/move-receipts";
 import { notify } from "@/lib/notify";
 import { refreshLiveBalance } from "@/lib/plaid/items";
-import { vault } from "@/lib/vault/mock";
+import { vault } from "@/lib/vault";
 import { VaultError } from "@/lib/vault/provider";
 
 // How a move behaves:
 //   planned    the engine decided; checks run
 //   announced  buffers only: the user is told, and it settles tomorrow (STOP works)
+//   settling   on Arc only: the transaction is sent and the contract has not
+//              answered yet. The ledger and the receipt wait for its event.
 //   settled    the ledger is written; receipt sent
-//   cancelled  the user tapped STOP, or the safety rule failed at settle time
-// Releases go planned to settled at once: fast to give back.
+//   cancelled  the user tapped STOP, the safety rule failed at settle time, or
+//              the transaction failed on Arc
+// Releases go from planned straight to the vault: fast to give back.
 
 function requireLoop(ctx: UserContext) {
   if (!ctx.homeBase || !ctx.vault) throw new Error("No home base or vault yet");
@@ -80,11 +83,13 @@ export async function releaseNow(
       reason,
       plannedFor: ctx.today,
       settleOn: ctx.today,
+      metaJson: extra.shortByCents ? { shortByCents: extra.shortByCents } : null,
     })
     .returning();
 
+  let sent;
   try {
-    await vault.release(vaultRow.id, amountCents, move.id);
+    sent = await vault.release(vaultRow.id, amountCents, move.id);
   } catch (error) {
     const why = error instanceof VaultError ? error.code : "error";
     await db.update(moves).set({ state: "cancelled", cancelReason: why }).where(eq(moves.id, move.id));
@@ -92,27 +97,9 @@ export async function releaseNow(
     throw error;
   }
 
-  await mirrorVaultMove(home, ctx.today, amountCents);
-  const vaultCents = await vault.getBalance(vaultRow.id);
-  await audit(ctx.user.id, direction === "emergency" ? "user" : "engine", `${direction}_settled`, {
-    moveId: move.id,
-    amountCents,
-    reason,
-  });
-
-  const label = accountLabel(home);
-  if (direction === "emergency") {
-    await notify(ctx.user.id, "emergency_settled", { amountCents, account: label, vaultCents }, { moveId: move.id });
-  } else if (extra.shortByCents && extra.shortByCents > 0 && vaultCents === 0) {
-    await notify(ctx.user.id, "release_short", { amountCents, shortByCents: extra.shortByCents }, { moveId: move.id });
-  } else {
-    await notify(
-      ctx.user.id,
-      "release",
-      { amountCents, account: label, vaultCents, unusual: reason === "unusual_drop" },
-      { moveId: move.id },
-    );
-  }
+  // The simulated vault settles at once. On Arc the move is on its way, and the
+  // receipt follows when the contract's event arrives.
+  if (sent.state === "settled") await afterMoveSettled(move.id);
   return move;
 }
 
@@ -137,6 +124,8 @@ export async function stopBuffer(userId: string, moveId?: string): Promise<boole
 // Settle buffers announced yesterday (or earlier), re running the safety rule
 // with a fresh balance. A buffer that would now leave bills short is cancelled.
 export async function settleDueBuffers(userId: string) {
+  // Anything still on its way to Arc settles first, so the checks below see it.
+  await settlePending(userId);
   let ctx = await loadContext(userId);
   if (!ctx.homeBase || !ctx.vault) return;
   const due = await db
@@ -148,7 +137,7 @@ export async function settleDueBuffers(userId: string) {
 
   await refreshLiveBalance(ctx.homeBase.id);
   ctx = await loadContext(userId);
-  const { home, vaultRow } = requireLoop(ctx);
+  const { vaultRow } = requireLoop(ctx);
 
   for (const move of due) {
     // Fresh bills and balance from today's feed, including buffers settled above.
@@ -170,8 +159,9 @@ export async function settleDueBuffers(userId: string) {
       await cancel("settle_failed");
       continue;
     }
+    let sent;
     try {
-      await vault.buffer(vaultRow.id, move.amountCents, move.id);
+      sent = await vault.buffer(vaultRow.id, move.amountCents, move.id);
     } catch (error) {
       if (error instanceof VaultError && (error.code === "frozen" || error.code === "daily_limit")) {
         await cancel(error.code === "frozen" ? "frozen" : "settle_failed");
@@ -179,10 +169,12 @@ export async function settleDueBuffers(userId: string) {
       }
       throw error;
     }
-    await mirrorVaultMove(home, ctx.today, -move.amountCents);
-    const vaultCents = await vault.getBalance(vaultRow.id);
-    const checkingCents = await checkingBalance(home, ctx.today, vaultRow.id);
-    await audit(userId, "engine", "buffer_settled", { moveId: move.id, amountCents: move.amountCents });
-    await notify(userId, "buffer_settled", { amountCents: move.amountCents, vaultCents, checkingCents }, { moveId: move.id });
+    if (sent.state === "settled") {
+      await afterMoveSettled(move.id);
+    } else if (move !== due[due.length - 1]) {
+      // On Arc, and another buffer is due: let this one land first, so the next
+      // safety check counts it.
+      await settlePending(userId);
+    }
   }
 }

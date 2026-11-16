@@ -9,7 +9,7 @@ import { formatCents } from "@/lib/format";
 import { notify } from "@/lib/notify";
 import { onboardingUser } from "@/lib/onboarding-guard";
 import { telegramLink } from "@/lib/telegram-link";
-import { vault } from "@/lib/vault/mock";
+import { vault } from "@/lib/vault";
 
 export default async function ReadyPage() {
   const user = await onboardingUser(8);

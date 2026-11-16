@@ -5,6 +5,7 @@ import { bufferRoom, decide } from "@/engine/decide";
 import { floorDollar } from "@/engine/money";
 import type { Action, Decision } from "@/engine/types";
 import { audit } from "@/lib/audit";
+import { settlePending } from "@/lib/chain/settle";
 import { loadContext, type UserContext } from "@/lib/context";
 import { db, pool } from "@/lib/db";
 import { bills, engineProfiles, messages, prompts, sourceTags } from "@/lib/db/schema";
@@ -32,7 +33,10 @@ export async function withUserLock<T>(userId: string, fn: () => Promise<T>): Pro
 export async function runEngine(userId: string, opts: RunOptions = {}): Promise<Decision> {
   return withUserLock(userId, async () => {
     let ctx = await loadContext(userId);
-    const learnOnly = opts.learnOnly || !ctx.homeBase || !ctx.vault;
+    let learnOnly = opts.learnOnly || !ctx.homeBase || !ctx.vault;
+    // On Arc, a move may still be on its way. Let it land before deciding, and
+    // if it has not, only learn this time: never decide on a balance in motion.
+    if (!learnOnly && (await settlePending(userId)) > 0) learnOnly = true;
     if (!learnOnly && ctx.homeBase && opts.forceFeast) {
       await refreshLiveBalance(ctx.homeBase.id);
       ctx = await loadContext(userId);

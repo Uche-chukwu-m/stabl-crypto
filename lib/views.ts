@@ -20,7 +20,7 @@ import {
   transactions,
 } from "@/lib/db/schema";
 import { emergenciesUsed } from "@/lib/security";
-import { interestEarned, vault } from "@/lib/vault/mock";
+import { interestEarned, vault } from "@/lib/vault";
 
 // Read models for the five tabs. Screens render these on the server, and the
 // JSON routes return the same shapes, so the two never drift.

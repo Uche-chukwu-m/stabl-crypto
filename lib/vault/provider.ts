@@ -18,7 +18,8 @@ export type Move = {
   vaultId: string;
   direction: "buffer" | "release" | "emergency";
   amountCents: number;
-  state: "planned" | "announced" | "settled" | "cancelled";
+  // "settling" comes back from the Arc vault only: sent, waiting for the contract.
+  state: "planned" | "announced" | "settling" | "settled" | "cancelled";
   settledAt: Date | null;
 };
 

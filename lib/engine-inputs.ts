@@ -113,7 +113,13 @@ export async function loadEngineInputs(ctx: UserContext): Promise<EngineInputs> 
     lastFeastCheck: profile?.lastFeastCheck ?? null,
     dailyLimitCents: ctx.user.dailyLimitCents,
     bufferedTodayCents: bufferedToday,
-    recentMoves: moveRows.map((m) => ({ direction: m.direction, amountCents: m.amountCents, state: m.state, date: m.plannedFor })),
+    // To the engine a move on its way to Arc is still pending, like an announced one.
+    recentMoves: moveRows.map((m) => ({
+      direction: m.direction,
+      amountCents: m.amountCents,
+      state: m.state === "settling" ? ("announced" as const) : m.state,
+      date: m.plannedFor,
+    })),
     openJumpPrompt,
     externalBills: external,
   };

@@ -8,7 +8,7 @@ import { keepHeldIncome, pauseBuffering } from "@/lib/engine-runner";
 import { notify, recordUserMessage, type Channel } from "@/lib/notify";
 import { stopBuffer } from "@/lib/moves";
 import { confirmUnfreeze, freeze, requestUnfreeze, startEmergency, type Via } from "@/lib/security";
-import { vault } from "@/lib/vault/mock";
+import { vault } from "@/lib/vault";
 
 export const COMMANDS = ["BALANCE", "STOP", "YES", "NO", "PAUSE", "KEEP", "FREEZE", "UNFREEZE", "EMERGENCY", "HELP"] as const;
 export type Command = (typeof COMMANDS)[number];

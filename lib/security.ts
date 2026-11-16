@@ -9,7 +9,7 @@ import { accounts, channels, moves, users } from "@/lib/db/schema";
 import { notify, type Channel } from "@/lib/notify";
 import { releaseNow } from "@/lib/moves";
 import { namesMatch } from "@/lib/names";
-import { vault } from "@/lib/vault/mock";
+import { vault } from "@/lib/vault";
 
 export type Via = "app" | "telegram";
 

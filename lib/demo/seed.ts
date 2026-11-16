@@ -4,6 +4,7 @@ import { VAULT } from "@/engine/config";
 import { addDays, daysBetween, type ISODate } from "@/engine/dates";
 import { sourceKey } from "@/engine/sources";
 import { audit } from "@/lib/audit";
+import { carryBalanceOntoArc } from "@/lib/chain/settle";
 import { localDate } from "@/lib/clock";
 import { accountLabel } from "@/lib/context";
 import { randomToken } from "@/lib/crypto";
@@ -27,7 +28,7 @@ import { render } from "@/lib/notify/templates";
 import { connectItem, removeItem } from "@/lib/plaid/items";
 import { createCustomUserPublicToken } from "@/lib/plaid/sandbox";
 import { syncItem } from "@/lib/plaid/sync";
-import { vault } from "@/lib/vault/mock";
+import { vault } from "@/lib/vault";
 import { generatePersona, plaidCustomUser, PERSONAS, type GeneratedPersona, type PersonaKey } from "@/personas";
 
 export const RULES_VERSION = "2026-10-20";
@@ -98,6 +99,10 @@ export async function seedPersona(key: PersonaKey, opts: SeedOptions = {}) {
     .where(eq(vaultAccounts.id, v.id));
   const [home] = await db.select().from(accounts).where(eq(accounts.id, homeId));
   await seedVaultHistory(user.id, v.id, home, gp);
+  // On Arc, the balance this history adds up to becomes one opening deposit, so
+  // the contract holds exactly what the ledger says.
+  const carried = await carryBalanceOntoArc(user.id);
+  if (carried?.txHash) log(`  opening balance on Arc: ${carried.txHash}`);
 
   await db
     .insert(sourceTags)

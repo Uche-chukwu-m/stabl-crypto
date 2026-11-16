@@ -24,6 +24,7 @@ const SKIP_REASONS = {
   paused: "buffering is paused",
   stopped: "you asked us to stop",
   settle_failed: "checking dropped since yesterday and your bills come first",
+  not_completed: "the transfer did not go through",
 } as const;
 
 export type SkipReason = keyof typeof SKIP_REASONS;
@@ -43,7 +44,7 @@ export const templates = {
 
   buffer_skipped: (d: { reason: SkipReason; amountCents?: number }): Rendered => ({
     body:
-      d.amountCents && (d.reason === "stopped" || d.reason === "settle_failed")
+      d.amountCents && (d.reason === "stopped" || d.reason === "settle_failed" || d.reason === "not_completed")
         ? `Stabl: Skipped: ${SKIP_REASONS[d.reason]}, so the ${money(d.amountCents)} stays in checking.`
         : `Stabl: Skipped: ${SKIP_REASONS[d.reason]}. Nothing moved.`,
   }),
@@ -60,6 +61,11 @@ export const templates = {
     body: `Stabl: We sent everything in your vault, ${money(d.amountCents)}. Checking is still about ${money(d.shortByCents)} short for this week's bills.`,
     urgent: true,
     email: { subject: `Sent ${money(d.amountCents)} to checking` },
+  }),
+
+  move_failed: (d: { amountCents: number }): Rendered => ({
+    body: `Stabl: We could not send ${money(d.amountCents)} from your vault just now. Nothing left your vault. Try again in a moment.`,
+    urgent: true,
   }),
 
   release_blocked: (d: { gapCents: number; reason: "frozen" | "vault_empty" }): Rendered => ({

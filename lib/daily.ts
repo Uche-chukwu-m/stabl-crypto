@@ -9,7 +9,7 @@ import { notify } from "@/lib/notify";
 import { settleDueBuffers } from "@/lib/moves";
 import { syncItem } from "@/lib/plaid/sync";
 import { activatePendingHomeBase } from "@/lib/security";
-import { accrueInterest, vault } from "@/lib/vault/mock";
+import { accrueInterest, vault } from "@/lib/vault";
 
 // The daily job for one user, in the PRD's order. The admin's "advance the demo
 // clock" runs this once per day it skips, so a week passes the same way it would

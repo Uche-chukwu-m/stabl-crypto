@@ -63,20 +63,43 @@ export type VaultEvent = {
   blockNumber: bigint;
 };
 
+// A log as it arrives from either source: viem's own shape from a receipt, or
+// the JSON a QuickNode Stream delivers, where numbers are hex strings.
+export type RawLog = {
+  address?: string | null;
+  topics?: readonly string[] | null;
+  data?: string | null;
+  transactionHash?: string | null;
+  logIndex?: string | number | null;
+  blockNumber?: string | number | bigint | null;
+  removed?: boolean;
+};
+
 // Turn raw logs into vault events. Logs from any other contract are ignored, so
 // a webhook cannot be fed events from a look-alike contract.
-export function decodeVaultLogs(logs: Pick<Log, "address" | "topics" | "data" | "transactionHash" | "logIndex" | "blockNumber">[]): VaultEvent[] {
+export function decodeVaultLogs(logs: RawLog[]): VaultEvent[] {
   const vault = requireVault().toLowerCase();
-  const ours = logs.filter((l) => l.address?.toLowerCase() === vault);
-  const parsed = parseEventLogs({ abi: vaultAbi, logs: ours as Log[], strict: true });
+  const ours = logs.filter(
+    (l) => l.address?.toLowerCase() === vault && !l.removed && l.transactionHash && l.logIndex != null && l.blockNumber != null && l.topics?.length,
+  );
   const events: VaultEvent[] = [];
-  for (const log of parsed) {
-    if (log.transactionHash == null || log.logIndex == null || log.blockNumber == null) continue;
-    const base = { txHash: log.transactionHash, logIndex: Number(log.logIndex), blockNumber: BigInt(log.blockNumber) };
-    if (log.eventName === "Deposited" || log.eventName === "Released" || log.eventName === "EmergencyUnlocked") {
-      events.push({ ...base, name: log.eventName, owner: log.args.owner, units: log.args.amount, ref: log.args.ref, balanceUnits: log.args.balance });
-    } else if (log.eventName === "Frozen" || log.eventName === "Unfrozen") {
-      events.push({ ...base, name: log.eventName, owner: log.args.owner, units: null, ref: null, balanceUnits: null });
+  for (const raw of ours) {
+    let parsed;
+    try {
+      [parsed] = parseEventLogs({
+        abi: vaultAbi,
+        logs: [{ address: raw.address, topics: raw.topics, data: raw.data ?? "0x" } as unknown as Log],
+        strict: true,
+      });
+    } catch {
+      continue;
+    }
+    if (!parsed) continue;
+    const base = { txHash: raw.transactionHash as Hex, logIndex: Number(raw.logIndex), blockNumber: BigInt(raw.blockNumber as string | number | bigint) };
+    if (parsed.eventName === "Deposited" || parsed.eventName === "Released" || parsed.eventName === "EmergencyUnlocked") {
+      events.push({ ...base, name: parsed.eventName, owner: parsed.args.owner, units: parsed.args.amount, ref: parsed.args.ref, balanceUnits: parsed.args.balance });
+    } else if (parsed.eventName === "Frozen" || parsed.eventName === "Unfrozen") {
+      events.push({ ...base, name: parsed.eventName, owner: parsed.args.owner, units: null, ref: null, balanceUnits: null });
     }
   }
   return events;

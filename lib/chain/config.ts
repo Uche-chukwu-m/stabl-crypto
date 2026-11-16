@@ -42,6 +42,7 @@ export const chain = {
   // Without them the app falls back to the simulated ledger, which is what the
   // test suite uses.
   get enabled(): boolean {
+    if (process.env.VAULT_PROVIDER === "mock") return false;
     return Boolean(
       process.env.CIRCLE_API_KEY &&
         process.env.CIRCLE_ENTITY_SECRET &&
