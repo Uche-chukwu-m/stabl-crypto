@@ -1,0 +1,17 @@
+{
+  "name": "stabl-vault-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The Stabl vault contract for Arc, with its tests and deploy script.",
+  "scripts": {
+    "build": "hardhat build",
+    "test": "hardhat test solidity",
+    "export-abi": "node scripts/export-abi.mjs",
+    "deploy": "node --env-file-if-exists=../.env.local scripts/deploy.mjs"
+  },
+  "devDependencies": {
+    "forge-std": "github:foundry-rs/forge-std#v1.9.7",
+    "hardhat": "^3.22.0"
+  }
+}

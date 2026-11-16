@@ -46,3 +46,6 @@ next-env.d.ts
 
 # private key material for the crypto build (Circle recovery file and the like)
 .secrets/
+
+# Arc Foundry binaries, downloaded locally (see contracts/README.md)
+/.tools/
