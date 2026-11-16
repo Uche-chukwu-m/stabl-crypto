@@ -76,6 +76,14 @@ The Stream is what turns a transaction into a receipt.
 
 Streams bill for every block they process, and Arc makes a block about every 0.7 seconds. The script can delete and recreate the stream, so it only runs when the app is in use.
 
+## Does it help?
+
+A simulation, not a study: [docs/simulation.md](docs/simulation.md). 200 synthetic freelancers, none of them the app's presenter personas, run for six months through the real engine, each one with Stabl and without it on the identical bank feed.
+
+- **Stabl never made things worse.** With spending held fixed, it caused 0 extra overdraft days across 180 people who earn more than they spend, and 0 across 20 who do not.
+- **The benefit depends on how much visible money gets spent.** If a person spends 10% of any spare checking each week, overdraft days fall from 879 to 777. At 20% they fall from 1,556 to 987, and at 30% from 2,175 to 1,228. Nobody ended up worse off at any rate.
+- **What it cannot show:** whether real people spend that way, or whether they would allow automatic transfers. That needs real users.
+
 ## See it on Arc
 
 These are real transactions from the live site.
@@ -84,10 +92,11 @@ These are real transactions from the live site.
 | --- | --- |
 | "Moved $650.00 to your vault." | [Deposited, 0.65 USDC](https://explorer.testnet.arc.io/tx/0xfcbf2fcad4711208687b122a4f1b01a6c59bf5cf99df73c45eb2060ba391a2f1) |
 | "Slow week, so we sent $210.00 from your vault to Checking 4321." | [Released, 0.21 USDC](https://explorer.testnet.arc.io/tx/0x8a51a26643c1e21f7e56f584fc8cfb548186a51759f6e9e972eeb2556f24ab18) |
+| "Emergency unlock done. We sent $150.00 from your vault to Checking 4321." | [EmergencyUnlocked, 0.15 USDC](https://explorer.testnet.arc.io/tx/0x2014fc95f62811642101efb17766aaaed2d1f8c2c3c2a49651474ffb5c1f3a4d), sent by the owner's wallet, not the operator |
 | A vault frozen, then unfrozen, by its owner's wallet | [Frozen](https://explorer.testnet.arc.io/tx/0xeedff541e643dae3558d229cb056730727e6ad42a19a52a7e6f081d2bd3b1a8a) and [Unfrozen](https://explorer.testnet.arc.io/tx/0xef4f5c7b73059e1bdbe889ec1ba51b468b9af2033ce2408ff57a5a69b89f0558) |
 | The contract being deployed | [Deploy](https://explorer.testnet.arc.io/tx/0x1302c8f4725d73f795a258edca6dbf6fd74c3ae4363d0cda55f165baff91cd3d) |
 
-The QuickNode Stream confirmed both moves to the app. From the app sending each transaction to the webhook settling it took 2.1 seconds for the deposit and 4.7 seconds for the release.
+The QuickNode Stream confirmed all three moves to the app: each move records `confirmed_by = stream`. From the app sending each transaction to the webhook settling it took 2.1 seconds for the deposit, 4.7 for the release, and 8.7 for the emergency unlock, which includes the person entering their code. After each one the app's balance and the contract's matched.
 
 ## Try it
 
@@ -163,6 +172,8 @@ npm run chain:stream -- create # needs a public https address for the webhook
 | `npm run seed:demo jemaya` | Create the presenter account locally |
 | `npx tsx scripts/try-pitch.ts` | Run the presenter's whole story on Arc locally and check the app against the contract at each step |
 | `npx tsx scripts/presenter.ts seed \| big-client \| advance \| slow-week \| reset \| link` | Drive the presenter account on the live site |
+| `npx tsx scripts/compare.ts 200` | The with-and-without simulation; writes docs/simulation.md |
+| `npx tsx scripts/try-emergency.ts <userId> [dollars]` | An emergency unlock through the app's own code |
 | `npx tsx scripts/live-check.ts` | Compare the live site's numbers with the contract, and show what confirmed each move |
 
 ## Where things live
