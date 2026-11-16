@@ -157,7 +157,10 @@ export async function walletFor(userId: string): Promise<ChainWallet> {
   if (row) return { id: row.circleWalletId, address: row.address as Address };
   const [user] = await db.select().from(users).where(eq(users.id, userId));
   if (!user) throw new Error("No such user");
-  const refId = user.isDemo && user.personaKey ? `persona:${user.email}` : `user:${user.id}`;
+  // The presenter's wallet is named per environment, so a local test run and the
+  // live site never share one vault on chain.
+  const place = process.env.WALLET_NAMESPACE || (process.env.VERCEL_ENV === "production" ? "live" : "dev");
+  const refId = user.isDemo && user.personaKey ? `persona:${place}:${user.email}` : `user:${user.id}`;
   const wallet = await ensureWallet(refId, user.isDemo ? `Presenter ${user.personaKey}` : "Stabl member", "SCA");
   const address = wallet.address.toLowerCase();
   // A reseeded persona's old row is gone with the old user, but be safe.

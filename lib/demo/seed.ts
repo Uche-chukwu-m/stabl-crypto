@@ -137,8 +137,11 @@ export async function connectPersona(
       log(`  creating Plaid Sandbox custom user for ${label}`);
       const publicToken = await createCustomUserPublicToken(plaidCustomUser(gp, item.key, ownerName));
       const row = await connectItem(userId, publicToken, { label });
+      // Plaid only hands over the last 180 days, counted from the real date, so
+      // older parts of a history that ends in the past never arrive.
       const keys = new Set(item.accounts.map((a) => a.key));
-      await waitForTransactions(row.id, gp.txns.filter((t) => keys.has(t.accountId)).length);
+      const oldest = addDays(localDate(new Date(), gp.persona.timezone), -178);
+      await waitForTransactions(row.id, gp.txns.filter((t) => keys.has(t.accountId) && t.date >= oldest).length);
       const rows = await db.select().from(accounts).where(eq(accounts.itemId, row.id));
       for (const a of item.accounts) {
         const match = rows.find((r) => r.mask === a.mask);
@@ -196,7 +199,7 @@ export async function connectPersona(
 async function waitForTransactions(itemRowId: string, expected: number) {
   const enough = Math.floor(expected * 0.95);
   let have = 0;
-  for (let attempt = 0; attempt < 45; attempt++) {
+  for (let attempt = 0; attempt < 30; attempt++) {
     await syncItem(itemRowId);
     const [{ n }] = await db
       .select({ n: sql<number>`count(*)::int` })

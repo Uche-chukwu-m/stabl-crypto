@@ -159,12 +159,29 @@ async function failMove(move: PendingMove, why: string) {
   }
 }
 
+// How long to wait for the Stream before the fallback reads Arc itself. Zero
+// where no Stream can reach the app, such as local development.
+function streamGraceMs(): number {
+  const set = process.env.STREAM_GRACE_MS;
+  if (set && /^\d+$/.test(set)) return Number(set);
+  return process.env.VERCEL_ENV === "production" && process.env.QUICKNODE_STREAM_TOKEN ? 10_000 : 0;
+}
+
 // Wait for everything a person has on its way to Arc. The daily job and the
 // engine call this first, so they never decide on a balance that is about to
 // change. Returns how many moves are still unsettled.
 export async function settlePending(userId: string, opts: { waitMs?: number } = {}): Promise<number> {
   if (!chain.enabled) return 0;
-  const pending = await db.select().from(moves).where(and(eq(moves.userId, userId), eq(moves.state, "settling")));
+  const unsettled = () => db.select().from(moves).where(and(eq(moves.userId, userId), eq(moves.state, "settling")));
+  let pending = await unsettled();
+  // Where the QuickNode Stream is running, give it the first chance: its
+  // webhook settles the move in another request, and this one just watches.
+  // The fallback below only steps in for whatever is left after that.
+  const until = Date.now() + streamGraceMs();
+  while (pending.length > 0 && Date.now() < until) {
+    await new Promise((r) => setTimeout(r, 400));
+    pending = await unsettled();
+  }
   for (const move of pending) {
     try {
       await reconcileMove(move, opts.waitMs ?? 45_000);
