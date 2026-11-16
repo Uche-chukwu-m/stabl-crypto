@@ -72,10 +72,12 @@ export class ArcVaultProvider extends MockVaultProvider {
         refId: "unfreeze",
       });
       await db.update(chainOps).set({ chainTxId: id }).where(eq(chainOps.id, op.id));
+      // The fallback in lib/chain/settle.ts records the event and marks this
+      // landed, in case the Stream is not the first to report it.
       const status = await waitForTx(id, 45_000);
       await db
         .update(chainOps)
-        .set({ state: status.landed ? "landed" : status.failed ? "failed" : "sent", txHash: status.txHash })
+        .set({ state: status.failed ? "failed" : "sent", txHash: status.txHash })
         .where(eq(chainOps.id, op.id));
     }
     await super.unfreeze(vaultId);

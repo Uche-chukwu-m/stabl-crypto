@@ -184,15 +184,40 @@ export async function settlePending(userId: string, opts: { waitMs?: number } = 
 // seconds ago with no event yet gets one look from the fallback, without waiting.
 export async function nudgePending(userId: string, olderThanMs = 12_000): Promise<void> {
   if (!chain.enabled) return;
+  const before = new Date(Date.now() - olderThanMs);
   const stale = await db
     .select()
     .from(moves)
-    .where(and(eq(moves.userId, userId), eq(moves.state, "settling"), lt(moves.submittedAt, new Date(Date.now() - olderThanMs))));
+    .where(and(eq(moves.userId, userId), eq(moves.state, "settling"), lt(moves.submittedAt, before)));
   for (const move of stale) {
     try {
       await reconcileMove(move, 0);
     } catch (error) {
       console.error("nudge failed", move.id, (error as Error).message);
+    }
+  }
+
+  // The same for a freeze, an unfreeze, or USDC on its way back to the bank side.
+  const ops = await db
+    .select()
+    .from(chainOps)
+    .where(and(eq(chainOps.userId, userId), eq(chainOps.state, "sent"), lt(chainOps.createdAt, before)));
+  for (const op of ops) {
+    try {
+      if (!op.chainTxId) {
+        // Never reached Circle. After a few minutes there is nothing to wait for.
+        if (op.createdAt < new Date(Date.now() - 5 * 60_000)) await db.update(chainOps).set({ state: "failed" }).where(eq(chainOps.id, op.id));
+        continue;
+      }
+      const status = await txStatus(op.chainTxId);
+      if (status.failed) {
+        await db.update(chainOps).set({ state: "failed" }).where(eq(chainOps.id, op.id));
+      } else if (status.landed && status.txHash) {
+        for (const ev of await vaultEventsInTx(status.txHash)) await applyVaultEvent(ev, "reconcile");
+        await db.update(chainOps).set({ state: "landed", txHash: status.txHash }).where(eq(chainOps.id, op.id));
+      }
+    } catch (error) {
+      console.error("nudge failed", op.id, (error as Error).message);
     }
   }
 }

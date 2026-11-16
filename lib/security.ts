@@ -2,6 +2,7 @@ import { and, eq, gte } from "drizzle-orm";
 import { SAFETY } from "@/engine/config";
 import { addDays } from "@/engine/dates";
 import { audit } from "@/lib/audit";
+import { emailReady } from "@/lib/channels/email";
 import { checkCode, issueCode } from "@/lib/codes";
 import { loadContext } from "@/lib/context";
 import { db } from "@/lib/db";
@@ -25,7 +26,9 @@ async function secondChannels(userId: string, via: Via) {
   const [ch] = await db.select().from(channels).where(eq(channels.userId, userId));
   if (via === "telegram") return { showInApp: true, exclude: ["telegram", "push"] as Channel[], where: "the Stabl app" };
   const others: string[] = [];
-  if (user.email && !user.isDemo) others.push("your email");
+  // Email only counts when it can really be delivered. Otherwise a code would be
+  // "sent" to a place the person can never read it.
+  if (user.email && !user.isDemo && emailReady()) others.push("your email");
   if (ch?.telegramChatId) others.push("Telegram");
   // With no second channel at all (a demo user with nothing linked), the app is
   // the only place left to show it.
