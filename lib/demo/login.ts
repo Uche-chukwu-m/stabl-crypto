@@ -7,5 +7,5 @@ import { env } from "@/lib/env";
 export async function demoLoginUrl(userId: string): Promise<string> {
   const token = randomToken(24);
   await issueCode(userId, "demo_login", { sentTo: ["link"], code: token, ttlMinutes: 24 * 60 });
-  return `${env.appUrl}/demo/login?u=${userId}&t=${token}`;
+  return `${env.appUrl}/enter?u=${userId}&t=${token}`;
 }
