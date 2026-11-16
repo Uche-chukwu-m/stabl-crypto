@@ -115,6 +115,7 @@ export default async function VaultProofPage() {
                 <span className="block text-caption text-muted">
                   {new Date(e.at).toLocaleString("en-US", { timeZone: user.timezone, month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
                   {e.usdc && <>, {e.usdc} test USDC</>}
+                  <span className="block">{e.source === "stream" ? "Confirmed by QuickNode Stream" : "Confirmed by reading Arc"}</span>
                 </span>
               </span>
               <Out href={e.url}>Proof</Out>
