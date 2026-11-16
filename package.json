@@ -22,7 +22,8 @@
     "film": "node film/record.mjs",
     "chain:setup": "tsx scripts/chain-setup.ts",
     "chain:deploy": "tsx scripts/chain-deploy.ts",
-    "chain:stream": "tsx scripts/chain-stream.ts"
+    "chain:stream": "tsx scripts/chain-stream.ts",
+    "chain:check": "tsx scripts/chain-check.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.3",

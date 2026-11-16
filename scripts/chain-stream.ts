@@ -76,9 +76,10 @@ if (command === "create") {
       dataset: "logs",
       filter_function: Buffer.from(streamFilter(vault)).toString("base64"),
       region: "usa_east",
-      // Arc's blocks are sub-second, so QuickNode asks for batches of at least
-      // five. Elastic batching still delivers at the tip without waiting.
-      dataset_batch_size: 5,
+      // One block per delivery is the most this plan allows. Set
+      // STREAM_BATCH_SIZE higher on a plan that permits it; elastic batching
+      // still delivers at the tip without waiting for a batch to fill.
+      dataset_batch_size: Number(process.env.STREAM_BATCH_SIZE ?? 1),
       elastic_batch_enabled: true,
       fix_block_reorgs: 0,
       keep_distance_from_tip: 0,
