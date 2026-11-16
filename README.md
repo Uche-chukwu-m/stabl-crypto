@@ -72,6 +72,19 @@ The Stream is what turns a transaction into a receipt.
 
 Streams bill for every block they process, and Arc makes a block about every 0.7 seconds. The script can delete and recreate the stream, so it only runs when the app is in use.
 
+## See it on Arc
+
+These are real transactions from the live site.
+
+| In the app | On Arc |
+| --- | --- |
+| "Moved $650.00 to your vault." | [Deposited, 0.65 USDC](https://explorer.testnet.arc.io/tx/0xfcbf2fcad4711208687b122a4f1b01a6c59bf5cf99df73c45eb2060ba391a2f1) |
+| "Slow week, so we sent $210.00 from your vault to Checking 4321." | [Released, 0.21 USDC](https://explorer.testnet.arc.io/tx/0x8a51a26643c1e21f7e56f584fc8cfb548186a51759f6e9e972eeb2556f24ab18) |
+| A vault frozen, then unfrozen, by its owner's wallet | [Frozen](https://explorer.testnet.arc.io/tx/0xeedff541e643dae3558d229cb056730727e6ad42a19a52a7e6f081d2bd3b1a8a) and [Unfrozen](https://explorer.testnet.arc.io/tx/0xef4f5c7b73059e1bdbe889ec1ba51b468b9af2033ce2408ff57a5a69b89f0558) |
+| The contract being deployed | [Deploy](https://explorer.testnet.arc.io/tx/0x1302c8f4725d73f795a258edca6dbf6fd74c3ae4363d0cda55f165baff91cd3d) |
+
+The QuickNode Stream confirmed both moves to the app. From the app sending each transaction to the webhook settling it took 2.1 seconds for the deposit and 4.7 seconds for the release.
+
 ## Try it
 
 Open https://stabl-crypto.vercel.app and sign in with any email address.
@@ -141,7 +154,10 @@ npm run chain:stream -- create # needs a public https address for the webhook
 | `npm run chain:status` | Operator balance, allowance and what the vault holds |
 | `npm run chain:check` | Smoke test of wallets, sponsorship, the contract and event decoding |
 | `npm run chain:stream -- create \| status \| delete` | Manage the QuickNode Stream |
-| `npm run seed:demo jemaya` | Create the presenter account |
+| `npm run seed:demo jemaya` | Create the presenter account locally |
+| `npx tsx scripts/try-pitch.ts` | Run the presenter's whole story on Arc locally and check the app against the contract at each step |
+| `npx tsx scripts/presenter.ts seed \| big-client \| advance \| slow-week \| reset \| link` | Drive the presenter account on the live site |
+| `npx tsx scripts/live-check.ts` | Compare the live site's numbers with the contract, and show what confirmed each move |
 
 ## Where things live
 
