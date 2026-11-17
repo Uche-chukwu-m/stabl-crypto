@@ -103,9 +103,10 @@ const SEQUENCE = [
   { key: "04-proof", card: true },
   { key: "05a-why-a-blockchain", card: true },
   { key: "05b-how-it-settles", card: true },
-  { key: "06-check-it", title: "Check it yourself", note: "The app's balance against the contract's, read live from Arc." },
-  { key: "07-slow-week", title: "A slow week", note: "Money goes back to checking right away." },
-  { key: "08-emergency", title: "Emergency unlock", note: "The same day, with a one time code. Sent from her own vault wallet." },
+  // speed: screen action with no talking over it plays a little faster.
+  { key: "06-check-it", title: "Check it yourself", note: "The app's balance against the contract's, read live from Arc.", speed: 1.3 },
+  { key: "07-slow-week", title: "A slow week", note: "Money goes back to checking right away.", speed: 1.25 },
+  { key: "08-emergency", title: "Emergency unlock", note: "The same day, with a one time code. Sent from her own vault wallet.", speed: 1.7 },
   { key: "09-honest", card: true },
   { key: "10-closing", card: true },
 ];
@@ -393,8 +394,9 @@ async function build() {
     } else {
       const dir = path.join(WORK, beat.key);
       const { frames, endAt } = JSON.parse(readFileSync(path.join(dir, "timing.json"), "utf8"));
-      const recorded = (endAt - frames[0].at) / 1000;
-      composeBeat({ framesDir: dir, stageDir, out: silent, caption: png, holdSeconds: Math.max(0.5, need - recorded) });
+      const speed = beat.speed ?? 1;
+      const recorded = (endAt - frames[0].at) / 1000 / speed;
+      composeBeat({ framesDir: dir, stageDir, out: silent, caption: png, speed, holdSeconds: Math.max(0.5, need - recorded) });
     }
     addVoice({ video: silent, audio: line.file, out: final });
     clips.push({ key: beat.key, out: final, seconds: durationOf(final), line: LINES[beat.key] });

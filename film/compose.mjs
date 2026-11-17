@@ -24,13 +24,13 @@ function concatList(dir, frames, endAt) {
   return list;
 }
 
-export function composeBeat({ framesDir, stageDir, out, holdSeconds = 0.8, caption }) {
+export function composeBeat({ framesDir, stageDir, out, holdSeconds = 0.8, caption, speed = 1 }) {
   const { frames, endAt } = JSON.parse(readFileSync(path.join(framesDir, "timing.json"), "utf8"));
   const list = concatList(framesDir, frames, endAt);
   const { w, h, x, y } = STAGE.screen;
   // The still layers loop forever, so the clip length is set explicitly: the
   // recording plus the held last frame.
-  const seconds = ((endAt - frames[0].at) / 1000 + holdSeconds).toFixed(3);
+  const seconds = ((endAt - frames[0].at) / 1000 / speed + holdSeconds).toFixed(3);
   const still = (file) => ["-loop", "1", "-framerate", String(STAGE.fps), "-i", file.startsWith("/") ? file : path.join(stageDir, file)];
   run([
     "-f", "concat", "-safe", "0", "-i", list,
@@ -40,7 +40,7 @@ export function composeBeat({ framesDir, stageDir, out, holdSeconds = 0.8, capti
     ...(caption ? still(caption) : []),
     "-filter_complex",
     [
-      `[0:v]fps=${STAGE.fps},tpad=stop_mode=clone:stop_duration=${holdSeconds},scale=${w}:${h}:flags=lanczos,format=rgba[screen]`,
+      `[0:v]setpts=PTS/${speed},fps=${STAGE.fps},tpad=stop_mode=clone:stop_duration=${holdSeconds},scale=${w}:${h}:flags=lanczos,format=rgba[screen]`,
       `[2:v]format=gray,scale=${w}:${h}[mask]`,
       `[screen][mask]alphamerge[rounded]`,
       `[1:v][rounded]overlay=${x}:${y}:shortest=1[staged]`,
