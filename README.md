@@ -122,6 +122,8 @@ Streams bill for every block they process, and Arc makes a block about every 0.7
 - settles any move still waiting on its event,
 - and changes nothing already recorded: every event it has seen before comes back as a duplicate.
 
+On November 16 the backfill replayed 111,894 blocks in about six minutes. It found 8 vault events the live site had never recorded (made by test runs outside it), recorded them, and left the 25 events the live Stream had already delivered untouched. The app's balances still matched the contract afterwards, and no move was left waiting.
+
 Afterwards `npx tsx scripts/live-check.ts` compares each vault's balance in the app with the contract's, and counts events by the source that first recorded them (`stream`, `backfill` or `reconcile`). Run it with `npm run chain:stream -- backfill`, and watch it with `npm run chain:stream -- backfill-status`.
 
 ## Does it help?
