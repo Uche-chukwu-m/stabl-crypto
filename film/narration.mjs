@@ -28,9 +28,9 @@ export const LINES = {
   "04-proof":
     "Every receipt links to its proof on Arc. Circle made her a wallet and paid the fee, so she never touches crypto.",
   "05a-why-a-blockchain":
-    "Why a blockchain? In 2024, the fintech middleman Synapse collapsed. It kept the ledger of who was owed what, and when it failed, customers couldn't prove their balances. Tens of millions of dollars went unaccounted for. Stabl's vault balances live on a public ledger anyone can check, and the contract only ever pays money back to its owner.",
+    "Why a blockchain? In 2024, the fintech middleman Synapse collapsed. It kept the ledger of who was owed what, and when it failed, customers couldn't prove their balances. Tens of millions of dollars went unaccounted for. Stabl's vault balances live on a public ledger anyone can check, the rules are in code, and it runs around the clock.",
   "05b-how-it-settles":
-    "Every move settles the same way. Circle signs, the contract enforces the rules, and a QuickNode Stream tells Stabl the moment it lands. Only then does Stabl send the receipt, and a repeated event never counts twice.",
+    "And why these three? Arc runs on dollars: fees are paid in U S D C, about a tenth of a cent, and every move is final in under a second. Circle gives each person a wallet they never see, and pays the fees. QuickNode pushes every vault event to Stabl the moment it lands, so nothing is missed, and nothing counts twice.",
   "06-check-it":
     "In Settings, Jemaya can check Stabl against the contract herself, read live from Arc. Each move here was confirmed by the QuickNode Stream.",
   "07-slow-week":

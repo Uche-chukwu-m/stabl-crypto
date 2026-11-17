@@ -49,7 +49,7 @@ export const CARDS = {
     page(
       `<div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
         <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Why a blockchain</p>
-        <div style="margin-top:56px;display:flex;gap:56px">
+        <div style="margin-top:40px;display:flex;gap:56px">
           <div style="flex:1;background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22);border-radius:30px;padding:46px 46px">
             <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.65">2024: the Synapse collapse</p>
             <p style="margin:26px 0 0;font-size:40px;font-weight:700;line-height:1.2">A fintech middleman kept the only ledger of who was owed what.</p>
@@ -62,37 +62,42 @@ export const CARDS = {
             <p style="margin:22px 0 0;font-size:30px;line-height:1.4;color:${MUTED}">The rules are in a contract anyone can read. Money in a vault can only ever go back to its owner, whatever Stabl's servers ask for.</p>
           </div>
         </div>
+        <div style="margin-top:40px;display:grid;grid-template-columns:260px 1fr 1fr;row-gap:14px;column-gap:40px;font-size:27px;line-height:1.3">
+          <span></span><span style="opacity:.6;font-weight:700">A savings account at a bank</span><span style="font-weight:700">Stabl's vault on Arc</span>
+          ${[
+            ["The rules", "Set by the bank's policy", "Written in code anyone can read"],
+            ["The record", "A ledger only the bank can see", "A public ledger anyone can check"],
+            ["The hours", "Transfers often wait for business days", "Settles around the clock"],
+          ]
+            .map(([k, bank, arc]) => `<span style="opacity:.6">${k}</span><span style="opacity:.75">${bank}</span><span>${arc}</span>`)
+            .join("")}
+        </div>
       </div>`,
       INK,
     ),
 
   "05b-how-it-settles": () => {
-    const steps = [
-      ["Stabl's engine", "decides a move from bank data (Plaid)"],
-      ["Circle wallets", "sign it; Gas Station pays the fee"],
-      ["StablVault on Arc", "enforces the rules: money only goes back to its owner"],
-      ["QuickNode Stream", "watches the contract, posts each event, signed"],
-      ["Stabl", "writes the ledger and sends the receipt, once"],
+    const flow = ["Engine decides", "Circle signs", "Arc settles", "QuickNode tells Stabl", "Receipt sent"];
+    const cols = [
+      ["Arc", ["Fees are paid in dollars (USDC), about a tenth of a cent, and stay steady", "Final in under a second, and can never be reversed", "Built for USDC, with Circle's on-ramp and earn tools next"]],
+      ["Circle", ["A wallet for every person, with no seed phrase to lose", "Gas Station pays every fee, so nobody needs crypto", "Stabl never holds a private key"]],
+      ["QuickNode Streams", ["Pushes each vault event the moment it lands", "Only Stabl's contract, and every delivery is signed", "Never skips a block: it retries until delivered"]],
     ];
     return page(
-      `<div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
-        <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">How a move settles</p>
-        <div style="margin-top:70px;display:flex;align-items:stretch;gap:0">
-          ${steps
+      `<div style="position:absolute;inset:0;padding:80px 120px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
+        <p style="margin:0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Why these three</p>
+        <div style="margin-top:34px;display:flex;align-items:center;gap:14px;font-size:26px">
+          ${flow.map((f, i) => `<span style="padding:12px 22px;border-radius:999px;background:rgb(241 238 227/.12)">${f}</span>${i < flow.length - 1 ? '<span style="opacity:.55">›</span>' : ""}`).join("")}
+        </div>
+        <div style="margin-top:44px;display:flex;gap:30px">
+          ${cols
             .map(
-              ([t, d], i) => `
-            <div style="flex:1;background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22);border-radius:26px;padding:34px 28px">
-              <div style="font-size:24px;opacity:.6" class="mono">${i + 1}</div>
-              <div style="margin-top:14px;font-size:36px;font-weight:700;line-height:1.1">${t}</div>
-              <div style="margin-top:16px;font-size:25px;line-height:1.35;opacity:.82">${d}</div>
-            </div>${i < steps.length - 1 ? `<div style="width:46px;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:.6">›</div>` : ""}`,
+              ([t, items]) => `<div style="flex:1;background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22);border-radius:26px;padding:34px 34px">
+              <p style="margin:0;font-size:40px;font-weight:700">${t}</p>
+              ${items.map((x) => `<p style="margin:22px 0 0;font-size:28px;line-height:1.35;opacity:.88">${x}</p>`).join("")}
+            </div>`,
             )
             .join("")}
-        </div>
-        <div style="margin-top:70px;display:flex;gap:60px;font-size:30px;line-height:1.4">
-          <div style="flex:1"><b>Settled only when Arc says so.</b><br><span style="opacity:.78">A move stays "on its way" until the contract's own event arrives.</span></div>
-          <div style="flex:1"><b>Exactly once.</b><br><span style="opacity:.78">Each event is stored under its transaction and log index. A repeat changes nothing.</span></div>
-          <div style="flex:1"><b>A fallback, not a crutch.</b><br><span style="opacity:.78">If the Stream is late, Stabl reads the receipt from Arc. Each move records which one confirmed it.</span></div>
         </div>
       </div>`,
       GREEN,

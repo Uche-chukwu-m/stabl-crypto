@@ -46,6 +46,29 @@ The person using Stabl sees none of this. They see dollars, their bank, and a sm
 
 **What the contract does not do yet.** In this prototype each person's wallet is a Circle developer-controlled wallet, so Stabl signs for it on their behalf. The contract limits where money can go, but it does not yet give a person an exit that works if Stabl disappears. That needs the person to hold their own key: Circle user-controlled wallets with a passkey, or a recovery address only they control. It is the next thing on the list. See [Custody](#what-is-real-and-what-is-simulated).
 
+## Why these choices
+
+**Why a contract vault, not a savings account at a bank.** A bank account's rules are the bank's policy, its ledger is private, and transfers often wait for business days. Stabl's vault rules are code anyone can read, the record is a public ledger anyone can check, and it settles around the clock. Holding USDC also means the vault can later earn yield or move across chains without a new banking partner.
+
+**Why Arc, not another chain.**
+- **Fees in dollars.** Arc's gas token is USDC, the same asset the vault holds. Fees are smoothed to stay steady, about a tenth of a cent for a transfer ([Arc stable fee design](https://docs.arc.io/arc/concepts/stable-fee-design.md)). A consumer app that only speaks dollars never has to buy or explain a second token.
+- **Final in under a second, and never reversed.** Arc's BFT consensus gives deterministic finality: no confirmation windows and no reorganizations ([Arc deterministic finality](https://docs.arc.io/arc/concepts/deterministic-finality.md)). That is why Stabl can settle a move on a single event, and why its Stream needs no reorg handling.
+- **Built for USDC.** Circle's wallets, Gas Station, CCTP and App Kits (on-ramp, earn) work on Arc first. The simulated dollar to USDC step has a real path to replace it.
+
+**Why Circle wallets, not MetaMask or our own keys.** Every person gets a wallet without a seed phrase or an install. Gas Station sponsors every fee, so nobody needs crypto. Stabl's servers never hold a private key: Circle signs, and every request carries an idempotency key so a retry cannot double-spend.
+
+**Why QuickNode Streams, not polling or websockets.**
+- **Push, not poll.** Polling Arc every few seconds for every person wastes calls and still lags. A Stream posts each event the moment its block is processed.
+- **Fits a serverless app.** Stabl runs on Vercel, which cannot hold a websocket open. A Stream delivers to a plain webhook.
+- **Nothing missed.** A Stream processes blocks in order and does not move on until the webhook accepts a delivery; it retries otherwise. Stabl stores each event once, so a retry never counts twice.
+- **Only what matters, signed.** The filter runs on QuickNode's side and passes only the vault's logs; each delivery carries an HMAC signature.
+- **The chain is the source of truth.** Circle reports what it signed; the Stream reports what the contract actually did. Stabl settles on the contract's event.
+
+**The trade-offs.**
+- **Custody.** The wallets are Circle developer-controlled, so Stabl signs for them today. Next: user-controlled wallets with a passkey.
+- **Privacy.** A public ledger shows vault balances. No names or bank details go on chain, only wallet addresses, but balances are visible. Arc's opt-in privacy is on its roadmap and not yet available ([Arc opt-in privacy](https://docs.arc.io/arc/concepts/opt-in-privacy.md)).
+- **Cost of the Stream.** Streams bill for every block processed, and Arc is fast, so it is switched off when idle; the fallback that reads Arc directly covers the gap.
+
 ## How it works
 
 ```mermaid
