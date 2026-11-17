@@ -10,6 +10,13 @@
 
 Stabl starts with freelancers who earn enough over a year but get paid at unpredictable times. Their bills arrive on fixed dates; their income does not. A good month gets spent, and a slow month means overdrafts and payday loans.
 
+Uneven income is common, and well documented:
+
+- A typical family's income changes by about **36% from one month to the next** ([JPMorgan Chase Institute, *Weathering Volatility 2.0*](https://www.jpmorganchase.com/institute/all-topics/financial-health-wealth-creation/report-weathering-volatility-2-a-monthly-stress-test-to-guide-saving)).
+- Households in the U.S. Financial Diaries spent **about five months a year** with income more than 25% above or below their average ([Financial Health Network, U.S. Financial Diaries](https://finhealthnetwork.org/u-s-financial-diaries/)).
+- **85% of freelancers** say they are paid late at least some of the time ([Remote](https://remote.com/blog/contractor-management/reversing-late-payment-culture)).
+- As Jonathan Morduch, co-author of *The Financial Diaries*, put it, families "want to have the right money at the right time" ([Dawn](https://www.dawn.com/news/1327369)).
+
 Stabl spreads money a person already earns across time. It cannot help someone whose income stays below their spending, and it tells them so instead of moving anything.
 
 Stabl connects to a person's bank, learns their income pattern and their bills, and then does two things:
@@ -23,7 +30,9 @@ Every move gets a plain message. There is nothing to configure and nothing to re
 
 A product that moves your money on its own has one question to answer: what stops it from moving your money somewhere else?
 
-For most apps the answer is "trust us." Here much of the answer is a contract anyone can read. The vault holds each person's money as USDC, and the contract enforces these rules whatever Stabl's servers ask for:
+For most apps the answer is "trust us," and that has failed before. In 2024 the fintech middleman Synapse collapsed. It kept the ledger of who was owed what; when it failed, customers could not prove their balances, and the bankruptcy trustee found a gap of tens of millions of dollars between what customers were owed and what partner banks held ([NBC News](https://www.nbcnews.com/business/business-news/synapse-bankruptcy-trustee-says-85-million-customer-savings-missing-fi-rcna156108), [American Banker](https://www.americanbanker.com/news/cfpb-to-hold-synapse-responsible-for-missing-customer-funds)). With Stabl, every vault balance sits on a public ledger anyone can check.
+
+Here much of the answer is a contract anyone can read. The vault holds each person's money as USDC, and the contract enforces these rules whatever Stabl's servers ask for:
 
 1. **Closed loop.** Every way out of a vault pays that vault's owner. No function sends an owner's money to any other address.
 2. **A limited operator.** Stabl can add money to a vault and send it back to its owner. It cannot redirect, borrow or sweep anything.

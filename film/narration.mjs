@@ -18,25 +18,27 @@ export const RATE = Number(process.env.FILM_RATE ?? 168);
 
 export const LINES = {
   "00-problem":
-    "Freelancers can earn enough over a year and still come up short, because clients pay whenever they pay. Rent is due on the first either way. Stabl smooths that out. It sets money aside in good weeks, and gives it back in slow ones.",
+    "Uneven income is normal. The JPMorgan Chase Institute found a typical family's income changes by about a third from one month to the next. And in a 2025 survey by Remote, eighty five percent of freelancers said they're paid late at least some of the time. As researcher Jonathan Morduch puts it, people want the right money at the right time.",
   "01-meet-jemaya":
-    "This is Jemaya, a freelance designer. Stabl reads her bank through Plaid, and learns her income and her bills. Her pay swings. Her spending stays steady.",
+    "Stabl handles that timing for you. This is Jemaya, a freelance designer. Stabl reads her bank through Plaid and learns her income and her bills. In good weeks it sets money aside. In slow weeks it gives it back.",
   "02-big-client-pays":
-    "A big client pays. Stabl sees six hundred and fifty dollars more than she needs for the next three weeks, and tells her a day before anything moves. She can reply, stop.",
+    "A big client pays. Stabl sees six hundred and fifty dollars more than she needs for the next three weeks, and tells her a day before anything moves.",
   "03-set-aside":
-    "The next day, the money moves into her vault. Jemaya only ever sees dollars. Under the hood, that vault is a smart contract on Arc, Circle's blockchain for dollars.",
+    "The next day, it moves into her vault. She only ever sees dollars. Underneath, the vault is a smart contract on Arc, Circle's blockchain for dollars.",
   "04-proof":
-    "Every receipt carries a proof link. This is that deposit on Arc. Test U S D C, credited to a wallet Circle made for her. Circle's Gas Station paid the fee, so she never needs crypto of her own.",
-  "05-how-it-settles":
-    "Here is how a move settles. The engine decides. Circle signs. The vault contract on Arc enforces the rules: money can only ever go back to its owner. A QuickNode Stream watches the contract and posts each event to Stabl. Only then does Stabl write the ledger and send the receipt. If an event arrives twice, nothing happens twice.",
+    "Every receipt links to its proof on Arc. Circle made her a wallet and paid the fee, so she never touches crypto.",
+  "05a-why-a-blockchain":
+    "Why a blockchain? In 2024, the fintech middleman Synapse collapsed. It kept the ledger of who was owed what, and when it failed, customers couldn't prove their balances. Tens of millions of dollars went unaccounted for. Stabl's vault balances live on a public ledger anyone can check, and the contract only ever pays money back to its owner.",
+  "05b-how-it-settles":
+    "Every move settles the same way. Circle signs, the contract enforces the rules, and a QuickNode Stream tells Stabl the moment it lands. Only then does Stabl send the receipt, and a repeated event never counts twice.",
   "06-check-it":
-    "In settings, Jemaya can check it herself. What Stabl shows matches what the contract holds, read live from Arc. And each move was confirmed by the QuickNode Stream.",
+    "In Settings, Jemaya can check Stabl against the contract herself, read live from Arc. Each move here was confirmed by the QuickNode Stream.",
   "07-slow-week":
-    "Then work dries up, and the car needs a repair. Stabl sends money back right away. That release is on Arc too.",
+    "Then work dries up, and the car needs a repair. Stabl sends money back right away.",
   "08-emergency":
-    "If something urgent comes up, she can unlock her vault the same day, with a one time code. That transaction comes from her own vault wallet, not from Stabl's operator.",
+    "In an emergency, she can unlock her vault the same day with a one time code, sent from her own vault wallet.",
   "09-honest":
-    "To be clear about this prototype. The bank side, and the conversion between dollars and U S D C, are simulated. And Stabl still manages the wallet keys. Next, those keys move to the user's phone. The vault moves are real transactions on Arc's test network. We also ran two hundred simulated freelancers through the same engine. Stabl never caused an overdraft. And when people spend some of what they can see, it cut overdraft days by up to forty four percent.",
+    "To be clear: the bank side and the dollar to U S D C conversion are simulated, and Stabl still manages the wallet keys. Moving them to the user's phone is next. The vault moves are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
   "10-closing": "Stabl. Steady pay for uneven income.",
 };
 

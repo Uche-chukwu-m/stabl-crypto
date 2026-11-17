@@ -97,11 +97,12 @@ function withTimeout(promise, ms, what) {
 
 const SEQUENCE = [
   { key: "00-problem", card: true },
-  { key: "01-meet-jemaya", title: "Meet Jemaya", note: "A freelance designer. Stabl reads her bank through Plaid and learns her income and her bills." },
+  { key: "01-meet-jemaya", title: "Meet Jemaya", note: "A freelance designer. Stabl sets money aside in good weeks and gives it back in slow ones." },
   { key: "02-big-client-pays", title: "A big client pays", note: "Stabl tells her a day before anything moves. She can reply STOP." },
   { key: "03-set-aside", title: "Set aside", note: "She sees dollars. Underneath, the vault is a contract on Arc." },
   { key: "04-proof", card: true },
-  { key: "05-how-it-settles", card: true },
+  { key: "05a-why-a-blockchain", card: true },
+  { key: "05b-how-it-settles", card: true },
   { key: "06-check-it", title: "Check it yourself", note: "The app's balance against the contract's, read live from Arc." },
   { key: "07-slow-week", title: "A slow week", note: "Money goes back to checking right away." },
   { key: "08-emergency", title: "Emergency unlock", note: "The same day, with a one time code. Sent from her own vault wallet." },

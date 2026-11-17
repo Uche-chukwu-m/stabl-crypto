@@ -24,16 +24,49 @@ const page = (body, bg = CREAM) => `<!doctype html><html><head>${FONTS}<style>
 export const CARDS = {
   "00-problem": () =>
     page(`
-    <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 170px">
-      <div style="display:flex;align-items:center;gap:18px">${LOGO(64, GREEN, CREAM)}<span style="font-family:Lora;font-style:italic;font-size:54px;color:${GREEN}">Stabl</span></div>
-      <p style="margin:70px 0 0;font-size:76px;font-weight:700;letter-spacing:-0.025em;line-height:1.08;max-width:1300px">Enough income over a year.<br>Paid at random times.</p>
-      <div style="margin-top:80px;display:flex;gap:28px;align-items:flex-end;height:220px">
-        ${[40, 190, 25, 0, 150, 210, 30, 0, 0, 120, 60, 170].map((h, i) => `<div style="width:64px;height:${Math.max(6, h)}px;border-radius:10px;background:${h ? GREEN : "#C9C3B1"}"></div>`).join("")}
-        <div style="margin-left:40px;font-size:34px;color:${MUTED};line-height:1.35">Client payments, week by week.<br><b style="color:${INK}">Rent is due on the 1st either way.</b></div>
+    <div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center">
+      <div style="display:flex;align-items:center;gap:16px">${LOGO(52, GREEN, CREAM)}<span style="font-family:Lora;font-style:italic;font-size:44px;color:${GREEN}">Stabl</span></div>
+      <p style="margin:56px 0 0;font-size:68px;font-weight:700;letter-spacing:-0.025em;line-height:1.08">Uneven income is normal.</p>
+      <div style="margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
+        ${[
+          ["36%", "how much a typical family's income changes from one month to the next", "JPMorgan Chase Institute, Weathering Volatility 2.0"],
+          ["5 months", "a year with income more than 25% above or below average", "U.S. Financial Diaries"],
+          ["85%", "of freelancers are paid late at least some of the time", "Remote, 2025"],
+        ]
+          .map(
+            ([big, what, src]) => `<div>
+          <p style="margin:0;font-size:96px;font-weight:700;letter-spacing:-0.04em;line-height:1;color:${GREEN}">${big}</p>
+          <p style="margin:18px 0 0;font-size:31px;line-height:1.35">${what}</p>
+          <p style="margin:16px 0 0;font-size:21px;color:${MUTED}">${src}</p></div>`,
+          )
+          .join("")}
       </div>
+      <p style="margin:76px 0 0;font-family:Lora;font-style:italic;font-size:40px;line-height:1.35;max-width:1500px">“They want to have the right money at the right time.”</p>
+      <p style="margin:12px 0 0;font-size:24px;color:${MUTED}">Jonathan Morduch, NYU, co-author of The Financial Diaries</p>
     </div>`),
 
-  "05-how-it-settles": () => {
+  "05a-why-a-blockchain": () =>
+    page(
+      `<div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
+        <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Why a blockchain</p>
+        <div style="margin-top:56px;display:flex;gap:56px">
+          <div style="flex:1;background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22);border-radius:30px;padding:46px 46px">
+            <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.65">2024: the Synapse collapse</p>
+            <p style="margin:26px 0 0;font-size:40px;font-weight:700;line-height:1.2">A fintech middleman kept the only ledger of who was owed what.</p>
+            <p style="margin:22px 0 0;font-size:30px;line-height:1.4;opacity:.85">When it failed, customers could not prove their balances. The bankruptcy trustee found a gap of $65 to $96 million between what customers were owed and what the banks held.</p>
+            <p style="margin:26px 0 0;font-size:20px;opacity:.6">NBC News, American Banker, court filings</p>
+          </div>
+          <div style="flex:1;background:${CREAM};color:${INK};border-radius:30px;padding:46px 46px">
+            <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:${MUTED}">Stabl's vault</p>
+            <p style="margin:26px 0 0;font-size:40px;font-weight:700;line-height:1.2">Every balance sits on a public ledger anyone can check.</p>
+            <p style="margin:22px 0 0;font-size:30px;line-height:1.4;color:${MUTED}">The rules are in a contract anyone can read. Money in a vault can only ever go back to its owner, whatever Stabl's servers ask for.</p>
+          </div>
+        </div>
+      </div>`,
+      INK,
+    ),
+
+  "05b-how-it-settles": () => {
     const steps = [
       ["Stabl's engine", "decides a move from bank data (Plaid)"],
       ["Circle wallets", "sign it; Gas Station pays the fee"],
@@ -42,7 +75,7 @@ export const CARDS = {
       ["Stabl", "writes the ledger and sends the receipt, once"],
     ];
     return page(
-      `<div style="position:absolute;inset:0;padding:96px 140px;color:${CREAM}">
+      `<div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
         <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">How a move settles</p>
         <div style="margin-top:70px;display:flex;align-items:stretch;gap:0">
           ${steps
@@ -83,24 +116,20 @@ export const CARDS = {
 
   "09-honest": () =>
     page(`
-    <div style="position:absolute;inset:0;display:flex;gap:90px;padding:110px 140px">
+    <div style="position:absolute;inset:0;display:flex;gap:90px;padding:120px 140px">
       <div style="flex:1">
-        <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">What is real</p>
-        <ul style="margin:36px 0 0;padding:0;list-style:none;font-size:36px;line-height:1.35">
-          <li style="margin-bottom:26px"><b>Vault contract and every move</b><br><span style="color:${MUTED}">Real transactions on Arc Testnet</span></li>
-          <li style="margin-bottom:26px"><b>Wallets and sponsored fees</b><br><span style="color:${MUTED}">Circle developer-controlled wallets, Gas Station</span></li>
-          <li style="margin-bottom:26px"><b>Event delivery</b><br><span style="color:${MUTED}">QuickNode Streams</span></li>
-        </ul>
-        <p style="margin:56px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">What is simulated</p>
-        <p style="margin:24px 0 0;font-size:34px;line-height:1.4">Bank transfers, and the dollars to USDC conversion.<br>Today Stabl manages the wallet keys. <b>Next: keys on the user's phone.</b></p>
+        <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Real, on Arc Testnet</p>
+        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees. QuickNode Stream delivery.</p>
+        <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
+        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
+        <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
+        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">Today Stabl manages the wallet keys. <b>Next, they move to the user's phone.</b></p>
       </div>
-      <div style="width:700px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px">
+      <div style="width:640px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px;display:flex;flex-direction:column;justify-content:center">
         <p style="margin:0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75">Simulation: 200 freelancers</p>
-        <p style="margin:34px 0 0;font-size:120px;font-weight:700;letter-spacing:-0.04em;line-height:1">0</p>
-        <p style="margin:10px 0 0;font-size:32px;line-height:1.35">overdrafts caused by Stabl, with spending held fixed</p>
-        <p style="margin:46px 0 0;font-size:120px;font-weight:700;letter-spacing:-0.04em;line-height:1">44%</p>
-        <p style="margin:10px 0 0;font-size:32px;line-height:1.35">fewer overdraft days, when people spend 30% of the spare money they can see</p>
-        <p style="margin:40px 0 0;font-size:22px;opacity:.7">Synthetic histories, run through the app's own engine. docs/simulation.md</p>
+        <p style="margin:36px 0 0;font-size:150px;font-weight:700;letter-spacing:-0.04em;line-height:1">0</p>
+        <p style="margin:16px 0 0;font-size:36px;line-height:1.35">overdrafts caused by Stabl</p>
+        <p style="margin:40px 0 0;font-size:24px;line-height:1.4;opacity:.75">Six months each through the app's own engine, with and without Stabl. docs/simulation.md</p>
       </div>
     </div>`),
 
