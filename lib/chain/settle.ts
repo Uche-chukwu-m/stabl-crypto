@@ -20,7 +20,7 @@ import { sendToBankSide, submitMove, walletFor } from "@/lib/vault/arc";
 // Whichever arrives first settles the move. The other is a harmless duplicate,
 // because chain_events has one row per (transaction, log).
 
-export type EventSource = "stream" | "reconcile";
+export type EventSource = "stream" | "backfill" | "reconcile";
 export type Applied = "settled" | "recorded" | "duplicate" | "mismatch";
 
 const DIRECTION = { Deposited: "buffer", Released: "release", EmergencyUnlocked: "emergency" } as const;

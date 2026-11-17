@@ -1,4 +1,4 @@
-// npm run chain:stream -- <create | status | pause | resume | delete>
+// npm run chain:stream -- <create | status | pause | resume | delete | backfill | backfill-status | backfill-delete>
 // Manages the QuickNode Stream that watches the vault contract on Arc Testnet
 // and posts its events to this app's webhook.
 //
@@ -10,6 +10,7 @@
 // and create it again before a demo: a new stream starts at the newest block.
 // Nothing is lost in between, because the app's fallback reads Arc directly.
 import "./env";
+import { readFileSync } from "node:fs";
 import { chain } from "@/lib/chain/config";
 import { streamFilter } from "@/lib/chain/stream";
 import { env } from "@/lib/env";
@@ -39,7 +40,7 @@ type Stream = { id: string; name: string; status: string; network: string; datas
 
 async function find(): Promise<Stream | null> {
   const res = (await call("GET", `/streams?external_id=${EXTERNAL_ID}`)) as { data?: Stream[] } | null;
-  return res?.data?.find((s) => (s as { external_id?: string }).external_id === EXTERNAL_ID) ?? res?.data?.[0] ?? null;
+  return res?.data?.find((s) => (s as { external_id?: string }).external_id === EXTERNAL_ID) ?? null;
 }
 
 function show(s: Stream) {
@@ -54,8 +55,74 @@ function show(s: Stream) {
 }
 
 const command = process.argv[2] ?? "status";
+const BACKFILL_ID = "stabl-vault-backfill";
 
-if (command === "create") {
+// The backfill: a second Stream with a fixed block range, from the block the
+// vault was deployed in up to now. It replays every vault event once and then
+// stops, delivering to /api/chain/backfill.
+async function backfill() {
+  const vault = chain.vaultAddress;
+  const token = process.env.QUICKNODE_STREAM_TOKEN;
+  const base = process.env.STREAM_WEBHOOK_BASE || env.appUrl;
+  if (!vault || !token || !base.startsWith("https://")) throw new Error("Needs ARC_VAULT_ADDRESS, QUICKNODE_STREAM_TOKEN and a public https STREAM_WEBHOOK_BASE.");
+  const deployment = JSON.parse(readFileSync("contracts/deployments/arc-testnet.json", "utf8")) as { blockNumber: number };
+  const rpc = await fetch(chain.rpcUrl, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_blockNumber", params: [] }) });
+  const tip = parseInt(((await rpc.json()) as { result: string }).result, 16);
+
+  for (const old of await backfills()) await call("DELETE", `/streams/${old.id}`);
+
+  const created = (await call("POST", "/streams", {
+    name: "Stabl vault backfill (Arc Testnet)",
+    external_id: BACKFILL_ID,
+    network: "arc-testnet",
+    dataset: "logs",
+    filter_function: Buffer.from(streamFilter(vault)).toString("base64"),
+    region: "usa_east",
+    start_range: deployment.blockNumber,
+    end_range: tip,
+    dataset_batch_size: Number(process.env.STREAM_BATCH_SIZE ?? 1),
+    elastic_batch_enabled: true,
+    fix_block_reorgs: 0,
+    keep_distance_from_tip: 0,
+    destination: "webhook",
+    destination_attributes: {
+      url: `${base}/api/chain/backfill`,
+      compression: "none",
+      max_retry: 5,
+      retry_interval_sec: 2,
+      post_timeout_sec: 30,
+      security_token: token,
+    },
+    status: "active",
+  })) as Stream;
+  console.log(`Backfill created: blocks ${deployment.blockNumber} to ${tip} (${(tip - deployment.blockNumber + 1).toLocaleString("en-US")} blocks).`);
+  show(created);
+}
+
+// Only streams tagged as the backfill, never the live one.
+async function backfills(): Promise<Stream[]> {
+  const res = (await call("GET", `/streams?external_id=${BACKFILL_ID}`)) as { data?: Stream[] } | null;
+  return (res?.data ?? []).filter((s) => (s as { external_id?: string }).external_id === BACKFILL_ID);
+}
+
+async function backfillStatus() {
+  const s = (await backfills())[0];
+  if (!s) return console.log("No backfill. Run: npm run chain:stream -- backfill");
+  show(s);
+  const at = Number(s.sequence ?? 0);
+  const from = Number(s.start_range ?? 0);
+  const to = Number(s.end_range ?? 0);
+  if (to > from) console.log(`  progress ${Math.min(100, Math.round(((at - from) / (to - from)) * 100))}%`);
+}
+
+if (command === "backfill") {
+  await backfill();
+} else if (command === "backfill-status") {
+  await backfillStatus();
+} else if (command === "backfill-delete") {
+  for (const old of await backfills()) await call("DELETE", `/streams/${old.id}`);
+  console.log("Backfill deleted.");
+} else if (command === "create") {
   const vault = chain.vaultAddress;
   if (!vault) throw new Error("Set ARC_VAULT_ADDRESS first.");
   const token = process.env.QUICKNODE_STREAM_TOKEN;

@@ -116,6 +116,14 @@ The Stream is what turns a transaction into a receipt.
 
 Streams bill for every block they process, and Arc makes a block about every 0.7 seconds. The script can delete and recreate the stream, so it only runs when the app is in use.
 
+**Backfill.** A second Stream replays the vault's whole history: the same network, dataset and filter, with a fixed range from the block the contract was deployed in (72518444) up to the moment it is created. It delivers to [app/api/chain/backfill/route.ts](app/api/chain/backfill/route.ts), which runs every event through the same exactly-once path as the live Stream. So the replay:
+
+- records any event Stabl missed, for example while the app was down or the live Stream was switched off,
+- settles any move still waiting on its event,
+- and changes nothing already recorded: every event it has seen before comes back as a duplicate.
+
+Afterwards `npx tsx scripts/live-check.ts` compares each vault's balance in the app with the contract's, and counts events by the source that first recorded them (`stream`, `backfill` or `reconcile`). Run it with `npm run chain:stream -- backfill`, and watch it with `npm run chain:stream -- backfill-status`.
+
 ## Does it help?
 
 A simulation, not a study: [docs/simulation.md](docs/simulation.md). 200 synthetic freelancers, none of them the app's presenter personas, run for six months through the real engine, each one with Stabl and without it on the identical bank feed.
@@ -208,7 +216,8 @@ npm run chain:stream -- create # needs a public https address for the webhook
 | `(cd contracts && npm test)` | 22 contract tests, two of them fuzz tests |
 | `npm run chain:status` | Operator balance, allowance and what the vault holds |
 | `npm run chain:check` | Smoke test of wallets, sponsorship, the contract and event decoding |
-| `npm run chain:stream -- create \| status \| delete` | Manage the QuickNode Stream |
+| `npm run chain:stream -- create \| status \| delete` | Manage the live QuickNode Stream |
+| `npm run chain:stream -- backfill \| backfill-status \| backfill-delete` | Replay the vault's whole history through a backfill Stream |
 | `npm run seed:demo jemaya` | Create the presenter account locally |
 | `npx tsx scripts/try-pitch.ts` | Run the presenter's whole story on Arc locally and check the app against the contract at each step |
 | `npx tsx scripts/presenter.ts seed \| big-client \| advance \| slow-week \| reset \| link` | Drive the presenter account on the live site |

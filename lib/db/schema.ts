@@ -264,7 +264,7 @@ export const moves = pgTable(
     submittedAt: stamp("submitted_at"),
     txHash: text("tx_hash"),
     chainBlock: bigint("chain_block", { mode: "number" }),
-    confirmedBy: text("confirmed_by", { enum: ["stream", "reconcile"] }),
+    confirmedBy: text("confirmed_by", { enum: ["stream", "backfill", "reconcile"] }),
     // Details the receipt needs once the move settles.
     metaJson: jsonb("meta_json").$type<{ shortByCents?: number }>(),
     // What follows a settled move, one step at a time, so a step that fails is
@@ -353,7 +353,9 @@ export const chainEvents = pgTable(
     balanceUnits: text("balance_units"),
     userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
     moveId: uuid("move_id").references(() => moves.id, { onDelete: "set null" }),
-    source: text("source", { enum: ["stream", "reconcile"] }).notNull(),
+    // stream: the live QuickNode Stream. backfill: a QuickNode Stream replaying
+    // history. reconcile: the fallback that reads Arc directly.
+    source: text("source", { enum: ["stream", "backfill", "reconcile"] }).notNull(),
     createdAt: createdAt(),
   },
   (t) => [unique("chain_events_tx_log_unique").on(t.txHash, t.logIndex), index("chain_events_user").on(t.userId, t.createdAt)],
