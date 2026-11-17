@@ -64,6 +64,14 @@ The person using Stabl sees none of this. They see dollars, their bank, and a sm
 - **Only what matters, signed.** The filter runs on QuickNode's side and passes only the vault's logs; each delivery carries an HMAC signature.
 - **The chain is the source of truth.** Circle reports what it signed; the Stream reports what the contract actually did. Stabl settles on the contract's event.
 
+**How a release reaches the bank in minutes.** Arc settles a vault move in under a second, but getting dollars into a checking account depends on the bank: seconds over FedNow or RTP if the bank supports them, about 30 minutes pushed to a debit card, the same day by wire, or one to three business days by ACH. Circle Mint redemptions typically settle the next business day ([Circle Mint docs](https://developers.circle.com/circle-mint/concepts/how-minting-works)). So in production, Stabl would not make a person wait on that:
+
+1. The contract releases the USDC. It is final in under a second, on any day.
+2. At the same moment, Stabl sends the dollars from a small cash reserve at a partner bank over FedNow, RTP or a push to the person's debit card.
+3. Stabl redeems the released USDC to refill the reserve. That can take a business day without the person noticing.
+
+Arc is what makes paying first safe. By the time Stabl sends the dollars, the matching USDC has already left the vault for good: it cannot bounce or be reversed, so the reserve can stay small. Set-asides do not need this, because they are announced a day ahead and can travel by ordinary ACH. And because the engine sees bills coming, it can release a day or two early whenever an instant rail is not available. None of this is built yet; the bank side is simulated in this version.
+
 **The trade-offs.**
 - **Custody.** The wallets are Circle developer-controlled, so Stabl signs for them today. Next: user-controlled wallets with a passkey.
 - **Privacy.** A public ledger shows vault balances. No names or bank details go on chain, only wallet addresses, but balances are visible. Arc's opt-in privacy is on its roadmap and not yet available ([Arc opt-in privacy](https://docs.arc.io/arc/concepts/opt-in-privacy.md)).
