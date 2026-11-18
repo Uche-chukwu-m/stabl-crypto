@@ -4,7 +4,7 @@ import { hashCode, safeEqual, sixDigitCode } from "@/lib/crypto";
 import { db } from "@/lib/db";
 import { codes } from "@/lib/db/schema";
 
-type Purpose = "emergency" | "unfreeze" | "demo_login";
+type Purpose = "emergency" | "unfreeze" | "demo_login" | "passkey";
 
 // One time codes: 6 digits, stored as a keyed hash, short lived, 5 tries.
 export async function issueCode(

@@ -227,6 +227,8 @@ export async function vaultView(userId: string) {
     // Arc only: sent, and waiting for the vault contract to confirm.
     onTheWay: onTheWay.map((p) => ({ id: p.id, amountCents: p.amountCents, direction: p.direction })),
     onArc: chain.enabled,
+    // Who can sign for the vault's owner wallet: Stabl, or a passkey on the person's device.
+    walletKind: chain.enabled ? ((await db.select({ kind: chainWallets.kind }).from(chainWallets).where(eq(chainWallets.userId, userId)))[0]?.kind ?? "circle") : null,
     emergency: {
       left: Math.max(0, SAFETY.emergencyPerWindow - used),
       codeWaiting: Boolean(code),
@@ -428,7 +430,7 @@ export async function vaultProofView(userId: string) {
   return {
     network: ARC.name,
     contract: { address: chain.vaultAddress, url: addressUrl(chain.vaultAddress) },
-    wallet: wallet ? { address: wallet.address, url: addressUrl(wallet.address) } : null,
+    wallet: wallet ? { address: wallet.address, url: addressUrl(wallet.address), kind: wallet.kind } : null,
     shownCents,
     onChain: onChain ? { usdc: formatUsdc(onChain.units), cents: unitsToCents(onChain.units), frozen: onChain.frozen } : null,
     matches: onChain ? unitsToCents(onChain.units) === shownCents : null,

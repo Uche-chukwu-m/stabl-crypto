@@ -137,7 +137,7 @@ suite("server side against Postgres", () => {
       const code = msg.body.match(/code is (\d{6})/)![1];
       const wrong = await m.security.confirmEmergency(jemaya, "000000" === code ? "111111" : "000000", 150_00);
       expect(wrong).toEqual({ ok: false, reason: "code" });
-      expect(await m.security.confirmEmergency(jemaya, code, 150_00)).toEqual({ ok: true });
+      expect(await m.security.confirmEmergency(jemaya, code, 150_00)).toMatchObject({ ok: true });
     }
     expect(await m.vault.getBalance(ctx.vault!.id)).toBe(start - 300_00);
 

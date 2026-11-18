@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { route } from "@/lib/api";
+import { chain } from "@/lib/chain/config";
+import { unfreezeSignRequest } from "@/lib/chain/passkey";
 import { rateLimit } from "@/lib/rate-limit";
 import { confirmUnfreeze, freeze, requestUnfreeze } from "@/lib/security";
 import { apiUser, HttpError } from "@/lib/session";
@@ -17,6 +19,11 @@ export const POST = route(async (request) => {
   const body = Body.parse(await request.json());
   if (body.action === "freeze") await freeze(user.id);
   else if (body.action === "unfreeze_request") await requestUnfreeze(user.id, "app");
-  else if (!(await confirmUnfreeze(user.id, body.code))) throw new HttpError(409, "That code did not match or has expired.");
+  else {
+    // A passkey vault: check the code here, then the browser signs the unfreeze.
+    const sign = chain.enabled ? await unfreezeSignRequest(user.id, body.code) : null;
+    if (sign) return { ok: true, sign };
+    if (!(await confirmUnfreeze(user.id, body.code))) throw new HttpError(409, "That code did not match or has expired.");
+  }
   return { ok: true };
 });

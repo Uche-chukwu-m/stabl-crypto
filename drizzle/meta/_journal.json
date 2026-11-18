@@ -29,6 +29,13 @@
       "when": 1794830337786,
       "tag": "0003_move_follow_ups",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795035322537,
+      "tag": "0004_passkey_wallets",
+      "breakpoints": true
     }
   ]
 }

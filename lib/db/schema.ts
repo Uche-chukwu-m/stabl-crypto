@@ -323,13 +323,21 @@ export const vaultBalances = pgView("vault_balances", {
   balanceCents: integer("balance_cents").notNull(),
 }).existing();
 
-// Arc build: each person's hidden wallet. A Circle smart contract account that
-// owns their vault on chain. They never see it.
+// Arc build: the wallet that owns each person's vault on chain.
+//   circle   a Circle developer-controlled smart account. Stabl signs for it.
+//   passkey  a Circle modular smart account whose only signer is a passkey on
+//            the person's device. Stabl cannot sign for it at all.
 export const chainWallets = pgTable("chain_wallets", {
   userId: uuid("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" }),
-  circleWalletId: text("circle_wallet_id").notNull().unique(),
+  kind: text("kind", { enum: ["circle", "passkey"] }).notNull().default("circle"),
+  // Set for circle wallets only.
+  circleWalletId: text("circle_wallet_id").unique(),
+  // The Stabl-managed wallet a passkey wallet replaced, kept for the record.
+  previousAddress: text("previous_address"),
+  previousCircleWalletId: text("previous_circle_wallet_id"),
+  passkeyAt: stamp("passkey_at"),
   // Lower case, so lookups by event owner are exact.
   address: text("address").notNull().unique(),
   blockchain: text("blockchain").notNull(),
@@ -368,7 +376,7 @@ export const chainOps = pgTable(
   {
     id: uuid("id").primaryKey().defaultRandom(),
     userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
-    kind: text("kind", { enum: ["opening", "freeze", "unfreeze", "offramp", "close"] }).notNull(),
+    kind: text("kind", { enum: ["opening", "freeze", "unfreeze", "offramp", "close", "passkey_out", "passkey_return", "passkey_in"] }).notNull(),
     // For offramp: the move whose release is being sent back.
     moveId: uuid("move_id").references(() => moves.id, { onDelete: "cascade" }),
     units: text("units"),
@@ -434,7 +442,7 @@ export const codes = pgTable("codes", {
   userId: uuid("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  purpose: text("purpose", { enum: ["emergency", "unfreeze", "demo_login"] }).notNull(),
+  purpose: text("purpose", { enum: ["emergency", "unfreeze", "demo_login", "passkey"] }).notNull(),
   codeHash: text("code_hash").notNull(),
   // Where the code was sent, so it never goes back to the channel that asked.
   sentTo: jsonb("sent_to").$type<string[]>().notNull().default([]),

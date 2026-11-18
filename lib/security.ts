@@ -10,7 +10,9 @@ import { accounts, channels, moves, users } from "@/lib/db/schema";
 import { notify, type Channel } from "@/lib/notify";
 import { releaseNow } from "@/lib/moves";
 import { namesMatch } from "@/lib/names";
+import { chain } from "@/lib/chain/config";
 import { vault } from "@/lib/vault";
+import { walletFor } from "@/lib/vault/arc";
 
 export type Via = "app" | "telegram";
 
@@ -72,6 +74,12 @@ export async function requestUnfreeze(userId: string, via: Via) {
 }
 
 export async function confirmUnfreeze(userId: string, code: string): Promise<boolean> {
+  // A passkey vault can only be unfrozen from the person's own device. From
+  // Telegram, point them to the app; the code stays valid for it.
+  if (chain.enabled && (await walletFor(userId)).kind === "passkey") {
+    await notify(userId, "unfreeze_needs_passkey", {});
+    return true;
+  }
   const check = await checkCode(userId, "unfreeze", code);
   if (!check.ok) return false;
   const ctx = await loadContext(userId);
@@ -120,7 +128,7 @@ export async function confirmEmergency(
   userId: string,
   code: string,
   amountCents: number,
-): Promise<{ ok: true } | { ok: false; reason: "code" | "not_yet" | "amount" | "frozen" }> {
+): Promise<{ ok: true; moveId: string } | { ok: false; reason: "code" | "not_yet" | "amount" | "frozen" }> {
   const ctx = await loadContext(userId);
   if (!ctx.vault || !ctx.homeBase) return { ok: false, reason: "amount" };
   if (ctx.vault.status === "frozen") return { ok: false, reason: "frozen" };
@@ -128,8 +136,8 @@ export async function confirmEmergency(
   if (!Number.isInteger(amountCents) || amountCents <= 0 || amountCents > balance) return { ok: false, reason: "amount" };
   const check = await checkCode(userId, "emergency", code);
   if (!check.ok) return { ok: false, reason: check.reason === "not_yet" ? "not_yet" : "code" };
-  await releaseNow(ctx, amountCents, "emergency", "emergency_unlock");
-  return { ok: true };
+  const move = await releaseNow(ctx, amountCents, "emergency", "emergency_unlock");
+  return { ok: true, moveId: move.id };
 }
 
 export async function emergenciesUsed(userId: string, today: string): Promise<number> {

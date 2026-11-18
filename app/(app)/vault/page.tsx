@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FeedList } from "@/components/FeedList";
 import { Monogram } from "@/components/Monogram";
+import { PasskeyCard } from "@/components/PasskeyCard";
 import { StopButton, VaultSheets } from "@/components/VaultActions";
 import { VaultHero } from "@/components/VaultHero";
 import { formatCents, formatDay } from "@/lib/format";
@@ -49,6 +50,12 @@ export default async function VaultPage({ searchParams }: { searchParams: Promis
           </span>
         </div>
       ))}
+
+      {v.walletKind === "circle" && !user.isDemo && (
+        <div className="rise rise-2">
+          <PasskeyCard username={user.email} />
+        </div>
+      )}
 
       <div className="rise rise-2">
         <VaultSheets

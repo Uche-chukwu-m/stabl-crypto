@@ -1,5 +1,8 @@
 import { z } from "zod";
 import { route } from "@/lib/api";
+import { chain } from "@/lib/chain/config";
+import { emergencySignRequest } from "@/lib/chain/passkey";
+import { walletFor } from "@/lib/vault/arc";
 import { rateLimit } from "@/lib/rate-limit";
 import { confirmEmergency, startEmergency } from "@/lib/security";
 import { apiUser, HttpError } from "@/lib/session";
@@ -25,5 +28,9 @@ export const POST = route(async (request) => {
   if (body.action === "start") return { result: await startEmergency(user.id, "app") };
   const result = await confirmEmergency(user.id, body.code, body.amountCents);
   if (!result.ok) throw new HttpError(409, REASONS[result.reason]);
+  // A passkey vault: the unlock waits for the person's own signature.
+  if (chain.enabled && (await walletFor(user.id)).kind === "passkey") {
+    return { ok: true, moveId: result.moveId, sign: await emergencySignRequest(user.id, result.moveId) };
+  }
   return result;
 });

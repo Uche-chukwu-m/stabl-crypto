@@ -2,7 +2,7 @@ import { and, eq, lt, sql } from "drizzle-orm";
 import { audit } from "@/lib/audit";
 import { decodeVaultLogs, readVault, vaultEventsInTx, type RawLog, type VaultEvent } from "@/lib/chain/arc";
 import { execute, txStatus, waitForTx } from "@/lib/chain/circle";
-import { ARC, centsToUnits, chain, moveRef, refToMoveId, type Address } from "@/lib/chain/config";
+import { ARC, centsToUnits, chain, moveRef, refToMoveId, type Address, type Hex } from "@/lib/chain/config";
 import { db } from "@/lib/db";
 import { chainEvents, chainOps, chainWallets, ledgerEntries, moves, vaultAccounts, vaultBalances } from "@/lib/db/schema";
 import { afterMoveSettled, unfinishedFollowUps } from "@/lib/move-receipts";
@@ -144,7 +144,19 @@ type PendingMove = typeof moves.$inferSelect;
 // landed, read the contract's events from the receipt.
 export async function reconcileMove(move: PendingMove, waitMs: number): Promise<void> {
   let chainTxId = move.chainTxId;
+  if (!chainTxId && move.txHash) {
+    // Signed in the person's browser with their passkey: no Circle request to
+    // ask about, so read the transaction straight from Arc.
+    await applyTx(move.txHash as Hex);
+    return;
+  }
   if (!chainTxId) {
+    if ((await walletFor(move.userId)).kind === "passkey") {
+      // Waiting on the person's passkey. Give up if they never approve it.
+      const waiting = Date.now() - (move.submittedAt?.getTime() ?? Date.now());
+      if (waiting > 15 * 60_000) await failMove(move, "not approved with the passkey");
+      return;
+    }
     // The request to Circle never finished. The idempotency key is the move's
     // id, so sending again cannot create a second transaction.
     chainTxId = await submitMove(move);
@@ -165,6 +177,18 @@ export async function reconcileMove(move: PendingMove, waitMs: number): Promise<
   }
   for (const ev of events) await applyVaultEvent(ev, "reconcile");
   if (!events.some((ev) => ev.ref === moveRef(move.id))) await failMove(move, "no vault event in the transaction");
+}
+
+// Apply every vault event in one transaction, read from Arc.
+export async function applyTx(txHash: Hex): Promise<VaultEvent[]> {
+  let events: VaultEvent[] = [];
+  try {
+    events = await vaultEventsInTx(txHash);
+  } catch {
+    return []; // Not visible on Arc's node yet. A later pass picks it up.
+  }
+  for (const ev of events) await applyVaultEvent(ev, "reconcile");
+  return events;
 }
 
 async function failMove(move: PendingMove, why: string) {
@@ -274,6 +298,7 @@ export async function carryBalanceOntoArc(userId: string): Promise<{ txHash: str
   const [v] = await db.select().from(vaultAccounts).where(eq(vaultAccounts.userId, userId));
   if (!v) return null;
   const owner = await walletFor(userId);
+  if (owner.kind === "passkey") throw new Error("A passkey vault is moved by its owner, not carried over by Stabl.");
   const [bal] = await db.select().from(vaultBalances).where(eq(vaultBalances.vaultId, v.id));
   const want = centsToUnits(bal?.balanceCents ?? 0);
   const onChain = await readVault(owner.address);

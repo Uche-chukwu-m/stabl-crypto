@@ -42,6 +42,22 @@ export function StopButton({ moveId, className = "btn btn-quiet px-4" }: { moveI
 
 type Emergency = { left: number; codeWaiting: boolean; opensAt: string | null; lockedUntil: string | null };
 
+type SignRequest = { to: `0x${string}`; data: `0x${string}`; label: string };
+
+// A passkey vault: the server checked the code and says what to sign. The
+// person approves it with their passkey, and Stabl reads the result from Arc.
+async function approveIfAsked(res: { sign?: SignRequest; moveId?: string }, opts: { unfreeze?: boolean } = {}) {
+  if (!res.sign) return;
+  const pk = await import("@/lib/passkey-client");
+  let txHash: string;
+  try {
+    txHash = await pk.approveWithPasskey(res.sign);
+  } catch (e) {
+    throw new Error(pk.passkeyErrorMessage(e));
+  }
+  await post("/api/vault/signed", { txHash, moveId: res.moveId, unfreeze: opts.unfreeze });
+}
+
 // Step 1 sends a code to a second channel. Step 2 takes the code and an amount;
 // the money is in checking the same day.
 function EmergencyPanel({ balanceCents, emergency, frozen, timezone, onDone }: { balanceCents: number; emergency: Emergency; frozen: boolean; timezone: string; onDone: () => void }) {
@@ -75,7 +91,7 @@ function EmergencyPanel({ balanceCents, emergency, frozen, timezone, onDone }: {
           onSubmit={(e) => {
             e.preventDefault();
             void run(
-              () => post("/api/vault/emergency", { action: "confirm", code, amountCents: cents }),
+              async () => approveIfAsked(await post<{ sign?: SignRequest; moveId?: string }>("/api/vault/emergency", { action: "confirm", code, amountCents: cents })),
               () => {
                 toast(`${formatCents(cents)} sent to checking`);
                 onDone();
@@ -148,7 +164,7 @@ function FreezePanel({ frozen, onDone }: { frozen: boolean; onDone: () => void }
               onSubmit={(e) => {
                 e.preventDefault();
                 void run(
-                  () => post("/api/vault/freeze", { action: "unfreeze_confirm", code }),
+                  async () => approveIfAsked(await post<{ sign?: SignRequest }>("/api/vault/freeze", { action: "unfreeze_confirm", code }), { unfreeze: true }),
                   () => {
                     toast("Unfrozen");
                     onDone();

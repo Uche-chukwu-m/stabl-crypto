@@ -1,5 +1,5 @@
 import { and, eq, inArray, ne, sql } from "drizzle-orm";
-import { execute, ensureWallet, waitForTx, type ChainWallet } from "@/lib/chain/circle";
+import { execute, ensureWallet, waitForTx } from "@/lib/chain/circle";
 import { ARC, centsToUnits, chain, moveRef, type Address } from "@/lib/chain/config";
 import { db } from "@/lib/db";
 import { chainOps, chainWallets, ledgerEntries, moves, users, vaultAccounts } from "@/lib/db/schema";
@@ -33,8 +33,10 @@ export class ArcVaultProvider extends MockVaultProvider {
     return this.send(vaultId, cents, moveId, "release");
   }
 
-  // Freezing takes effect in the app at once and on Arc a moment later. The
-  // owner's own wallet sends it, so it is the owner's freeze on chain too.
+  // Freezing takes effect in the app at once and on Arc a moment later. With a
+  // Stabl-managed wallet the owner's wallet sends it. With a passkey wallet
+  // Stabl cannot sign for the owner, so the operator freezes on their behalf,
+  // which the contract allows because stopping is always safe.
   async freeze(vaultId: string): Promise<void> {
     await super.freeze(vaultId);
     const [v] = await db.select().from(vaultAccounts).where(eq(vaultAccounts.id, vaultId));
@@ -43,9 +45,12 @@ export class ArcVaultProvider extends MockVaultProvider {
       const wallet = await walletFor(v.userId);
       const [op] = await db.insert(chainOps).values({ userId: v.userId, kind: "freeze" }).returning();
       const id = await execute({
-        walletId: wallet.id,
+        walletId: wallet.kind === "passkey" ? requireOperatorWalletId() : wallet.id,
         contractAddress: requireVaultAddress(),
-        call: { abiFunctionSignature: "freeze()", abiParameters: [] },
+        call:
+          wallet.kind === "passkey"
+            ? { abiFunctionSignature: "freezeFor(address)", abiParameters: [wallet.address] }
+            : { abiFunctionSignature: "freeze()", abiParameters: [] },
         key: ["op", op.id],
         refId: "freeze",
       });
@@ -59,10 +64,13 @@ export class ArcVaultProvider extends MockVaultProvider {
 
   // Unfreezing waits for Arc, so the next move cannot be refused by a vault that
   // is still frozen on chain.
+  //
+  // A passkey wallet has already unfrozen itself on Arc, signed in the person's
+  // browser (lib/chain/passkey.ts), so only the app side is left to do.
   async unfreeze(vaultId: string): Promise<void> {
     const [v] = await db.select().from(vaultAccounts).where(eq(vaultAccounts.id, vaultId));
-    if (v) {
-      const wallet = await walletFor(v.userId);
+    const wallet = v ? await walletFor(v.userId) : null;
+    if (v && wallet?.kind === "circle") {
       const [op] = await db.insert(chainOps).values({ userId: v.userId, kind: "unfreeze" }).returning();
       const id = await execute({
         walletId: wallet.id,
@@ -132,6 +140,9 @@ export class ArcVaultProvider extends MockVaultProvider {
     });
 
     if (claimed.previous === null) return claimed.move;
+    // An emergency unlock from a passkey wallet is signed in the person's
+    // browser, not here. The move waits, settling, for that signature.
+    if (claimed.move.direction === "emergency" && (await walletFor(claimed.move.userId)).kind === "passkey") return claimed.move;
     try {
       const chainTxId = await submitMove(claimed.move);
       const [sent] = await db.update(moves).set({ chainTxId }).where(eq(moves.id, moveId)).returning();
@@ -144,17 +155,28 @@ export class ArcVaultProvider extends MockVaultProvider {
   }
 }
 
+function requireOperatorWalletId(): string {
+  const id = chain.operatorWalletId;
+  if (!id) throw new Error("STABL_OPERATOR_WALLET_ID is not set");
+  return id;
+}
+
 function requireVaultAddress(): Address {
   const address = chain.vaultAddress;
   if (!address) throw new Error("ARC_VAULT_ADDRESS is not set");
   return address;
 }
 
-// The person's hidden wallet, created the first time it is needed. A demo
-// persona keeps one wallet across reseeds, so its USDC is not left behind.
-export async function walletFor(userId: string): Promise<ChainWallet> {
+export type OwnerWallet = { kind: "circle"; id: string; address: Address } | { kind: "passkey"; id: null; address: Address };
+
+// The wallet that owns a person's vault on chain. A Stabl-managed one is
+// created the first time it is needed; a person can later replace it with a
+// passkey wallet only they can sign for. A demo persona keeps one wallet across
+// reseeds, so its USDC is not left behind.
+export async function walletFor(userId: string): Promise<OwnerWallet> {
   const [row] = await db.select().from(chainWallets).where(eq(chainWallets.userId, userId));
-  if (row) return { id: row.circleWalletId, address: row.address as Address };
+  if (row?.kind === "passkey") return { kind: "passkey", id: null, address: row.address as Address };
+  if (row?.circleWalletId) return { kind: "circle", id: row.circleWalletId, address: row.address as Address };
   const [user] = await db.select().from(users).where(eq(users.id, userId));
   if (!user) throw new Error("No such user");
   // The presenter's wallet is named per environment, so a local test run and the
@@ -169,7 +191,7 @@ export async function walletFor(userId: string): Promise<ChainWallet> {
     .insert(chainWallets)
     .values({ userId, circleWalletId: wallet.id, address, blockchain: ARC.blockchain })
     .onConflictDoNothing();
-  return { id: wallet.id, address: address as Address };
+  return { kind: "circle", id: wallet.id, address: address as Address };
 }
 
 // Send the transaction for a move. The idempotency key is the move's id, so
@@ -202,7 +224,9 @@ export async function submitMove(move: { id: string; userId: string; direction: 
       refId: `release ${move.id}`,
     });
   }
-  // Emergency unlock is the owner's own exit: their wallet sends it, not the operator.
+  // Emergency unlock is the owner's own exit: their wallet sends it, not the
+  // operator. A passkey wallet signs it in the person's browser instead.
+  if (owner.kind === "passkey") throw new Error("An emergency unlock from a passkey wallet is signed by its owner");
   return execute({
     walletId: owner.id,
     contractAddress: vaultAddress,
@@ -223,6 +247,9 @@ export async function sendToBankSide(move: { id: string; userId: string; amountC
     .where(and(eq(chainOps.moveId, move.id), eq(chainOps.kind, "offramp"), inArray(chainOps.state, ["sent", "landed"])));
   if (already) return;
   const owner = await walletFor(move.userId);
+  // A passkey wallet's USDC is the person's to move; Stabl cannot sign for it,
+  // so the released money simply stays in their own wallet.
+  if (owner.kind === "passkey") return;
   const units = centsToUnits(move.amountCents).toString();
   const [op] = await db.insert(chainOps).values({ userId: move.userId, kind: "offramp", moveId: move.id, units }).returning();
   try {

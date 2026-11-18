@@ -225,6 +225,16 @@ export const templates = {
     body: `Stabl: Your vault ending in ${d.mask} is open. Every move will show up here first, and nothing happens without a message.`,
   }),
 
+  unfreeze_needs_passkey: (): Rendered => ({
+    body: "Stabl: Your vault is protected by your passkey, so unfreezing happens in the app. Open Stabl, enter your code, and approve with your passkey.",
+    urgent: true,
+  }),
+
+  passkey_linked: (): Rendered => ({
+    body: "Stabl: Your vault now belongs to a key on your device. Only you can unfreeze it or unlock money from it, by approving with your passkey.",
+    email: { subject: "Your vault key is on your device" },
+  }),
+
   first_check: (): Rendered => ({
     body: "Stabl: First check done. Your income and bills look steady right now, so nothing needs to move today. We check again every week.",
   }),

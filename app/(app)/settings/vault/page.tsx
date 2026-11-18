@@ -40,7 +40,7 @@ const PROMISES = [
   "Your vault is held by a contract on Arc, a network built for dollars. The contract is public, and anyone can read it.",
   "The contract can only ever pay your vault's own key. Stabl can set money aside and send it back to you, and the contract refuses to send it anywhere else.",
   "Freezing stops every move at once. While it is frozen, the contract moves nothing in or out.",
-  "In this early version Stabl looks after your vault key for you, so you never handle one. Next, the key moves to your phone, so only you can freeze or unlock.",
+  "With a passkey, your vault's key lives on your device. Then only you can unfreeze it or unlock money from it, and Stabl can only ever send money back to you.",
 ];
 
 // The only page that says this build runs on a test network. Everything else in
@@ -97,9 +97,14 @@ export default async function VaultProofPage() {
           <Out href={v.contract.url}>{short(v.contract.address)}</Out>
         </Row>
         {v.wallet && (
-          <Row label="Your vault key">
-            <Out href={v.wallet.url}>{short(v.wallet.address)}</Out>
-          </Row>
+          <>
+            <Row label="Your vault wallet">
+              <Out href={v.wallet.url}>{short(v.wallet.address)}</Out>
+            </Row>
+            <Row label="Who holds its key">
+              {v.wallet.kind === "passkey" ? <span className="pill bg-accent/12 text-accent">You, with your passkey</span> : <span className="text-caption text-muted">Stabl, for now</span>}
+            </Row>
+          </>
         )}
       </Group>
 
