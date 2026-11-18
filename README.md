@@ -170,7 +170,7 @@ A vault can belong to a **Circle modular smart account whose only signer is a pa
 For a passkey-signed move, the server hands the browser the transaction, the browser sends it with Circle's paymaster covering the fee, and the server reads the result from Arc before applying it ([app/api/vault/signed/route.ts](app/api/vault/signed/route.ts)). It never trusts the browser's report alone. From Telegram, UNFREEZE points the person to the app.
 
 **How it was tested**
-- Linking with a real passkey, on the live site.
+- With a real passkey on the live site: linking, then a freeze sent by Stabl's operator on the owner's behalf ([Frozen](https://explorer.testnet.arc.io/tx/0xc6980ce504d3be6f241920201b3ab952ccfbebc196951af832d96e3a2263476d)), then an unfreeze signed by the passkey and sent through Circle's bundler with the paymaster covering the fee ([Unfrozen](https://explorer.testnet.arc.io/tx/0x655acbbd3abdf12e3375619904d5bbb1927da85b9c8285ba75f8714bee6afe98), a user operation through the ERC-4337 EntryPoint).
 - Moving a funded vault, an owner-signed emergency unlock, and freeze and unfreeze, all on Arc, with an ordinary key standing in for the passkey: [scripts/try-passkey-server.ts](scripts/try-passkey-server.ts) and [scripts/try-passkey-freeze.ts](scripts/try-passkey-freeze.ts). In those runs a $2,550.75 vault moved to its new owner in about 11 seconds, Stabl's own attempt to unfreeze left the contract frozen, and the owner's signed unlock settled in under 3 seconds with the app and contract in agreement.
 
 **Not done yet:** passkey recovery, so a person who loses their device can restore access ([Circle's guide](https://developers.circle.com/wallets/modular/set-up-passkey-recovery.md)).
