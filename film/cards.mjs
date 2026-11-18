@@ -124,11 +124,11 @@ export const CARDS = {
     <div style="position:absolute;inset:0;display:flex;gap:90px;padding:100px 140px">
       <div style="flex:1">
         <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Real, on Arc Testnet</p>
-        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees. QuickNode Stream delivery.</p>
+        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees, and passkey wallets only you can sign for. QuickNode Stream delivery.</p>
         <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
         <p style="margin:26px 0 0;font-size:38px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
         <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
-        <p style="margin:26px 0 0;font-size:34px;line-height:1.4">Keys move from Stabl to the user's phone.</p>
+        <p style="margin:26px 0 0;font-size:34px;line-height:1.4">Passkeys at sign-up, with recovery. Today it's one tap, after.</p>
         <p style="margin:14px 0 0;font-size:34px;line-height:1.4">Releases paid instantly over FedNow, RTP or debit card, with the vault settling behind them in under a second.</p>
       </div>
       <div style="width:640px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px;display:flex;flex-direction:column;justify-content:center">

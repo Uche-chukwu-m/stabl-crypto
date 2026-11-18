@@ -44,7 +44,7 @@ There is no admin key, no pause switch, no fee and no upgrade path. The contract
 
 The person using Stabl sees none of this. They see dollars, their bank, and a small **Proof** link on each receipt.
 
-**What the contract does not do yet.** In this prototype each person's wallet is a Circle developer-controlled wallet, so Stabl signs for it on their behalf. The contract limits where money can go, but it does not yet give a person an exit that works if Stabl disappears. That needs the person to hold their own key: Circle user-controlled wallets with a passkey, or a recovery address only they control. It is the next thing on the list. See [Custody](#what-is-real-and-what-is-simulated).
+**Who holds the key.** Every vault starts with a Circle developer-controlled wallet, so a new person can use Stabl without ever seeing a wallet. Stabl signs for that wallet, which means the contract limits where money can go, but on its own it is not an exit that works if Stabl disappears. So each person can move their vault to **a key on their own device**: a Circle modular wallet whose only signer is a passkey (Face ID or a fingerprint). After that, only they can unfreeze the vault or unlock money from it. See [Hold your own key](#hold-your-own-key-passkey-wallets).
 
 ## Why these choices
 
@@ -55,7 +55,7 @@ The person using Stabl sees none of this. They see dollars, their bank, and a sm
 - **Final in under a second, and never reversed.** Arc's BFT consensus gives deterministic finality: no confirmation windows and no reorganizations ([Arc deterministic finality](https://docs.arc.io/arc/concepts/deterministic-finality.md)). That is why Stabl can settle a move on a single event, and why its Stream needs no reorg handling.
 - **Built for USDC.** Circle's wallets, Gas Station, CCTP and App Kits (on-ramp, earn) work on Arc first. The simulated dollar to USDC step has a real path to replace it.
 
-**Why Circle wallets, not MetaMask or our own keys.** Every person gets a wallet without a seed phrase or an install. Gas Station sponsors every fee, so nobody needs crypto. Stabl's servers never hold a private key: Circle signs, and every request carries an idempotency key so a retry cannot double-spend.
+**Why Circle wallets, not MetaMask or our own keys.** Every person gets a wallet without a seed phrase or an install. Gas Station sponsors every fee, so nobody needs crypto. Stabl's servers never hold a private key: Circle signs, and every request carries an idempotency key so a retry cannot double-spend. And when a person wants to hold the key themselves, Circle's modular wallets put it in a passkey on their device, with Circle's paymaster still covering the fee.
 
 **Why QuickNode Streams, not polling or websockets.**
 - **Push, not poll.** Polling Arc every few seconds for every person wastes calls and still lags. A Stream posts each event the moment its block is processed.
@@ -73,7 +73,7 @@ The person using Stabl sees none of this. They see dollars, their bank, and a sm
 Arc is what makes paying first safe. By the time Stabl sends the dollars, the matching USDC has already left the vault for good: it cannot bounce or be reversed, so the reserve can stay small. Set-asides do not need this, because they are announced a day ahead and can travel by ordinary ACH. And because the engine sees bills coming, it can release a day or two early whenever an instant rail is not available. None of this is built yet; the bank side is simulated in this version.
 
 **The trade-offs.**
-- **Custody.** The wallets are Circle developer-controlled, so Stabl signs for them today. Next: user-controlled wallets with a passkey.
+- **Custody.** A vault starts with a Stabl-managed wallet, which Stabl signs for. A person can switch to a passkey wallet that only they can sign for; it is opt-in, and the presenter account keeps the Stabl-managed one. Passkey recovery, if a person loses their device, is not set up yet.
 - **Privacy.** A public ledger shows vault balances. No names or bank details go on chain, only wallet addresses, but balances are visible. Arc's opt-in privacy is on its roadmap and not yet available ([Arc opt-in privacy](https://docs.arc.io/arc/concepts/opt-in-privacy.md)).
 - **Cost of the Stream.** Streams bill for every block processed, and Arc is fast, so it is switched off when idle; the fallback that reads Arc directly covers the gap.
 
@@ -92,7 +92,7 @@ flowchart LR
 
 1. **Plaid** reads the person's accounts. Stabl never moves money at the bank in this build, so it is safe to check out the app.
 2. **The engine** ([engine/](engine/)) is pure functions. It learns income and bills, then decides when to set aside and when to give back.
-3. **Circle developer-controlled wallets** sign every transaction. Each person gets a hidden smart contract account that owns their vault on chain. Circle's Gas Station pays the fees, so that wallet never needs funding. Stabl holds no private keys.
+3. **Circle wallets** own each vault on chain. A new person gets a hidden developer-controlled smart account, and can switch to a passkey wallet that only their device can sign for. Circle's Gas Station and paymaster cover the fees either way, so no one needs crypto. Stabl's servers hold no private keys.
 4. **StablVault on Arc** holds the USDC and enforces the rules above.
 5. **A QuickNode Stream** watches the contract and posts each of its events to the app.
 6. **The app settles the move only then.** The ledger entry and the receipt are written when Arc says the money moved, not when the app asked for it.
@@ -148,6 +148,33 @@ These are real transactions from the live site.
 
 The QuickNode Stream confirmed all three moves to the app: each move records `confirmed_by = stream`. From the app sending each transaction to the webhook settling it took 2.1 seconds for the deposit, 4.7 for the release, and 8.7 for the emergency unlock, which includes the person entering their code. After each one the app's balance and the contract's matched.
 
+## Hold your own key: passkey wallets
+
+A vault can belong to a **Circle modular smart account whose only signer is a passkey** on the person's device ([lib/chain/passkey.ts](lib/chain/passkey.ts), [lib/passkey-client.ts](lib/passkey-client.ts)). Stabl cannot sign for it.
+
+**Moving a vault to a passkey**, from the Vault screen:
+1. The browser creates the passkey and the smart account it signs for.
+2. That account signs a one-time challenge from Stabl; Stabl verifies the signature on Arc (ERC-6492, so it works before the account is deployed).
+3. Stabl moves the balance on chain in three transactions: the operator releases it to the old wallet, the old wallet hands the USDC back, and the operator deposits it for the new owner. The app's ledger does not change, because it is the same person's money throughout.
+
+**What changes after that**
+
+| | Stabl-managed key | Passkey on your device |
+| --- | --- | --- |
+| Set-asides and releases | Automatic | Automatic: the contract lets Stabl's operator do these, but only ever back to you |
+| Freeze | Any channel, at once | Same: Stabl's operator freezes on your behalf, which the contract allows |
+| Unfreeze | Code | Code, then your passkey. Stabl cannot unfreeze on its own |
+| Emergency unlock | Code | Code, then your passkey signs it. Stabl never sends it |
+| Released money | Sent back to Stabl's operator, standing in for your bank | Stays in your own wallet |
+
+For a passkey-signed move, the server hands the browser the transaction, the browser sends it with Circle's paymaster covering the fee, and the server reads the result from Arc before applying it ([app/api/vault/signed/route.ts](app/api/vault/signed/route.ts)). It never trusts the browser's report alone. From Telegram, UNFREEZE points the person to the app.
+
+**How it was tested**
+- Linking with a real passkey, on the live site.
+- Moving a funded vault, an owner-signed emergency unlock, and freeze and unfreeze, all on Arc, with an ordinary key standing in for the passkey: [scripts/try-passkey-server.ts](scripts/try-passkey-server.ts) and [scripts/try-passkey-freeze.ts](scripts/try-passkey-freeze.ts). In those runs a $2,550.75 vault moved to its new owner in about 11 seconds, Stabl's own attempt to unfreeze left the contract frozen, and the owner's signed unlock settled in under 3 seconds with the app and contract in agreement.
+
+**Not done yet:** passkey recovery, so a person who loses their device can restore access ([Circle's guide](https://developers.circle.com/wallets/modular/set-up-passkey-recovery.md)).
+
 ## Try it
 
 Open https://stabl-crypto.vercel.app and sign in with any email address.
@@ -159,7 +186,8 @@ Open https://stabl-crypto.vercel.app and sign in with any email address.
 
 Things to try once you are in:
 
-- **Vault, then Freeze.** This sends a transaction from your hidden wallet to the contract. Unfreezing needs a code, which shows up in Messages.
+- **Vault, then "Hold your own vault key."** Create a passkey with Face ID or your fingerprint. Stabl moves your vault to a wallet only your device can sign for.
+- **Vault, then Freeze.** This sends a transaction to the contract. Unfreezing needs a code, which shows up in Messages, and, if you hold your own key, your passkey.
 - **Settings, then "Where your vault is held."** It compares what Stabl shows with what the contract says, read live from Arc, and lists your latest proofs.
 
 A set-aside is announced a day ahead, so a new account sees its first deposit on Arc the next day.
@@ -169,7 +197,7 @@ A set-aside is announced a day ahead, so a new account sees its first deposit on
 | | |
 | --- | --- |
 | Vault contract, its rules, and every transaction | Real, on Arc Testnet |
-| Hidden wallets and fee sponsorship | Real, Circle developer-controlled wallets and Gas Station |
+| Wallets and fee sponsorship | Real: Circle developer-controlled wallets with Gas Station, or a Circle modular wallet with a passkey and Circle's paymaster |
 | Event delivery | Real, QuickNode Streams |
 | Bank connection | Real Plaid, in Sandbox. See the note below |
 | Money leaving and reaching the bank | Simulated. Nothing moves at a bank |
@@ -182,7 +210,7 @@ Test USDC has no value. The app says so on one page, Settings then "Where your v
 
 **Plaid Sandbox.** In Sandbox every bank returns the same stock test user, in someone else's name and with no income pattern Stabl could learn from. So after Plaid's window closes, Stabl asks the Sandbox for a custom test user instead: your own name, under the bank you picked, with six months of history for the way you said you earn ([lib/plaid/test-history.ts](lib/plaid/test-history.ts)). With real accounts the connection is used exactly as Plaid returns it.
 
-**Custody.** This is a custodial prototype with contract-enforced vault rules. The hidden wallets are developer-controlled, which is what lets a person use Stabl without ever seeing a wallet, and it means Stabl asks Circle to sign for them. The contract guarantees that money leaving a vault only reaches that vault's owner wallet. After a release, the app sends the USDC from the owner wallet back to the operator, standing in for paying dollars into checking. The next step is user-controlled wallets, so that only the person can sign a freeze or an emergency unlock.
+**Custody.** A vault starts on a hidden developer-controlled wallet, which Stabl asks Circle to sign for; that is what lets a person start without seeing a wallet. The contract guarantees money leaving a vault only reaches that vault's owner wallet. With a Stabl-managed wallet, after a release the app sends the USDC from the owner wallet back to the operator, standing in for paying dollars into checking. A person who moves to a passkey wallet holds the key themselves; Stabl can no longer move their USDC, so released money stays in their own wallet.
 
 **Bank timing.** Arc finalizes a vault move in under a second. That says nothing about how fast a real bank transfer would be; the bank side here is simulated.
 

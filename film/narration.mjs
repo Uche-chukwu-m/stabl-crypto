@@ -38,7 +38,7 @@ export const LINES = {
   "08-emergency":
     "In an emergency, she can unlock her vault the same day with a one time code, sent from her own vault wallet.",
   "09-honest":
-    "To be clear: the bank side and the dollar to U S D C conversion are simulated, and Stabl still manages the wallet keys. Next, those keys move to the user's phone. And in production, Stabl pays you first over instant bank networks, and the vault settles behind it in under a second. The vault moves you saw are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
+    "To be clear: the bank side and the dollar to U S D C conversion are simulated. Every vault starts with a key Stabl manages, and one tap moves it to a passkey on your phone; then only you can unfreeze or unlock it. In production, Stabl pays you first over instant bank networks, and the vault settles behind it in under a second. The vault moves you saw are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
   "10-closing": "Stabl. Steady pay for uneven income.",
 };
 
