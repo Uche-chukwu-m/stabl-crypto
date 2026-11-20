@@ -278,4 +278,4 @@ scripts/chain-*.ts   Setup, deploy, status, stream and smoke test
 
 ## The presenter account
 
-One account, Jemaya Brooks, exists for the video and the stage. It runs on test banks, cannot be entered from the sign in page, and opens only from a one time link made on a page behind a key. Once signed in it looks like any other account. The presenter page can play the events a pitch needs on cue, such as a big client payment or a slow week, because a real account only moves when real income does.
+One account, Mike Rivera, exists for the video and the stage. It runs on test banks, cannot be entered from the sign in page, and opens only from a one time link made on a page behind a key. Once signed in it looks like any other account. The presenter page can play the events a pitch needs on cue, such as a big client payment or a slow week, because a real account only moves when real income does.
