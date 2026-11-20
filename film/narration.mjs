@@ -59,10 +59,13 @@ function cutTake(take, dir) {
   const total = durationOf(take);
   // Ignore silence at the very start and end of the take.
   const inner = pauses.filter((p) => p.at > 1 && p.at < total - 1);
-  if (inner.length < keys.length - 1) {
+  if (!process.env.FILM_VOICE_CUTS && inner.length < keys.length - 1) {
     throw new Error(`The take has ${inner.length} clear pauses but needs ${keys.length - 1}. Leave about two seconds between sections.`);
   }
-  const cuts = inner.sort((a, b) => b.length - a.length).slice(0, keys.length - 1).map((p) => p.at).sort((a, b) => a - b);
+  // FILM_VOICE_CUTS lists the cut points by hand, in seconds, when the pauses
+  // between sections are not the longest ones in the take.
+  const manual = process.env.FILM_VOICE_CUTS?.split(",").map(Number).filter((n) => Number.isFinite(n));
+  const cuts = manual?.length === keys.length - 1 ? manual : inner.sort((a, b) => b.length - a.length).slice(0, keys.length - 1).map((p) => p.at).sort((a, b) => a - b);
   const bounds = [0, ...cuts, total];
   mkdirSync(dir, { recursive: true });
   return keys.map((key, i) => {
@@ -89,7 +92,9 @@ export function speakAll(dir) {
       const trim = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1";
       execFileSync(ffmpeg, [
         "-hide_banner", "-loglevel", "error", "-y", "-i", recorded, "-vn",
-        "-af", `${trim},areverse,${trim},areverse,highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11`,
+        // Pauses inside a line longer than about a third of a second are
+        // shortened, and FILM_VOICE_TEMPO speeds speech up without changing pitch.
+        "-af", `${trim},areverse,${trim},areverse,silenceremove=stop_periods=-1:stop_duration=0.4:stop_threshold=-35dB:stop_silence=0.3,atempo=${Number(process.env.FILM_VOICE_TEMPO ?? 1)},highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11`,
         "-ac", "2", "-ar", "48000", "-c:a", "aac", "-b:a", "192k", file,
       ]);
     } else {
