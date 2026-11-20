@@ -45,36 +45,46 @@ export const CARDS = {
       <p style="margin:12px 0 0;font-size:24px;color:${MUTED}">Jonathan Morduch, NYU, co-author of The Financial Diaries</p>
     </div>`),
 
-  "05a-why-a-blockchain": () =>
-    page(
-      `<div style="position:absolute;inset:0;padding:96px 140px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
+  "05a-why-a-blockchain": () => {
+    const reasons = [
+      [
+        "Trust",
+        "A public ledger anyone can check",
+        "In 2024 the fintech middleman Synapse collapsed. It kept the only ledger of who was owed what; customers could not prove their balances, and a $65 to $96 million gap was found.",
+        "NBC News, American Banker",
+      ],
+      [
+        "Time",
+        "Settles 24/7, in under a second",
+        "Bank transfers (ACH) take 1 to 3 business days and stop on weekends and holidays. The vault settles any hour, any day, so money that lands on a Saturday can move on a Saturday.",
+        "Arc docs: deterministic finality",
+      ],
+      [
+        "Rules",
+        "Enforced at the ledger, not by policy",
+        "Today the contract guarantees money only goes back to its owner, freezes on request, and settles each move once. Next: split each payout automatically into a reserve earning yield in tokenized Treasuries (USYC on Arc).",
+        "StablVault.sol",
+      ],
+    ];
+    return page(
+      `<div style="position:absolute;inset:0;padding:80px 110px;display:flex;flex-direction:column;justify-content:center;color:${CREAM}">
         <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Why a blockchain</p>
-        <div style="margin-top:40px;display:flex;gap:56px">
-          <div style="flex:1;background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22);border-radius:30px;padding:46px 46px">
-            <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.65">2024: the Synapse collapse</p>
-            <p style="margin:26px 0 0;font-size:40px;font-weight:700;line-height:1.2">A fintech middleman kept the only ledger of who was owed what.</p>
-            <p style="margin:22px 0 0;font-size:30px;line-height:1.4;opacity:.85">When it failed, customers could not prove their balances. The bankruptcy trustee found a gap of $65 to $96 million between what customers were owed and what the banks held.</p>
-            <p style="margin:26px 0 0;font-size:20px;opacity:.6">NBC News, American Banker, court filings</p>
-          </div>
-          <div style="flex:1;background:${CREAM};color:${INK};border-radius:30px;padding:46px 46px">
-            <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:${MUTED}">Stabl's vault</p>
-            <p style="margin:26px 0 0;font-size:40px;font-weight:700;line-height:1.2">Every balance sits on a public ledger anyone can check.</p>
-            <p style="margin:22px 0 0;font-size:30px;line-height:1.4;color:${MUTED}">The rules are in a contract anyone can read. Money in a vault can only ever go back to its owner, whatever Stabl's servers ask for.</p>
-          </div>
-        </div>
-        <div style="margin-top:40px;display:grid;grid-template-columns:260px 1fr 1fr;row-gap:14px;column-gap:40px;font-size:27px;line-height:1.3">
-          <span></span><span style="opacity:.6;font-weight:700">A savings account at a bank</span><span style="font-weight:700">Stabl's vault on Arc</span>
-          ${[
-            ["The rules", "Set by the bank's policy", "Written in code anyone can read"],
-            ["The record", "A ledger only the bank can see", "A public ledger anyone can check"],
-            ["The hours", "Transfers often wait for business days", "Settles around the clock"],
-          ]
-            .map(([k, bank, arc]) => `<span style="opacity:.6">${k}</span><span style="opacity:.75">${bank}</span><span>${arc}</span>`)
+        <div style="margin-top:40px;display:flex;gap:32px">
+          ${reasons
+            .map(
+              ([tag, head, body, src], i) => `<div style="flex:1;border-radius:28px;padding:40px 38px;${i === 0 ? "background:rgb(241 238 227/.08);border:2px solid rgb(241 238 227/.22)" : `background:${CREAM};color:${INK}`}">
+              <p style="margin:0;font-size:24px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.65">${tag}</p>
+              <p style="margin:20px 0 0;font-size:38px;font-weight:700;line-height:1.15">${head}</p>
+              <p style="margin:20px 0 0;font-size:26px;line-height:1.4;opacity:.85">${body}</p>
+              <p style="margin:20px 0 0;font-size:18px;opacity:.55">${src}</p>
+            </div>`,
+            )
             .join("")}
         </div>
       </div>`,
       INK,
-    ),
+    );
+  },
 
   "05b-how-it-settles": () => {
     const flow = ["Engine decides", "Circle signs", "Arc settles", "QuickNode tells Stabl", "Receipt sent"];
@@ -124,14 +134,13 @@ export const CARDS = {
     <div style="position:absolute;inset:0;display:flex;gap:90px;padding:100px 140px">
       <div style="flex:1">
         <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Real, on Arc Testnet</p>
-        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees, and passkey wallets only you can sign for. QuickNode Stream delivery.</p>
-        <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
-        <p style="margin:26px 0 0;font-size:38px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
-        <p style="margin:60px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
-        <p style="margin:26px 0 0;font-size:34px;line-height:1.4">Passkeys at sign-up, with recovery. Today it's one tap, after.</p>
-        <p style="margin:14px 0 0;font-size:34px;line-height:1.4">Releases paid instantly over FedNow, RTP or debit card, with the vault settling behind them in under a second.</p>
+        <p style="margin:24px 0 0;font-size:34px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees, and passkey wallets only you can sign for. QuickNode Stream delivery.</p>
+        <p style="margin:52px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
+        <p style="margin:24px 0 0;font-size:34px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
+        <p style="margin:52px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
+        <p style="margin:24px 0 0;font-size:32px;line-height:1.4">Each payout split automatically into a yield-earning reserve. Instant payouts over FedNow and RTP. Passkeys at sign-up, with recovery.</p>
       </div>
-      <div style="width:640px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px;display:flex;flex-direction:column;justify-content:center">
+      <div style="width:600px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px;display:flex;flex-direction:column;justify-content:center">
         <p style="margin:0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75">Simulation: 200 freelancers</p>
         <p style="margin:36px 0 0;font-size:150px;font-weight:700;letter-spacing:-0.04em;line-height:1">0</p>
         <p style="margin:16px 0 0;font-size:36px;line-height:1.35">overdrafts caused by Stabl</p>

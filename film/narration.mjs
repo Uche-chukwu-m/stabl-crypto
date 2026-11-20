@@ -7,7 +7,7 @@
 // Content sounds far more natural than the built in ones. FILM_RATE sets words a
 // minute. To use a recorded voice instead, put one file per beat in
 // FILM_VOICE_DIR named <beat key>.m4a (or .wav, .aiff) and it is used as is.
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import ffmpeg from "ffmpeg-static";
@@ -18,9 +18,9 @@ export const RATE = Number(process.env.FILM_RATE ?? 168);
 
 export const LINES = {
   "00-problem":
-    "Uneven income is normal. The JPMorgan Chase Institute found a typical family's income changes by about a third from one month to the next. And in a 2025 survey by Remote, eighty five percent of freelancers said they're paid late at least some of the time. As researcher Jonathan Morduch puts it, people want the right money at the right time.",
+    "Uneven income is normal. The JPMorgan Chase Institute found a typical family's income changes by about a third from one month to the next. And in a 2025 survey by Remote, eighty-five percent of freelancers said they're paid late at least some of the time. As researcher Jonathan Morduch puts it, people want the right money at the right time.",
   "01-meet-jemaya":
-    "Stabl handles that timing for you. This is Jemaya, a freelance designer. Stabl reads her bank through Plaid and learns her income and her bills. In good weeks it sets money aside. In slow weeks it gives it back.",
+    "Stabl handles that timing for you. Meet a freelance designer. Stabl reads her bank through Plaid and learns her income and her bills. In good weeks it sets money aside. In slow weeks it gives it back.",
   "02-big-client-pays":
     "A big client pays. Stabl sees six hundred and fifty dollars more than she needs for the next three weeks, and tells her a day before anything moves.",
   "03-set-aside":
@@ -28,24 +28,58 @@ export const LINES = {
   "04-proof":
     "Every receipt links to its proof on Arc. Circle made her a wallet and paid the fee, so she never touches crypto.",
   "05a-why-a-blockchain":
-    "Why a blockchain? In 2024, the fintech middleman Synapse collapsed. It kept the ledger of who was owed what, and when it failed, customers couldn't prove their balances. Tens of millions of dollars went unaccounted for. Stabl's vault balances live on a public ledger anyone can check, the rules are in code, and it runs around the clock.",
+    "Why a blockchain? Three reasons. Trust: in 2024 the fintech middleman Synapse collapsed, and customers couldn't prove what they were owed. Stabl's balances sit on a public ledger anyone can check. Time: the vault settles in under a second, any day, even on the weekends when bank transfers stop. And rules: the contract enforces Stabl's rules at the ledger itself, and next it can split each payout into a reserve that earns yield in tokenized Treasuries.",
   "05b-how-it-settles":
-    "And why these three? Arc runs on dollars: fees are paid in U S D C, about a tenth of a cent, and every move is final in under a second. Circle gives each person a wallet they never see, and pays the fees. QuickNode pushes every vault event to Stabl the moment it lands, so nothing is missed, and nothing counts twice.",
+    "And why these three? Arc, because fees are paid in dollars, about a tenth of a cent. Circle, for wallets with no seed phrase. QuickNode, to push each vault event to Stabl the moment it lands.",
   "06-check-it":
-    "In Settings, Jemaya can check Stabl against the contract herself, read live from Arc. Each move here was confirmed by the QuickNode Stream.",
+    "In Settings, she can check Stabl against the contract herself, read live from Arc, and see each move confirmed by the QuickNode Stream.",
   "07-slow-week":
     "Then work dries up, and the car needs a repair. Stabl sends money back right away.",
   "08-emergency":
-    "In an emergency, she can unlock her vault the same day with a one time code, sent from her own vault wallet.",
+    "In an emergency, she can unlock her vault the same day with a one-time code. And with a passkey on her phone, only she can.",
   "09-honest":
-    "To be clear: the bank side and the dollar to U S D C conversion are simulated. Every vault starts with a key Stabl manages, and one tap moves it to a passkey on your phone; then only you can unfreeze or unlock it. In production, Stabl pays you first over instant bank networks, and the vault settles behind it in under a second. The vault moves you saw are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
-  "10-closing": "Stabl. Steady pay for uneven income.",
+    "To be clear: the bank side and the conversion to U S D C are simulated. The vault moves you saw are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
+  "10-closing":
+    "Stabl. Steady pay for uneven income.",
 };
 
 // Make the audio for every beat, and return each one's file and length.
+// One continuous take (FILM_VOICE_TAKE=<file>): the whole script read straight
+// through, with a pause of about two seconds between sections. The take is cut
+// at its longest pauses, one fewer than there are sections, into one clip per
+// beat, in order. Each clip is then trimmed and leveled like any recorded clip.
+function cutTake(take, dir) {
+  const keys = Object.keys(LINES);
+  // ffmpeg prints silence detection to stderr; spawnSync keeps both streams.
+  const probe = spawnSync(ffmpeg, ["-hide_banner", "-i", take, "-af", "silencedetect=noise=-38dB:d=0.9", "-f", "null", "-"], { encoding: "utf8" });
+  const text = `${probe.stdout ?? ""}${probe.stderr ?? ""}`;
+  const starts = [...text.matchAll(/silence_start: ([\d.]+)/g)].map((m) => Number(m[1]));
+  const ends = [...text.matchAll(/silence_end: ([\d.]+) \| silence_duration: ([\d.]+)/g)].map((m) => ({ end: Number(m[1]), length: Number(m[2]) }));
+  const pauses = ends.map((e, i) => ({ at: (starts[i] ?? e.end - e.length) + e.length / 2, length: e.length }));
+  const total = durationOf(take);
+  // Ignore silence at the very start and end of the take.
+  const inner = pauses.filter((p) => p.at > 1 && p.at < total - 1);
+  if (inner.length < keys.length - 1) {
+    throw new Error(`The take has ${inner.length} clear pauses but needs ${keys.length - 1}. Leave about two seconds between sections.`);
+  }
+  const cuts = inner.sort((a, b) => b.length - a.length).slice(0, keys.length - 1).map((p) => p.at).sort((a, b) => a - b);
+  const bounds = [0, ...cuts, total];
+  mkdirSync(dir, { recursive: true });
+  return keys.map((key, i) => {
+    const file = path.join(dir, `${key}.wav`);
+    execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", take, "-ss", bounds[i].toFixed(3), "-to", bounds[i + 1].toFixed(3), "-ac", "1", file]);
+    return [key, file];
+  });
+}
+
 export function speakAll(dir) {
   mkdirSync(dir, { recursive: true });
   const out = {};
+  if (process.env.FILM_VOICE_TAKE) {
+    const pieces = cutTake(process.env.FILM_VOICE_TAKE, path.join(dir, "take"));
+    process.env.FILM_VOICE_DIR = path.join(dir, "take");
+    console.log(`Split the take into ${pieces.length} clips at its ${pieces.length - 1} longest pauses.`);
+  }
   for (const [key, line] of Object.entries(LINES)) {
     const recorded = ["m4a", "wav", "aiff", "mp3", "mov", "caf"].map((ext) => process.env.FILM_VOICE_DIR && path.join(process.env.FILM_VOICE_DIR, `${key}.${ext}`)).find((f) => f && existsSync(f));
     const file = path.join(dir, `${key}.m4a`);

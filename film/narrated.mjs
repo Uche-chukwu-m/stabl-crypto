@@ -97,7 +97,7 @@ function withTimeout(promise, ms, what) {
 
 const SEQUENCE = [
   { key: "00-problem", card: true },
-  { key: "01-meet-jemaya", title: "Meet Jemaya", note: "A freelance designer. Stabl sets money aside in good weeks and gives it back in slow ones." },
+  { key: "01-meet-jemaya", title: "Stabl", note: "Steady pay for uneven income. A freelance designer: her pay swings, her spending doesn't." },
   { key: "02-big-client-pays", title: "A big client pays", note: "Stabl tells her a day before anything moves. She can reply STOP." },
   { key: "03-set-aside", title: "Set aside", note: "She sees dollars. Underneath, the vault is a contract on Arc." },
   { key: "04-proof", card: true },
@@ -281,12 +281,10 @@ async function record() {
   writeFileSync(path.join(WORK, "explorer.json"), JSON.stringify({ url: txUrl }));
 
   console.log("06 Check it yourself");
-  await page.goto(`${BASE}/settings`);
-  await page.evaluate(() => document.fonts.ready);
+  // Straight to the vault page: the Settings screen above it shows the account's name.
   await startRec("06-check-it");
-  await wait(900);
-  await tap(page.locator('a[href="/settings/vault"]'));
-  await page.waitForURL(/\/settings\/vault/);
+  await page.goto(`${BASE}/settings/vault`);
+  await page.evaluate(() => document.fonts.ready);
   await page.getByText("The contract says").waitFor({ timeout: 20_000 });
   await wait(1200);
   const checkTop = await page

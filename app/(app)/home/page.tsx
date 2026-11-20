@@ -20,12 +20,14 @@ export default async function HomePage() {
   const fastFirst = v.nextFastCheck <= v.nextFeastCheck;
   const next = fastFirst ? { label: "Fast check", date: v.nextFastCheck } : { label: "Feast check", date: v.nextFeastCheck };
   const pending = v.lastMove?.state === "announced" ? v.lastMove : null;
-  const first = v.name.split(" ")[0];
+  // The presenter account is shown on stage and on video, so it greets with the
+  // brand rather than a made-up person's name.
+  const first = user.isDemo ? "" : v.name.split(" ")[0];
 
   return (
     <div className="space-y-4">
       <Celebration move={v.lastMove} recent={Boolean(v.lastMove && daysBetween(v.lastMove.date, v.today) <= 2)} />
-      <VaultHero greeting={first ? `Hi, ${first}` : "Hi"} status={v.status} balanceCents={v.vaultCents} coverWeeks={v.coverWeeks} frozen={v.frozen} />
+      <VaultHero greeting={user.isDemo ? "Stabl" : first ? `Hi, ${first}` : "Hi"} status={v.status} balanceCents={v.vaultCents} coverWeeks={v.coverWeeks} frozen={v.frozen} />
 
       {!v.hasMargin && (
         <p className="card rise rise-2 p-4 text-[0.9375rem]">
