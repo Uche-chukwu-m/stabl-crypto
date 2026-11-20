@@ -92,9 +92,10 @@ export function speakAll(dir) {
       const trim = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1";
       execFileSync(ffmpeg, [
         "-hide_banner", "-loglevel", "error", "-y", "-i", recorded, "-vn",
-        // Pauses inside a line longer than about a third of a second are
-        // shortened, and FILM_VOICE_TEMPO speeds speech up without changing pitch.
-        "-af", `${trim},areverse,${trim},areverse,silenceremove=stop_periods=-1:stop_duration=0.4:stop_threshold=-35dB:stop_silence=0.3,atempo=${Number(process.env.FILM_VOICE_TEMPO ?? 1)},highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11`,
+        // Only true silence (below -50 dB) longer than 0.9 s inside a line is
+        // shortened, to 0.6 s, so no quiet part of a word is ever cut.
+        // FILM_VOICE_TEMPO speeds speech up without changing pitch.
+        "-af", `${trim},areverse,${trim},areverse,silenceremove=stop_periods=-1:stop_duration=${process.env.FILM_VOICE_PAUSE_MAX ?? 0.9}:stop_threshold=${process.env.FILM_VOICE_PAUSE_DB ?? -50}dB:stop_silence=0.6,atempo=${Number(process.env.FILM_VOICE_TEMPO ?? 1)},highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11`,
         "-ac", "2", "-ar", "48000", "-c:a", "aac", "-b:a", "192k", file,
       ]);
     } else {
