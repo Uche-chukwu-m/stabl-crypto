@@ -3,6 +3,7 @@
 **Steady pay for uneven income.** Stabl sets money aside in good weeks and gives it back in slow ones. In this version the vault that holds that money is a smart contract on Arc, and the person using it never has to know.
 
 - **Live app:** https://stabl-crypto.vercel.app
+- **Demo video (3 min):** https://youtu.be/agiq6auK6u4
 - **Vault contract (Arc Testnet, verified):** [`0xD70f1e4973458D2b2E440b17600c53A4ca78d90f`](https://explorer.testnet.arc.io/address/0xD70f1e4973458D2b2E440b17600c53A4ca78d90f)
 - **Built for:** University Blockchain Conference 2026 hackathon. Consumer Applications track, built on Arc, using QuickNode Streams.
 
