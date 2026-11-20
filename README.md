@@ -180,7 +180,7 @@ For a passkey-signed move, the server hands the browser the transaction, the bro
 Open https://stabl-crypto.vercel.app and sign in with any email address.
 
 1. Answer two questions about how you earn, agree to the rules, and give a name and date of birth.
-2. **Connect a bank.** This opens Plaid's real window in test mode. Pick any bank and use Plaid's test login: username `user_good`, password `pass_good`.
+2. **Connect a bank.** This opens Plaid's real window in test mode. Pick any bank and use Plaid's test login: username `user_good`, password `pass_good`. If Plaid asks for a phone or verification code, enter `123456`.
 3. Choose your home base, review what Stabl learned, and open your vault.
 4. Stabl runs its first check straight away and tells you what it would do.
 

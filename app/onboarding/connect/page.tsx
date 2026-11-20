@@ -42,6 +42,14 @@ export default async function ConnectPage({ searchParams }: { searchParams: Prom
 
       <ConnectBank mode={env.plaidMode} label={items.length ? "Add another place you get paid" : "Connect a bank"} />
 
+      {env.plaidMode === "sandbox" && (
+        <p className="mt-4 text-caption text-muted">
+          Test banks only. In Plaid&apos;s window, sign in with <span className="font-semibold text-text">user_good</span> and{" "}
+          <span className="font-semibold text-text">pass_good</span>. If it asks for a code, enter{" "}
+          <span className="font-semibold text-text">123456</span>.
+        </p>
+      )}
+
       {error === "checking" && (
         <p role="alert" className="mt-6 text-fast">
           Connect at least one checking account. It will be your home base.
