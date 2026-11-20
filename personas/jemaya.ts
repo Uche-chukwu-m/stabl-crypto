@@ -6,7 +6,7 @@ import type { Gen, Persona } from "./gen";
 // PayPal into a second bank, and she moves that money over to checking.
 export const jemaya: Persona = {
   key: "jemaya",
-  legalName: "Jemaya Brooks",
+  legalName: "Mike Rivera",
   email: "jemaya.brooks@demo.stabl.app",
   earnType: "freelance",
   payFrequency: "irregular",

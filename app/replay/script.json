@@ -1,12 +1,12 @@
 {
-  "persona": "Jemaya Brooks",
+  "persona": "Mike Rivera",
   "steps": [
     {
       "at": 0,
       "title": "Home",
       "status": "steady",
       "vaultCents": 128000,
-      "note": "Jemaya is Steady. Income swings, spending stays inside the band.",
+      "note": "Mike is Steady. Income swings, spending stays inside the band.",
       "message": null
     },
     {

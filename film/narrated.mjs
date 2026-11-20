@@ -97,16 +97,16 @@ function withTimeout(promise, ms, what) {
 
 const SEQUENCE = [
   { key: "00-problem", card: true },
-  { key: "01-meet-jemaya", title: "Stabl", note: "Steady pay for uneven income. A freelance designer: her pay swings, her spending doesn't." },
-  { key: "02-big-client-pays", title: "A big client pays", note: "Stabl tells her a day before anything moves. She can reply STOP." },
-  { key: "03-set-aside", title: "Set aside", note: "She sees dollars. Underneath, the vault is a contract on Arc." },
+  { key: "01-meet-jemaya", title: "Stabl", note: "Steady pay for uneven income. Meet Mike, a freelance designer: his pay swings, his spending doesn't." },
+  { key: "02-big-client-pays", title: "A big client pays", note: "Stabl tells Mike a day before anything moves. He can reply STOP." },
+  { key: "03-set-aside", title: "Set aside", note: "Mike sees dollars. Underneath, the vault is a contract on Arc." },
   { key: "04-proof", card: true },
   { key: "05a-why-a-blockchain", card: true },
   { key: "05b-how-it-settles", card: true },
   // speed: screen action with no talking over it plays a little faster.
   { key: "06-check-it", title: "Check it yourself", note: "The app's balance against the contract's, read live from Arc.", speed: 1.3 },
   { key: "07-slow-week", title: "A slow week", note: "Money goes back to checking right away.", speed: 1.25 },
-  { key: "08-emergency", title: "Emergency unlock", note: "The same day, with a one time code. Sent from her own vault wallet.", speed: 1.7 },
+  { key: "08-emergency", title: "Emergency unlock", note: "The same day, with a one time code, from his own vault wallet.", speed: 1.7 },
   { key: "09-honest", card: true },
   { key: "10-closing", card: true },
 ];
@@ -231,7 +231,7 @@ async function record() {
   await page.getByRole("button", { name: "Sign in" }).click();
   await page.waitForURL(/\/home/, { timeout: 60_000 });
 
-  console.log("01 Meet Jemaya");
+  console.log("01 Meet Mike");
   await startRec("01-meet-jemaya");
   await page.goto(`${BASE}/home`);
   await page.evaluate(() => document.fonts.ready);

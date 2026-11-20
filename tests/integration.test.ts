@@ -186,7 +186,7 @@ suite("server side against Postgres", () => {
     const ctx = await m.loadContext(jemaya);
     await m.db.update(m.schema.users).set({ legalName: "Someone Else" }).where(m.drizzle.eq(m.schema.users.id, jemaya));
     expect(await m.security.setHomeBase(jemaya, ctx.homeBase!.id)).toEqual({ ok: false, reason: "name_mismatch" });
-    await m.db.update(m.schema.users).set({ legalName: "Jemaya Brooks" }).where(m.drizzle.eq(m.schema.users.id, jemaya));
+    await m.db.update(m.schema.users).set({ legalName: "Mike Rivera" }).where(m.drizzle.eq(m.schema.users.id, jemaya));
     expect(await m.security.setHomeBase(jemaya, ctx.homeBase!.id)).toEqual({ ok: true, pending: false });
   });
 

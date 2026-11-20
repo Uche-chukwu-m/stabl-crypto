@@ -20,23 +20,23 @@ export const LINES = {
   "00-problem":
     "Uneven income is normal. The JPMorgan Chase Institute found a typical family's income changes by about a third from one month to the next. And in a 2025 survey by Remote, eighty-five percent of freelancers said they're paid late at least some of the time. As researcher Jonathan Morduch puts it, people want the right money at the right time.",
   "01-meet-jemaya":
-    "Stabl handles that timing for you. Meet a freelance designer. Stabl reads her bank through Plaid and learns her income and her bills. In good weeks it sets money aside. In slow weeks it gives it back.",
+    "Stabl handles that timing for you. Meet Mike, a freelance designer. Stabl reads his bank through Plaid and learns his income and his bills. In good weeks it sets money aside. In slow weeks it gives it back.",
   "02-big-client-pays":
-    "A big client pays. Stabl sees six hundred and fifty dollars more than she needs for the next three weeks, and tells her a day before anything moves.",
+    "A big client pays. Stabl sees six hundred and fifty dollars more than Mike needs for the next three weeks, and tells him a day before anything moves.",
   "03-set-aside":
-    "The next day, it moves into her vault. She only ever sees dollars. Underneath, the vault is a smart contract on Arc, Circle's blockchain for dollars.",
+    "The next day, it moves into his vault. Mike only ever sees dollars. Underneath, the vault is a smart contract on Arc, Circle's blockchain for dollars.",
   "04-proof":
-    "Every receipt links to its proof on Arc. Circle made her a wallet and paid the fee, so she never touches crypto.",
+    "Every receipt links to its proof on Arc. Circle made Mike a wallet and paid the fee, so he never touches crypto.",
   "05a-why-a-blockchain":
     "Why a blockchain? Three reasons. Trust: in 2024 the fintech middleman Synapse collapsed, and customers couldn't prove what they were owed. Stabl's balances sit on a public ledger anyone can check. Time: the vault settles in under a second, any day, even on the weekends when bank transfers stop. And rules: the contract enforces Stabl's rules at the ledger itself, and next it can split each payout into a reserve that earns yield in tokenized Treasuries.",
   "05b-how-it-settles":
     "And why these three? Arc, because fees are paid in dollars, about a tenth of a cent. Circle, for wallets with no seed phrase. QuickNode, to push each vault event to Stabl the moment it lands.",
   "06-check-it":
-    "In Settings, she can check Stabl against the contract herself, read live from Arc, and see each move confirmed by the QuickNode Stream.",
+    "In Settings, Mike can check Stabl against the contract himself, read live from Arc, and see each move confirmed by the QuickNode Stream.",
   "07-slow-week":
     "Then work dries up, and the car needs a repair. Stabl sends money back right away.",
   "08-emergency":
-    "In an emergency, she can unlock her vault the same day with a one-time code. And with a passkey on her phone, only she can.",
+    "In an emergency, Mike can unlock his vault the same day with a one-time code. And with a passkey on his phone, only he can.",
   "09-honest":
     "To be clear: the bank side and the conversion to U S D C are simulated. The vault moves you saw are real, on Arc's test network. Next, real dollars through a licensed bank partner, instant payouts, and a pilot with real freelancers. Because this is what they tell us. For one freelance screenwriter, a client paying late meant a late fee on January rent and some overdraft fees.",
   "10-closing":

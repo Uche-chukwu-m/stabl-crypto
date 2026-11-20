@@ -5,7 +5,7 @@ import { render } from "@/lib/notify/templates";
 
 const account = "Checking 4321";
 const steps = [
-  { at: 0, title: "Home", status: "steady", vaultCents: 1_280_00, note: "Jemaya is Steady. Income swings, spending stays inside the band.", message: null },
+  { at: 0, title: "Home", status: "steady", vaultCents: 1_280_00, note: "Mike is Steady. Income swings, spending stays inside the band.", message: null },
   {
     at: 6,
     title: "Big client pays",
@@ -48,5 +48,5 @@ const steps = [
   },
   { at: 45, title: "The thread", status: "fast", vaultCents: 1_370_00, note: "The messages tell the whole story with no screen explained.", message: null },
 ];
-writeFileSync("app/replay/script.json", JSON.stringify({ persona: "Jemaya Brooks", steps }, null, 2) + "\n");
+writeFileSync("app/replay/script.json", JSON.stringify({ persona: "Mike Rivera", steps }, null, 2) + "\n");
 console.log("wrote app/replay/script.json");
