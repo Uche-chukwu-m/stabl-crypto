@@ -67,8 +67,8 @@ async function admin(action, body = {}) {
 
 // The move a beat made, read from the live database: its transaction, and what
 // confirmed it and how fast.
-async function lastMove(db, userId, direction) {
-  for (let i = 0; i < 40; i++) {
+async function lastMove(db, userId, direction, waitSeconds = 60) {
+  for (let i = 0; i < waitSeconds; i++) {
     const { rows } = await db.query(
       `select amount_cents, state, tx_hash, confirmed_by,
               round(extract(epoch from (settled_at - submitted_at))::numeric, 1)::float as secs
@@ -322,6 +322,16 @@ async function record() {
   await wait(3200);
   await stopRec();
 
+  // Circle sends one transaction per wallet at a time. The slow week's money
+  // going back to the bank side leaves from the same wallet as the unlock, so
+  // let it land first, or the unlock waits behind it.
+  for (let i = 0; i < 180; i++) {
+    const { rows } = await db.query(`select count(*)::int as n from chain_ops where user_id = $1 and kind = 'offramp' and state = 'sent'`, [userId]);
+    if (rows[0].n === 0) break;
+    if (i % 15 === 0) console.log("   waiting for the earlier transfer to land");
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+
   console.log("08 Emergency unlock");
   await scrollTo(0, 10);
   await startRec("08-emergency");
@@ -343,7 +353,7 @@ async function record() {
   await page.keyboard.type("150", { delay: 150 });
   await tap(sheet.getByRole("button", { name: "Send to checking" }), 500);
   await page.getByText("$150.00 sent to checking").waitFor({ timeout: 10_000 }).catch(() => {});
-  const emergency = await lastMove(db, userId, "emergency");
+  const emergency = await lastMove(db, userId, "emergency", 300);
   facts["08-emergency"] = moveFacts(emergency, "EmergencyUnlocked");
   await page.getByRole("status").filter({ hasText: "Emergency unlock done" }).waitFor({ timeout: 15_000 }).catch(() => {});
   await wait(2800);
