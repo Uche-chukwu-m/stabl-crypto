@@ -1,6 +1,7 @@
 "use server";
 
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { audit } from "@/lib/audit";
@@ -17,6 +18,9 @@ import { requireUser } from "@/lib/session";
 async function advance(userId: string, next: number) {
   const [u] = await db.select({ step: users.onboardingStep }).from(users).where(eq(users.id, userId));
   if (u.step < next) await db.update(users).set({ onboardingStep: next }).where(eq(users.id, userId));
+  // Where /home and each step redirect depends on the step, so drop every page
+  // the browser has cached from before this one.
+  revalidatePath("/", "layout");
 }
 
 const About = z.object({

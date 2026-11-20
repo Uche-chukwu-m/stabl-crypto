@@ -8,7 +8,10 @@ export function Plain({ children, wide = false }: { children: React.ReactNode; w
     <div className="flex min-h-dvh flex-col">
       <Toaster />
       <header className="px-5 pb-2 pt-[calc(1rem+env(safe-area-inset-top))]">
-        <Link href="/home" aria-label="Stabl home" className="inline-block">
+        {/* Not prefetched: during onboarding /home answers with a redirect to the
+            current step, and a cached copy of that redirect would send a person who
+            has just finished back into onboarding, round and round. */}
+        <Link href="/home" prefetch={false} aria-label="Stabl home" className="inline-block">
           <Logo />
         </Link>
       </header>
