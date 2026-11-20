@@ -38,7 +38,7 @@ export const LINES = {
   "08-emergency":
     "In an emergency, she can unlock her vault the same day with a one-time code. And with a passkey on her phone, only she can.",
   "09-honest":
-    "To be clear: the bank side and the conversion to U S D C are simulated. The vault moves you saw are real, on Arc's test network. And across two hundred simulated freelancers, Stabl never caused an overdraft.",
+    "To be clear: the bank side and the conversion to U S D C are simulated. The vault moves you saw are real, on Arc's test network. Next, real dollars through a licensed bank partner, instant payouts, and a pilot with real freelancers. Because this is what they tell us. For one freelance screenwriter, a client paying late meant a late fee on January rent and some overdraft fees.",
   "10-closing":
     "Stabl. Steady pay for uneven income.",
 };

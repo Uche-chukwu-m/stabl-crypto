@@ -131,20 +131,28 @@ export const CARDS = {
 
   "09-honest": () =>
     page(`
-    <div style="position:absolute;inset:0;display:flex;gap:90px;padding:100px 140px">
+    <div style="position:absolute;inset:0;display:flex;gap:80px;padding:90px 120px">
       <div style="flex:1">
-        <p style="margin:0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Real, on Arc Testnet</p>
-        <p style="margin:24px 0 0;font-size:34px;line-height:1.4">The vault contract and every move. Circle wallets with sponsored fees, and passkey wallets only you can sign for. QuickNode Stream delivery.</p>
-        <p style="margin:52px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
-        <p style="margin:24px 0 0;font-size:34px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
-        <p style="margin:52px 0 0;font-size:30px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
-        <p style="margin:24px 0 0;font-size:32px;line-height:1.4">Each payout split automatically into a yield-earning reserve. Instant payouts over FedNow and RTP. Passkeys at sign-up, with recovery.</p>
+        <p style="margin:0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Real, on Arc Testnet</p>
+        <p style="margin:20px 0 0;font-size:31px;line-height:1.4">The vault contract and every move. Circle wallets, and passkey wallets only you can sign for. QuickNode Stream delivery.</p>
+        <p style="margin:40px 0 0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Simulated</p>
+        <p style="margin:20px 0 0;font-size:31px;line-height:1.4">Bank transfers, and converting dollars to USDC.</p>
+        <p style="margin:40px 0 0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${MUTED}">Next</p>
+        <ol style="margin:20px 0 0;padding-left:34px;font-size:29px;line-height:1.45">
+          <li>Real dollars, through a licensed bank partner and Circle Mint</li>
+          <li>Instant payouts over FedNow and RTP</li>
+          <li>Vault balances earning yield in tokenized Treasuries</li>
+          <li>A pilot with real freelancers</li>
+        </ol>
       </div>
-      <div style="width:600px;background:${GREEN};color:${CREAM};border-radius:34px;padding:56px 54px;display:flex;flex-direction:column;justify-content:center">
-        <p style="margin:0;font-size:28px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75">Simulation: 200 freelancers</p>
-        <p style="margin:36px 0 0;font-size:150px;font-weight:700;letter-spacing:-0.04em;line-height:1">0</p>
-        <p style="margin:16px 0 0;font-size:36px;line-height:1.35">overdrafts caused by Stabl</p>
-        <p style="margin:40px 0 0;font-size:24px;line-height:1.4;opacity:.75">Six months each through the app's own engine, with and without Stabl. docs/simulation.md</p>
+      <div style="width:660px;background:${GREEN};color:${CREAM};border-radius:34px;padding:50px 50px;display:flex;flex-direction:column;justify-content:center">
+        <p style="margin:0;font-size:26px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75">In their words</p>
+        <p style="margin:30px 0 0;font-family:Lora;font-style:italic;font-size:38px;line-height:1.3">“It also cost me a late fee on January rent and some overdraft fees.”</p>
+        <p style="margin:12px 0 0;font-size:21px;opacity:.75">A freelance screenwriter, on a client paying late. Fstoppers, 2019</p>
+        <p style="margin:34px 0 0;font-family:Lora;font-style:italic;font-size:30px;line-height:1.3">“I can’t count on a paycheck hitting my bank account every two weeks.”</p>
+        <p style="margin:12px 0 0;font-size:21px;opacity:.75">Jumko Ogata-Aguilar, freelance writer. Elite Daily, 2022</p>
+        <p style="margin:34px 0 0;font-size:27px;line-height:1.35"><b>Nearly 3 in 4</b> gig workers report income swings of 25% or more.</p>
+        <p style="margin:10px 0 0;font-size:21px;opacity:.75">Experian survey of 503 gig workers, May 2026</p>
       </div>
     </div>`),
 
